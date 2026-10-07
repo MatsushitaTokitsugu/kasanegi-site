@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data API | Kasanegi</title>
+<meta name="description" content="Japanese public data as APIs that AI agents can use directly. The ten APIs of JP Local Pack, one example from the family of data APIs Kasanegi has built and offered since before its founding, are open free of charge with no sign-up: payroll, social insurance, withholding income tax, consumption tax, national holidays, corporate numbers, qualified invoices and Peppol. MCP supported.">
+<link rel="canonical" href="https://kasanegi.com/en/api/">
+<link rel="alternate" hreflang="ja" href="https://kasanegi.com/api/">
+<link rel="alternate" hreflang="en" href="https://kasanegi.com/en/api/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kasanegi">
+<meta property="og:title" content="Data API | Kasanegi">
+<meta property="og:description" content="Japanese public data as APIs that AI agents can call directly. The ten APIs of JP Local Pack, one example from Kasanegi's family of data APIs, are open free of charge.">
+<meta property="og:image" content="https://kasanegi.com/assets/og.png">
+<meta property="og:url" content="https://kasanegi.com/en/api/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/kasanegi-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  body{letter-spacing:.005em}
+  .sec-h,.phero h1,h3,.stats dt{font-family:"Source Serif 4",var(--serif);letter-spacing:.01em}
+  .body,.lede{line-height:1.85}
+  .phero p{line-height:1.85}
+  .news p{line-height:1.7}
+  html:not(.js) .reveal{opacity:1;transform:none}
+  .together .lede{text-wrap:pretty}
+  .nw{display:inline-block}
+  .sub-h{margin:84px 0 22px}
+  .sub-h + .plate{margin-top:0}
+  .split.top-start{align-items:start}
+  .split.method-note{margin-top:96px;align-items:start}
+  .visual h3{font-size:22px}
+  .visual .tag{font-size:12px;letter-spacing:.14em;color:var(--beni);margin-bottom:6px}
+  .visual .facts{margin-top:16px}
+  .visual .facts > div,.horizon .facts > div{grid-template-columns:6.4em 1fr;gap:12px;padding:12px 0}
+  .visual .facts dt,.horizon .facts dt{font-size:12.5px;letter-spacing:.06em;padding-top:2px}
+  .visual .facts dd,.horizon .facts dd{font-size:14px;line-height:1.75;color:var(--ink2)}
+  .points li{grid-template-columns:200px 1fr}
+  .points b{font-family:"Source Serif 4",var(--serif);font-size:18px;line-height:1.4}
+  .points span{line-height:1.8}
+  @media(max-width:480px){.points li{grid-template-columns:1fr}}
+  @media(max-width:480px){.top .brand{gap:8px}.top .brand span{font-size:13px;letter-spacing:.16em}.top nav{gap:10px;font-size:12px;letter-spacing:.04em}.top nav a{white-space:nowrap}.top nav .lang{padding:2px 7px;letter-spacing:.1em}}
+  @media(max-width:360px){.top .brand span{display:none}}
+  .api-res dt{min-width:0;overflow-wrap:anywhere}
+  @media(max-width:860px){.try-grid{grid-template-columns:minmax(0,1fr)}}
+
+  /* stages */
+  .steps{list-style:none;margin-top:56px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ai)}
+  .step{position:relative;padding:30px 22px 6px 0}
+  .step + .step{padding-left:22px;border-left:1px solid var(--line)}
+  .step::before{content:"";position:absolute;top:-8px;left:-7px;width:14px;height:14px;border-radius:50%;background:var(--paper2);border:2px solid var(--ai)}
+  .step:first-child::before{left:0}
+  .step .k{display:block;font-family:var(--latin);font-size:40px;line-height:1;color:var(--beni)}
+  .step h3{font-size:19px;line-height:1.45;margin:14px 0 4px}
+  .step dt{margin-top:16px;font-size:12px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+  .step dd{margin-top:4px;font-size:14px;line-height:1.75;color:var(--ink2)}
+  .step dd.res{color:var(--ink)}
+  @media(max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(3){padding-left:0;border-left:0}.step:nth-child(n+3){margin-top:30px;border-top:1px solid var(--line)}.step:nth-child(3)::before{left:0}}
+  @media(max-width:600px){.steps{grid-template-columns:1fr}.step,.step + .step{padding:30px 0 6px;border-left:0}.step + .step{margin-top:24px;border-top:1px solid var(--line)}.step::before,.step:nth-child(3)::before{left:0}}
+
+  /* diagram */
+  .rrim{margin:0}
+  .rrim svg{width:100%;height:auto;display:block;overflow:visible}
+  .rrim text{font-family:var(--sans);font-size:12px;fill:var(--ink2)}
+  .rrim .th{font-family:"Source Serif 4",var(--serif);font-size:14px;font-weight:600;fill:var(--ink)}
+  .rrim .sm{font-size:10.5px;fill:var(--mute)}
+
+  /* tables */
+  .tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;line-height:1.65}
+  .tbl col.c1{width:34%}.tbl col.c2{width:28%}.tbl col.c3{width:16%}.tbl col.c4{width:22%}
+  .tbl th,.tbl td{text-align:left;vertical-align:top;padding:13px 18px 13px 0;border-bottom:1px solid var(--line)}
+  .tbl thead th{font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--mute);border-bottom:1px solid var(--ink);text-transform:uppercase}
+  .tbl tbody th{font-weight:500;color:var(--ink)}
+  .tbl td{color:var(--ink2)}
+  @media(max-width:720px){.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl th,.tbl td{display:block;width:auto}.tbl tr{padding:14px 0;border-bottom:1px solid var(--line)}.tbl tbody th,.tbl td{border:0;padding:2px 0;width:auto}.tbl td::before{content:attr(data-l);display:inline-block;min-width:6.4em;margin-right:8px;font-size:11.5px;letter-spacing:.08em;color:var(--mute)}}
+
+  /* scaled to diameter */
+  .dgrid{margin-top:32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 22px}
+  .dgrid figure{margin:0}
+  .dgrid img{width:100%;height:auto;aspect-ratio:1/1;background:var(--paper);border:1px solid var(--line);border-radius:3px}
+  .dgrid figcaption{margin-top:10px;line-height:1.5}
+  .dgrid figcaption b{display:block;font-family:"Source Serif 4",var(--serif);font-size:16px;font-weight:600}
+  .dgrid figcaption span{display:block;font-size:12.5px;color:var(--mute)}
+  .dgrid .dlegend{align-self:center;font-size:12.5px;line-height:1.8;color:var(--mute);padding-left:16px;border-left:2px solid var(--beni)}
+  @media(max-width:760px){.dgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.dgrid .dlegend{grid-column:1/-1}}
+
+  /* record */
+  .tl{margin-top:36px}
+  .tl p b{font-weight:700;color:var(--ink)}
+  .tl p span{display:block;margin-top:2px;font-size:14.5px;color:var(--ink2)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "JP Local Pack",
+  "description": "One example from Kasanegi's family of Japanese public-data APIs for AI agents, open free of charge: payroll deductions, social insurance grades, withholding income tax (NTA monthly table, all 1,856 cells), consumption tax, national holidays, corporate numbers, qualified invoice issuer registry, and Peppol invoice validation.",
+  "url": "https://kasanegi.com/en/api/",
+  "documentation": "https://api.kasanegi.com/openapi.json",
+  "termsOfService": "https://kasanegi.com/en/api/",
+  "provider": {"@type": "Organization", "name": "Kasanegi", "alternateName": "かさねぎ", "url": "https://kasanegi.com/en/"},
+  "isAccessibleForFree": true
+}
+</script>
+</head>
+<body>
+
+<header class="top always" id="top">
+  <a class="brand" href="/en/" aria-label="Kasanegi home"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
+  <nav aria-label="Main">
+    <a href="/en/research/">Research</a>
+    <a href="/en/reader/">Reader</a>
+    <a href="/en/api/" aria-current="page">Data API</a>
+    <a class="hide-sm" href="/en/#contact">Contact</a>
+    <a class="lang" href="/api/" hreflang="ja" lang="ja">JA</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="phero">
+  <div class="wrap">
+    <p class="kicker">DATA API</p>
+    <h1>Japan&#39;s public data, <span class="nw">in a form AI can use directly</span></h1>
+    <p>We rebuild tables and registries published by Japan&#39;s public bodies into APIs that AI agents and software can use in a single call. Our sources include the National Tax Agency (NTA), the Japan Health Insurance Association (Kyokai Kenpo), the Ministry of Health, Labour and Welfare (MHLW), the Cabinet Office, and gBizINFO from the Ministry of Economy, Trade and Industry (METI). Since before our founding, Kasanegi has built and offered a family of these data APIs. We are now integrating that family into a single foundation that brings all of Kasanegi&#39;s work together. In the meantime, so that you can try the real thing, one example from the family is open to everyone: the ten APIs of JP Local Pack, free of charge with no sign-up.</p>
+    <div class="btns"><a class="btn light" href="#try">Try the example now <span class="arrow">→</span></a><a class="btn ghost on-dark" href="#agents">Use with AI agents</a></div>
+  </div>
+</section>
+
+<div class="kasane" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="block" id="local-pack">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">AN EXAMPLE · JP LOCAL PACK</p>
+      <h2 class="sec-h">One example: Japanese back-office work in ten APIs</h2>
+      <p class="body">This example from our family of data APIs is open free of charge today. Running payroll, checking business partners, validating invoices: the calculations and checks that Japanese companies repeat every month, packaged so that AI can call them directly.</p>
+    </div>
+    <div class="reveal">
+      <table class="tbl api-tbl">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+        <thead><tr><th scope="col">API</th><th scope="col">Returns</th><th scope="col">Source</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Payroll summary<br><code class="ep">/combined/payroll-summary</code></th><td data-l="Returns">From a monthly salary: each insurance premium, withholding income tax, total deductions and take-home pay, plus that month&#39;s national holidays</td><td data-l="Source">Kyokai Kenpo, MHLW, NTA, Cabinet Office</td></tr>
+          <tr><th scope="row">Payroll deductions<br><code class="ep">/payroll/calc-by-salary</code></th><td data-l="Returns">Health insurance, long-term care insurance, child and child-rearing support contribution, employees&#39; pension, employment insurance, withholding income tax and take-home pay</td><td data-l="Source">Kyokai Kenpo, Japan Pension Service, MHLW, NTA</td></tr>
+          <tr><th scope="row">Standard monthly remuneration<br><code class="ep">/social-insurance/standard-remuneration</code></th><td data-l="Returns">Grade and premium across the 50 health insurance grades and 32 employees&#39; pension grades</td><td data-l="Source">Kyokai Kenpo, Japan Pension Service</td></tr>
+          <tr><th scope="row">Consumption tax rate<br><code class="ep">/tax/consumption/rate</code></th><td data-l="Returns">Standard and reduced rates for any date, and whether that date falls on or after the start of the Qualified Invoice System</td><td data-l="Source">NTA</td></tr>
+          <tr><th scope="row">National holidays<br><code class="ep">/holiday/jp</code></th><td data-l="Returns">National holidays, substitute holidays and citizens&#39; holidays for 2024–2027, with English names</td><td data-l="Source">Cabinet Office</td></tr>
+          <tr><th scope="row">Company search by name<br><code class="ep">/houjin-lookup/by-name</code></th><td data-l="Returns">Candidate corporate numbers for a company name, with the evidence that tells them apart</td><td data-l="Source">gBizINFO (METI)</td></tr>
+          <tr><th scope="row">Corporate number lookup<br><code class="ep">/houjin-number/lookup</code></th><td data-l="Returns">A company overview from its corporate number</td><td data-l="Source">gBizINFO (METI)</td></tr>
+          <tr><th scope="row">Invoice issuer search<br><code class="ep">/invoice/issuer-by-name</code></th><td data-l="Returns">Whether a company, found by name, is registered as a qualified invoice issuer</td><td data-l="Source">gBizINFO, NTA published data</td></tr>
+          <tr><th scope="row">Invoice registration lookup<br><code class="ep">/invoice/issuer-registration-lookup</code></th><td data-l="Returns">Registration status and date from a registration number (T number)</td><td data-l="Source">NTA Qualified Invoice Issuer Publication Site (published data)</td></tr>
+          <tr><th scope="row">Peppol validation<br><code class="ep">/invoice/peppol-validate</code></th><td data-l="Returns">Validation results for invoice data against 15 key rules of Peppol BIS Billing JP</td><td data-l="Source">Peppol BIS Billing JP</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Prefix each path with <code>https://api.kasanegi.com/preview/v1/local</code> (the table shows the rest of the path).</p>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="accuracy">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">ACCURACY</p>
+      <h2 class="sec-h">Matched to the official tables, to the yen</h2>
+      <p class="body">In payroll, close is not good enough. We carry the official tables and rules exactly as published.</p>
+    </div>
+    <ul class="points reveal">
+      <li><b>Withholding income tax</b><span>We carry all 1,856 cells of the Kō column of the monthly table in the NTA&#39;s Withholding Tax Table for Employment Income (2026): 231 brackets × 0 to 7 dependants, plus the bottom row. Our tests confirm that every cell matches the official table. When monthly pay after social insurance deductions is ¥740,000 or more, tax is computed with the formulas for nine brackets, as the table&#39;s notes specify. Results also match the worked examples in the NTA&#39;s guide to using the monthly table.</span></li>
+      <li><b>Health and long-term care insurance</b><span>We carry Kyokai Kenpo&#39;s FY2026 rates for all 47 prefectures, and check grades, ranges and premiums against all 50 rows of the Tokyo premium table. Fractions of a yen follow the table&#39;s notes: amounts of 0.50 yen or less are rounded down, and amounts over 0.50 yen are rounded up. For employees aged 40 to 64, health insurance and long-term care insurance are added together before rounding.</span></li>
+      <li><b>Support contribution, pension, employment insurance</b><span>We cover the child and child-rearing support contribution on pay from April 2026 (0.23%), employees&#39; pension (18.3%), and employment insurance (general businesses: employee share 5/1,000, applied to wages rather than standard remuneration, with fractions handled as the rules specify).</span></li>
+      <li><b>Consumption tax</b><span>We carry the full rate history by effective date, from 3% in 1989 to the 10% standard and 8% reduced rates of October 2019. The API also determines whether a date falls on or after the start of the Qualified Invoice System (1 October 2023), with dates decided in Japan time.</span></li>
+      <li><b>Invoice registry</b><span>We build the registry from the NTA&#39;s complete published data and its updates, with 5,009,701 registrations ready to look up. Every response carries the as-of date of its data.</span></li>
+      <li><b>National holidays</b><span>From Cabinet Office data: 75 days from 2024 to 2027, covering national holidays, substitute holidays and citizens&#39; holidays.</span></li>
+    </ul>
+    <dl class="stats reveal">
+      <div><dt><small style="font-size:.5em">¥</small>50,390</dt><dd>total deductions on a ¥300,000 monthly salary, Tokyo, age 30 (take-home pay ¥249,610)</dd></div>
+      <div><dt><small style="font-size:.5em">¥</small>113,596</dt><dd>withholding income tax on a ¥1,050,000 monthly salary, Tokyo, age 45 (formula for ¥740,000 or more)</dd></div>
+      <div><dt>1,856<small style="font-size:.5em"> cells</small></dt><dd>checked against the NTA monthly table, every one a match</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block" id="try">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">TRY</p>
+      <h2 class="sec-h">Call it now, no sign-up</h2>
+      <p class="body">No key, no registration. Call it straight from your browser or the command line.</p>
+    </div>
+    <div class="try-grid reveal">
+      <pre class="codeblock"><code>curl "https://api.kasanegi.com/preview/v1/local/payroll/calc-by-salary?monthly_salary=300000&amp;pref_code=13&amp;age=30"</code></pre>
+      <div class="api-card">
+        <p class="api-req"><span>200</span> Monthly salary ¥300,000 · Tokyo (pref_code=13) · age 30</p>
+        <dl class="api-res">
+          <div><dt>health_insurance_employee</dt><dd>14,775</dd></div>
+          <div><dt>child_care_support_employee</dt><dd>345</dd></div>
+          <div><dt>pension_employee</dt><dd>27,450</dd></div>
+          <div><dt>employment_insurance_employee</dt><dd>1,500</dd></div>
+          <div><dt>income_tax_withholding</dt><dd>6,320</dd></div>
+          <div class="sum"><dt>total_deduction</dt><dd>50,390</dd></div>
+          <div class="sum"><dt>net_salary</dt><dd>249,610</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body reveal" style="margin-top:28px">Each client can make up to 30 calls every 60 seconds. For heavier business use, you can get a key on RapidAPI, an API marketplace for developers.</p>
+    <div class="btns reveal"><a class="btn" href="https://api.kasanegi.com/preview/v1/local/payroll/calc-by-salary?monthly_salary=300000&amp;pref_code=13&amp;age=30" rel="noopener">Open in your browser <span class="arrow">→</span></a><a class="btn ghost" href="https://rapidapi.com/kasanegi123/api/jp-local-pack-japan-payroll-invoice-tax-apis" rel="noopener">RapidAPI</a></div>
+  </div>
+</section>
+
+<section class="block alt" id="agents">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">FOR AI AGENTS</p>
+      <h2 class="sec-h">Use with AI agents</h2>
+      <p class="body">Through our MCP server, AI agents can discover all ten as tools, along with how to use each one and where to call it. We also publish the API definition (OpenAPI 3.1) and a guide for AI (llms.txt). The product list, the API definition and the tool list are all generated from a single registry, so they agree wherever you look.</p>
+    </div>
+    <dl class="facts reveal">
+      <div><dt>MCP server</dt><dd><code>https://mcp.kasanegi.com/mcp</code> (Streamable HTTP · MCP 2025-06-18)</dd></div>
+      <div><dt>API definition</dt><dd><a href="https://api.kasanegi.com/openapi.json" rel="noopener"><code>https://api.kasanegi.com/openapi.json</code></a> (OpenAPI 3.1)</dd></div>
+      <div><dt>Guide for AI</dt><dd><a href="https://api.kasanegi.com/llms.txt" rel="noopener"><code>https://api.kasanegi.com/llms.txt</code></a></dd></div>
+      <div><dt>Product list</dt><dd><a href="https://api.kasanegi.com/products" rel="noopener"><code>https://api.kasanegi.com/products</code></a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block" id="sources">
+  <div class="wrap reveal">
+    <p class="eyebrow">SOURCES</p>
+    <h2 class="sec-h">Data sources</h2>
+    <table class="tbl src-tbl">
+      <colgroup><col class="c1"><col class="c2"></colgroup>
+      <thead><tr><th scope="col">Data</th><th scope="col">Provided by</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><a href="https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/01.htm" rel="noopener">Withholding Tax Table for Employment Income (2026)</a></th><td data-l="Provided by">National Tax Agency (NTA)</td></tr>
+        <tr><th scope="row"><a href="https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html" rel="noopener">Insurance rates and premium tables by prefecture (FY2026)</a></th><td data-l="Provided by">Japan Health Insurance Association (Kyokai Kenpo)</td></tr>
+        <tr><th scope="row">Employees&#39; pension insurance premium rate</th><td data-l="Provided by">Japan Pension Service</td></tr>
+        <tr><th scope="row">Employment insurance premium rates (FY2026)</th><td data-l="Provided by">Ministry of Health, Labour and Welfare (MHLW)</td></tr>
+        <tr><th scope="row">Consumption tax rates</th><td data-l="Provided by">National Tax Agency (NTA)</td></tr>
+        <tr><th scope="row"><a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html" rel="noopener">National holidays</a></th><td data-l="Provided by">Cabinet Office</td></tr>
+        <tr><th scope="row">Basic corporate information (gBizINFO)</th><td data-l="Provided by">Ministry of Economy, Trade and Industry (METI)</td></tr>
+        <tr><th scope="row">Published data on qualified invoice issuers</th><td data-l="Provided by">National Tax Agency (NTA)</td></tr>
+        <tr><th scope="row">Peppol BIS Billing JP</th><td data-l="Provided by">OpenPeppol, Digital Agency</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block alt" id="history">
+  <div class="wrap reveal">
+    <p class="eyebrow">HISTORY</p>
+    <h2 class="sec-h">Milestones</h2>
+    <ul class="news">
+      <li class="new"><time datetime="2026-10-08">2026.10.08</time><span class="tag">Release</span><p>Opened the ten APIs of JP Local Pack free of charge with no sign-up, as one example while we integrate our family of data APIs</p></li>
+      <li><time datetime="2026-05-08">2026.05.08</time><span class="tag">Listing</span><p>Our data API family was listed in a developer community&#39;s directory of APIs for AI agents</p></li>
+      <li><time datetime="2026-05-07">2026.05.07</time><span class="tag">Release</span><p>Launched kasanegi.com and released our data APIs, also listing them on RapidAPI, an API marketplace for developers</p></li>
+      <li><time datetime="2026-04-16">2026.04.16</time><span class="tag">Release</span><p>Released Japanese public data as APIs that AI can use directly</p></li>
+    </ul>
+    <p class="body" style="margin-top:36px">To discuss adopting our data APIs or building them into your operations, contact us at <a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <a class="mark logo-type" href="/en/" style="font-size:22px">KASANEGI</a>
+        <p class="meta">Osaka, Japan</p>
+      </div>
+      <p class="meta"><a href="/en/#projects">Projects</a> · <a href="/en/research/">Research</a> · <a href="/en/reader/">Reader</a> · <a href="/en/api/">Data API</a> · <a href="/demo/">Demo</a> · <a href="/en/#contact">Contact</a> · <a href="/api/" hreflang="ja" lang="ja">日本語</a></p>
+    </div>
+    <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

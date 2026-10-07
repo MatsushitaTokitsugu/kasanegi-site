@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kasanegi</title>
-<meta name="description" content="Kasanegi is a research and development studio based in Osaka, Japan, working on meteorite impact structure research with Japan-wide terrain data, the language-learning app kasanegi, and a fully automated content production system.">
+<title>Kasanegi | Research and Development Studio in Osaka, Japan</title>
+<meta name="description" content="Kasanegi is a research and development studio in Osaka, Japan, that uses AI to find a new dimension in existing data: machine-learning research to find undiscovered meteorite craters across Japan, a language app that layers two language editions of the same manga, data APIs for AI agents, and a fully automated video production system.">
 <link rel="canonical" href="https://kasanegi.com/en/">
 <link rel="alternate" hreflang="ja" href="https://kasanegi.com/">
 <link rel="alternate" hreflang="en" href="https://kasanegi.com/en/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kasanegi">
 <meta property="og:title" content="Kasanegi">
-<meta property="og:description" content="A research and development studio in Osaka, Japan: meteorite impact structure research, the language app kasanegi, and a fully automated content production system.">
+<meta property="og:description" content="Kasanegi is a research and development studio in Osaka, Japan: research to find undiscovered meteorite craters, a language app for learning through manga, data APIs for AI agents, and fully automated content production.">
 <meta property="og:image" content="https://kasanegi.com/assets/og.png">
 <meta property="og:url" content="https://kasanegi.com/en/">
 <meta name="twitter:card" content="summary_large_image">
@@ -32,13 +32,14 @@
   "@type": "Organization",
   "name": "Kasanegi",
   "alternateName": "かさねぎ",
-  "url": "https://kasanegi.com/",
+  "url": "https://kasanegi.com/en/",
   "logo": "https://kasanegi.com/assets/kasanegi-mark.svg",
   "email": "contact@kasanegi.com",
   "foundingDate": "2026-06-01",
   "address": {"@type": "PostalAddress", "addressLocality": "Osaka", "addressRegion": "Osaka", "addressCountry": "JP"},
   "founder": {"@type": "Person", "name": "Tokitsugu Matsushita", "alternateName": "松下宗嗣", "jobTitle": "Founder"},
-  "description": "Research and development studio in Osaka, Japan: meteorite impact structure research on Japan-wide terrain data, the kasanegi language-learning app, and a fully automated content production system.",
+  "description": "Research and development studio in Osaka, Japan: research to find undiscovered meteorite craters in Japan-wide terrain data, the kasanegi language-learning app, a family of public-data APIs for AI agents, and a fully automated content production system.",
+  "knowsAbout": ["meteorite impact structures", "red relief image maps", "Japanese payroll and withholding tax", "Japanese qualified invoice system", "Model Context Protocol", "image registration"],
   "sameAs": [
     "https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA",
     "https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA",
@@ -69,8 +70,8 @@
       <rect x="24" y="24" width="72" height="72" rx="26" fill="#d2584c" fill-opacity=".92"/>
       <rect x="10" y="40" width="72" height="72" rx="26" fill="#2c3d6b" fill-opacity=".92"/>
     </svg>
-    <p class="word logo-type">KASANEGI</p>
-    <p class="yomi">かさねぎ</p>
+    <h1 class="word logo-type">KASANEGI</h1>
+    <p class="yomi" lang="ja">かさねぎ</p>
   </div>
   <p class="cue">SCROLL</p>
 </section>
@@ -83,11 +84,16 @@
     <h2 class="sec-h">About Kasanegi</h2>
     <div class="about-grid">
       <div>
-        <p class="body">Kasanegi is a research and development studio based in Osaka, Japan. We work on three things: research to find undiscovered meteorite craters in Japan's terrain, a language-learning app that uses manga, and a content production system that earns revenue fully automatically.</p>
-        <p class="body">Most of our research and development is done with Claude Code.</p>
+        <p class="body">We use AI to find a new dimension in data that already exists. Kasanegi is a research and development studio in Osaka, Japan, built on that single idea. In the age of AI, the value this idea creates is already here and already at work.</p>
+        <p class="body">At the centre is research to find undiscovered meteorite craters across Japan&#39;s entire terrain. The same idea has also grown into an app that turns the manga you love into language study material, data APIs that turn Japan&#39;s public data into tools for AI agents, and a video production system in which AI produces everything from script to upload, fully automatically. The video production system earns real revenue and supports our research and development.</p>
+        <p class="body">We are now undertaking a major integration, bringing everything we build into a single foundation that uses AI to create new value from existing data. This includes the data APIs we have published since before our founding, the processing behind our research, the technology that layers two languages, the video production system, and much more development not listed here. Meanwhile, the ten APIs of JP Local Pack remain open free of charge, as one example from our family of data APIs.</p>
       </div>
       <div>
-        <p class="body">The name comes from <i>kasanegi</i> (重ね着), wearing kimono in layers. We layer software, data and AI onto geological knowledge, to carry out research and development. In the four months since we started, our three lines of work have passed 1,700 commits.</p>
+        <p class="body">The name comes from <i>kasanegi</i> (<span lang="ja">重ね着</span>), dressing in layered garments, as in the twelve-layered <i>jūnihitoe</i>. Layering makes things beautiful and practical, and creates new value. We layer AI onto data and technology onto knowledge, and keep evolving. That is the work of Kasanegi. We gave our language app the same name. Our research and development is built around Claude Code.</p>
+        <dl class="stats two">
+          <div><dt>450,000</dt><dd>lines of code running our four businesses</dd></div>
+          <div><dt>1,800<small style="font-size:.5em">+</small></dt><dd>commits across our research and development</dd></div>
+        </dl>
       </div>
     </div>
   </div>
@@ -103,57 +109,88 @@
     <article class="proj reveal">
       <div class="proj-text">
         <p class="proj-num">01 · Research</p>
-        <h3>Searching for undiscovered meteorite craters</h3>
-        <p class="body">In Japan, Oikeyama in Nagano is known as a meteorite crater. Japan&#39;s steep, forested land is likely to hold craters that have not yet been found. We read the latest Japan-wide red relief map with AI instead of the human eye, to search the whole country for undiscovered craters.</p>
-        <p class="body">For AI to recognise craters, we keep an inventory of 354 impact structures worldwide, including 226 confirmed sites, and have brought the terrain of 48 of them, from public 1 m data, into red relief maps on the same basis as Japan&#39;s. At Oikeyama we reproduce the Japan-wide red relief map to within one colour level, so terrain from around the world and from Japan is compared on one scale.</p>
-        <p class="body">Finding crater candidates in an enormous number of terrain images is work that requires advanced AI. Our founder, a certified mineral appraiser, checks the candidates with a geologist&#39;s eye.</p>
+        <h3>Searching all of Japan for undiscovered meteorite craters</h3>
+        <p class="body">Building on the latest red relief image map of all of Japan, this research uses machine learning to train AI on the world&#39;s known impact structures, so that the AI can identify undiscovered meteorite craters across the terrain of the entire country. It works at a speed, and in a way, that checking by eye and overlaying data by hand cannot match.</p>
+        <p class="body">In Japan, Oikeyama in Nagano Prefecture has been reported as a meteorite crater. The country&#39;s steep, forest-covered mountains are thought to hide craters that remain undiscovered. Identifying craters in imagery covering all of Japan requires advanced AI built on machine learning.</p>
+        <p class="body">The AI learns from the world&#39;s impact structures. We have compiled 354 of them, across 67 countries and regions, into a single inventory, and linked 2,011 papers to 240 of those structures. For 48 known craters, we have made red relief image maps from publicly available 1 m elevation data. We have also identified the calculation behind Japan&#39;s nationwide red relief image map down to its formulas and constants, and reproduced it at Oikeyama to within one colour level. This lets us compare terrain worldwide and in Japan by the same measure.</p>
+        <p class="body">Beyond terrain, we assess the quality of Japan&#39;s nationwide gravity and airborne magnetic surveys against primary sources and the actual data. Candidates the AI puts forward are verified by our founder, a certified mineral appraiser and geology specialist, who examines the rocks in the field. The same method extends to terrain worldwide, to the surface of the Moon, and to the discovery of <i>kofun</i> burial mounds.</p>
         <dl class="stats">
-          <div><dt>354</dt><dd>impact structures in our inventory, including 226 confirmed</dd></div>
-          <div><dt>48</dt><dd>known craters mapped from 1 m terrain data</dd></div>
-          <div><dt>289</dt><dd>commits in the first three weeks of the research</dd></div>
+          <div><dt>354</dt><dd>impact structures worldwide in our inventory, across 67 countries and regions, including 226 confirmed sites</dd></div>
+          <div><dt>2,011</dt><dd>papers linked to 240 structures in the inventory</dd></div>
+          <div><dt>48</dt><dd>known craters made into red relief image maps from 1 m terrain data</dd></div>
         </dl>
-        <div class="btns"><a class="btn" href="/en/research/">Read the research <span class="arrow">→</span></a></div>
+        <div class="btns"><a class="btn" href="/en/research/">About the research <span class="arrow">→</span></a></div>
       </div>
       <figure class="proj-fig">
-        <img src="/assets/oikeyama.png" width="768" height="768" loading="lazy" decoding="async" alt="Red relief map of Oikeyama, Nagano">
-        <figcaption>Red relief map of the Oikeyama crater, Nagano, made from GSI 1 m elevation data.</figcaption>
+        <img src="/assets/oikeyama.png" width="768" height="768" loading="lazy" decoding="async" alt="Red relief image map of Oikeyama, Nagano Prefecture">
+        <figcaption>Red relief image map of the Oikeyama crater, Nagano Prefecture, made from 1 m elevation data from the Geospatial Information Authority of Japan.</figcaption>
       </figure>
     </article>
 
     <article class="proj flip reveal">
       <div class="proj-text">
         <p class="proj-num">02 · App</p>
-        <h3>kasanegi, a language app that uses manga</h3>
-        <p class="body">kasanegi layers the Japanese and English editions of the same manga page by page on your phone. Enter two URLs, and a whole episode is layered page by page. Move the round lens, and that part switches to the other language. Any manga you love becomes study material.</p>
-        <p class="body">The two editions are matched page by page by their artwork and aligned. On real manga, pages are matched without error and layered as they are. Images never leave the device.</p>
-        <p class="body">An Android app, a PC version with a round lens, and a demo you can try in your browser are all running.</p>
-        <dl class="stats">
-          <div><dt>0</dt><dd>page-matching errors on real manga</dd></div>
-          <div><dt>3</dt><dd>platforms running: Android, PC and browser</dd></div>
-          <div><dt>53k</dt><dd>lines of code across the app, tests and matching core</dd></div>
+        <h3>kasanegi: crossing the language barrier through manga</h3>
+        <p class="body">The kasanegi app lets you read two language editions of the same manga layered page by page on your device. Enter two URLs, and the whole chapter is layered at once. Move the round lens, and just that area switches to the other language. The manga you already love becomes your language study material.</p>
+        <p class="body">Pages are paired not by their order but by comparing the artwork, then aligned and layered. On one chapter of a published manga, all 60 page pairs were matched without a single mix-up. Images never leave the device.</p>
+        <p class="body">Because the layering works from the artwork, it is not tied to any particular pair of languages. Sharing its name with the company, the app is the most accessible form of the idea behind Kasanegi. It runs on Android and PC, and you can see it for yourself right now in the browser demo.</p>
+        <dl class="stats two">
+          <div><dt>60</dt><dd>page pairs matched without a mix-up on one chapter of a published manga</dd></div>
+          <div><dt>3</dt><dd>platforms it runs on: Android, PC and the browser demo</dd></div>
         </dl>
         <div class="btns"><a class="btn" href="/demo/">Try the demo <span class="arrow">→</span></a><a class="btn ghost" href="/en/reader/">About the app</a></div>
       </div>
       <figure class="proj-fig svg">
-        <img src="/assets/reader.svg" width="560" height="420" loading="lazy" alt="Two language editions of a page layered; a round lens shows the other language">
+        <img src="/assets/reader.svg" width="560" height="420" loading="lazy" alt="Pages from two language editions layered, with the other language visible only inside a round lens">
+      </figure>
+    </article>
+
+    <article class="proj reveal" id="api">
+      <div class="proj-text">
+        <p class="proj-num">03 · Data API</p>
+        <h3>Japan&#39;s public data, in a form AI agents can use directly</h3>
+        <p class="body">We turn tables and registers published by Japan&#39;s public institutions into APIs that AI agents and software can use in a single call. Sources include the National Tax Agency, the Japan Health Insurance Association (Kyokai Kenpo), the Ministry of Health, Labour and Welfare, the Cabinet Office, and gBizINFO from the Ministry of Economy, Trade and Industry. Since before our founding, Kasanegi has developed a family of these data APIs and offered them on kasanegi.com and on a marketplace for developers.</p>
+        <p class="body">We are now integrating that family of data APIs into the foundation that brings all of Kasanegi together. In the meantime, so that you can work with the real thing, the ten APIs of JP Local Pack are open free of charge, with no sign-up. JP Local Pack is one approach within the family: public data for back-office work in Japan.</p>
+        <p class="body">Even this one example is exact: the withholding income tax API holds all 1,856 cells of the National Tax Agency&#39;s monthly withholding table and matches the official table cell for cell.</p>
+        <p class="body">Our data APIs are built so that AI agents can find and use them on their own. With an MCP server, OpenAPI and llms.txt in place, an AI agent receives the usage instructions and endpoints, and can put the APIs to work directly.</p>
+        <dl class="stats">
+          <div><dt>1,856</dt><dd>cells of the National Tax Agency&#39;s withholding tax table, every one matched, even in JP Local Pack, one example from the family</dd></div>
+          <div><dt>5<small style="font-size:.5em"> million</small></dt><dd>entries in the qualified invoice issuer registry, which an AI agent can look up in one call</dd></div>
+          <div><dt>10</dt><dd>APIs open free of charge now, as one example from the family, with MCP support</dd></div>
+        </dl>
+        <div class="btns"><a class="btn" href="/en/api/">About the data APIs <span class="arrow">→</span></a><a class="btn ghost" href="/en/api/#try">Try one example free</a></div>
+      </div>
+      <figure class="proj-fig api-fig">
+        <div class="api-card">
+          <p class="api-req"><span>GET</span> api.kasanegi.com/preview/v1/local/payroll/calc-by-salary?monthly_salary=300000&amp;pref_code=13&amp;age=30</p>
+          <dl class="api-res">
+            <div><dt>Health insurance</dt><dd>14,775</dd></div>
+            <div><dt>Child and child-rearing support contribution</dt><dd>345</dd></div>
+            <div><dt>Employees&#39; pension</dt><dd>27,450</dd></div>
+            <div><dt>Employment insurance</dt><dd>1,500</dd></div>
+            <div><dt>Withholding income tax</dt><dd>6,320</dd></div>
+            <div class="sum"><dt>Total deductions</dt><dd>50,390</dd></div>
+            <div class="sum"><dt>Take-home pay</dt><dd>249,610</dd></div>
+          </dl>
+        </div>
+        <figcaption>The actual response (in yen) from JP Local Pack, one example from the family, for a monthly salary of ¥300,000 in Tokyo at age 30. The figures follow the fiscal 2026 tables of Kyokai Kenpo and the National Tax Agency.</figcaption>
       </figure>
     </article>
 
     <article class="proj solo reveal">
       <div class="proj-text">
-        <p class="proj-num">03 · System</p>
-        <h3>A fully automated content system that earns revenue</h3>
-        <p class="body">AI subscriptions alone cost our research and development more than $400 a month. Using part of that capacity, we built a content production system with Claude Code in which AI handles everything from writing the script to editing and uploading, fully automatically. The revenue it earns now covers our monthly AI costs and other development costs, and we keep expanding its scale.</p>
-        <p class="body">While much AI-generated video struggles with quality and accuracy, this system builds its videos from real events and real people&#39;s voices.</p>
-        <p class="body">Several channels in different genres and languages run on the system. The two sports channels below are only part of it, and these two alone have set the following records.</p>
-        <dl class="stats">
-          <div><dt>6 <small style="font-size:.5em">weeks</small></dt><dd>for フットボール海外の反応局 alone to pass one million total views</dd></div>
-          <div><dt>1.9M</dt><dd>total views from these two sports channels alone</dd></div>
-          <div><dt>2h 35m</dt><dd>from the final whistle to a published video</dd></div>
+        <p class="proj-num">04 · System</p>
+        <h3>A fully automated AI video production system that earns revenue</h3>
+        <p class="body">With Claude Code, we developed a video production system in which AI handles everything from writing the script to editing and publishing, fully automatically. The system runs seven channels across different genres and languages.</p>
+        <p class="body">What it makes is not low-quality AI content or videos padded with invented stories, but videos worth people&#39;s time. Facts are checked against their sources through a fixed procedure, and the AI is never allowed to invent them. Our newest channel reached one million total views within a month of launch.</p>
+        <p class="body">The videos earn real revenue. That revenue covers the monthly AI usage fees and development costs behind our research and development, and lets us keep expanding production. The two channels below are examples of what the system runs.</p>
+        <dl class="stats two">
+          <div><dt>7</dt><dd>channels across different genres and languages, run by the system</dd></div>
+          <div><dt>1<small style="font-size:.5em"> million</small></dt><dd>total views reached by our newest channel within a month of launch</dd></div>
         </dl>
         <div class="ch-links">
-          <a href="https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA" rel="noopener"><i aria-hidden="true"></i>野球海外の反応局 (MLB)</a>
-          <a href="https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA" rel="noopener"><i aria-hidden="true"></i>フットボール海外の反応局 (Football)</a>
+          <a href="https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA" rel="noopener" lang="ja"><i aria-hidden="true"></i>野球海外の反応局</a>
+          <a href="https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA" rel="noopener" lang="ja"><i aria-hidden="true"></i>フットボール海外の反応局</a>
         </div>
       </div>
     </article>
@@ -162,18 +199,21 @@
 
 <section class="block" id="news">
   <div class="wrap reveal">
-    <p class="eyebrow">NEWS</p>
-    <h2 class="sec-h">News</h2>
+    <p class="eyebrow">NEWS &amp; HISTORY</p>
+    <h2 class="sec-h">News and history</h2>
     <ul class="news">
-      <li class="new"><time datetime="2026-10-07">2026.10.07</time><span class="tag">News</span><p>We renewed our website</p></li>
-      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">Channels</span><p>フットボール海外の反応局 passed one million total views, six weeks after launch</p></li>
-      <li><time datetime="2026-10-05">2026.10.05</time><span class="tag">Development</span><p>Our page matching aligned the pages of real manga without error</p></li>
-      <li><time datetime="2026-10-01">2026.10.01</time><span class="tag">Channels</span><p>Published a video on a Japan national football match 2 hours 35 minutes after the final whistle</p></li>
-      <li><time datetime="2026-09-27">2026.09.27</time><span class="tag">Development</span><p>Developed the PC version of the language app with a round lens</p></li>
-      <li><time datetime="2026-09-20">2026.09.20</time><span class="tag">Research</span><p>Started research on meteorite impact structures</p></li>
-      <li><time datetime="2026-08-29">2026.08.29</time><span class="tag">Development</span><p>Started developing the language app kasanegi</p></li>
-      <li><time datetime="2026-08-23">2026.08.23</time><span class="tag">Channels</span><p>Started publishing videos on フットボール海外の反応局</p></li>
-      <li><time datetime="2026-06-01">2026.06.01</time><span class="tag">News</span><p>Kasanegi was founded</p></li>
+      <li class="new"><time datetime="2026-10-08">2026.10.08</time><span class="tag">Data API</span><p>Opened the ten APIs of JP Local Pack free of charge, as one example while we integrate our family of data APIs. Payroll, social insurance, withholding income tax, consumption tax, public holidays, corporate numbers, qualified invoices and Peppol are all available to try with no sign-up.</p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">News</span><p>Relaunched our website. We are integrating all of Kasanegi, including the family of data APIs we have published since before our founding, into one foundation that uses AI to create new value.</p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">App</span><p>The Android app layered 60 page pairs from one chapter of a published manga without error.</p></li>
+      <li><time datetime="2026-10-06">2026.10.06</time><span class="tag">Research</span><p>Identified the calculation behind Japan&#39;s nationwide red relief image map down to its formulas and constants, and reproduced it at Oikeyama to within one colour level.</p></li>
+      <li><time datetime="2026-10-05">2026.10.05</time><span class="tag">App</span><p>The language app&#39;s page matching paired the pages of a published manga without error.</p></li>
+      <li><time datetime="2026-09-27">2026.09.27</time><span class="tag">App</span><p>Developed the PC version of the language app, with a round lens.</p></li>
+      <li><time datetime="2026-08-23">2026.08.23</time><span class="tag">Channels</span><p>Launched a new channel. It reached one million total views within a month of launch.</p></li>
+      <li><time datetime="2026-06-01">2026.06.01</time><span class="tag">News</span><p>Kasanegi was founded.</p></li>
+      <li><time datetime="2026-05-29">2026.05.29</time><span class="tag">Channels</span><p>Our video channel was approved for the YouTube Partner Program.</p></li>
+      <li><time datetime="2026-05-08">2026.05.08</time><span class="tag">Data API</span><p>Our data APIs were listed in a developer community directory of APIs for AI agents.</p></li>
+      <li><time datetime="2026-05-07">2026.05.07</time><span class="tag">Data API</span><p>Launched kasanegi.com and published our data APIs.</p></li>
+      <li><time datetime="2026-04-16">2026.04.16</time><span class="tag">Data API</span><p>Published Japan&#39;s public data as APIs that AI can use directly.</p></li>
     </ul>
   </div>
 </section>
@@ -185,10 +225,10 @@
     <div class="profile">
       <div>
         <p class="name">Tokitsugu Matsushita</p>
-        <p class="kana">松下 宗嗣</p>
+        <p class="kana" lang="ja">松下 宗嗣</p>
         <p class="role">Founder</p>
       </div>
-      <p class="body">Certified mineral appraiser. Has carried out field surveys of minerals in the Izumi Group of Osaka Prefecture, and in 2019 published a <a href="https://cir.nii.ac.jp/crid/1522262179823947136" rel="noopener">paper</a> on dawsonite from the Shindachi Formation in <i>Chigaku Kenkyu</i> (Journal of Geoscience). Founded Kasanegi in June 2026.</p>
+      <p class="body">Certified mineral appraiser. As a geology specialist, carried out mineral field surveys in the Izumi Group of Osaka Prefecture, and in 2019 published a <a href="https://cir.nii.ac.jp/crid/1522262179823947136" rel="noopener">paper</a> on dawsonite from the Shindachi Formation in <i>Chigaku Kenkyu</i>. Developed and published data APIs for AI agents before founding Kasanegi in June 2026. Leads research and development at Kasanegi.</p>
     </div>
   </div>
 </section>
@@ -196,13 +236,14 @@
 <section class="block" id="company">
   <div class="wrap reveal">
     <p class="eyebrow">COMPANY</p>
-    <h2 class="sec-h">Company</h2>
+    <h2 class="sec-h">Company overview</h2>
     <dl class="facts">
-      <div><dt>Name</dt><dd>Kasanegi (かさねぎ)</dd></div>
+      <div><dt>Trade name</dt><dd>Kasanegi (Japanese: <span lang="ja">かさねぎ</span>)</dd></div>
       <div><dt>Founder</dt><dd>Tokitsugu Matsushita</dd></div>
-      <div><dt>Location</dt><dd>Osaka, Japan</dd></div>
+      <div><dt>Location</dt><dd>Osaka City, Osaka Prefecture, Japan</dd></div>
       <div><dt>Founded</dt><dd>1 June 2026</dd></div>
-      <div><dt>Business</dt><dd>Research and development in earth science<br>Software planning and development<br>Video content production</dd></div>
+      <div><dt>Business</dt><dd>Development of a foundation that uses AI to create new value from existing data<br>Earth science research and development (terrain analysis with AI)<br>Development and provision of data APIs for AI agents<br>Planning and development of software, including the language app<br>Development and operation of an AI video production system</dd></div>
+      <div><dt>Track record</dt><dd>YouTube Partner Program (approved May 2026)<br>Data APIs listed on RapidAPI<br>Public MCP server (mcp.kasanegi.com)</dd></div>
       <div><dt>Contact</dt><dd><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></dd></div>
     </dl>
   </div>
@@ -212,7 +253,7 @@
   <div class="wrap reveal">
     <p class="eyebrow">CONTACT</p>
     <h2 class="sec-h">Contact</h2>
-    <p class="body">For research collaboration, press or partnership enquiries, please contact us at the address below. We are also looking for people to try the beta of our language app.</p>
+    <p class="body">For enquiries about joint research, adopting our data APIs, the kasanegi language app, partnerships or press coverage, please contact us at the address below.</p>
     <a class="btn" href="mailto:contact@kasanegi.com">contact@kasanegi.com <span class="arrow">→</span></a>
   </div>
 </section>
@@ -224,9 +265,9 @@
     <div class="grid">
       <div>
         <a class="mark logo-type" href="/en/" style="font-size:22px">KASANEGI</a>
-        <p class="meta">Osaka, Japan</p>
+        <p class="meta">Kasanegi · Osaka</p>
       </div>
-      <p class="meta"><a href="#projects">Projects</a> · <a href="#news">News</a> · <a href="#company">Company</a> · <a href="/en/research/">Research</a> · <a href="/demo/">Demo</a> · <a href="/" hreflang="ja" lang="ja">日本語</a></p>
+      <p class="meta"><a href="#projects">Projects</a> · <a href="#news">News</a> · <a href="#company">Company</a> · <a href="/en/research/">Research</a> · <a href="/en/reader/">Reader</a> · <a href="/en/api/">Data API</a> · <a href="/demo/">Demo</a> · <a href="/" hreflang="ja" lang="ja">日本語</a></p>
     </div>
     <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
   </div>

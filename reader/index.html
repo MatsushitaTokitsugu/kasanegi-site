@@ -87,7 +87,7 @@
       <h1 id="page-title">同じ漫画を、<wbr>ふたつの言語で<wbr>重ねて読む</h1>
       <p>kasanegi は、語学を学ぶ人のためのアプリです。同じ漫画の日本語版と英語版を、端末の中で頁ごとに重ねて表示します。丸いレンズを動かすと、その場所だけもう一方の言語で読めます。</p>
       <p>頁の画像は端末の中だけで扱います。私たちのサーバに画像を送ることはありません。</p>
-      <div class="btns"><a class="btn light" href="#demo">デモを試す <span class="arrow">→</span></a><a class="btn ghost" href="#beta">ベータに参加する</a></div>
+      <div class="btns"><a class="btn light" href="#demo">デモを試す <span class="arrow">→</span></a><a class="btn ghost" href="#access">利用を申し込む</a></div>
     </div>
     <figure class="loupe">
       <img src="/demo/pc/e04p03_ja.jpg" width="992" height="1400" alt="『Pepper&amp;Carrot』第 4 話の頁。日本語版の上を丸いレンズが動き、レンズの中だけ英語版の吹き出しが見えています。">
@@ -256,11 +256,11 @@
         <p class="proj-num">03 · Android</p>
         <h3>Android アプリ</h3>
         <p class="body">スマホで読むためのアプリです。Kotlin で書いています。読む版と参照版の URL を入れて開始すると、一話の頁が照合されます。指でなぞった場所には、丸窓でもう一方の版が表示されます。前頁と次頁への移動と、2 つの版の入れ替えができます。</p>
-        <p class="body">Android アプリは、一話の 2 つの版(64 頁と 58 頁)から 60 組の頁を結びました。誤った組は 0 でした。見開きの頁は左右を別々に結ぶため、組の数が頁の数より多くなります。</p>
+        <p class="body">Android アプリは 2 つの実装で作りました。読書の機能を作り込んだ実装と、一話の画像をまとめて重ねる実装です。後者は、一話の 2 つの版(64 頁と 58 頁)から 60 組の頁を結びました。誤った組は 0 でした。見開きの頁は左右を別々に結ぶため、組の数が頁の数より多くなります。</p>
         <dl class="stats">
-          <div><dt>22,898</dt><dd>読書の機能の Kotlin の行数(134 ファイル)</dd></div>
-          <div><dt>25,970</dt><dd>単体試験と機器試験の行数</dd></div>
-          <div><dt>60</dt><dd>Android アプリで結んだ頁の組(誤り 0)</dd></div>
+          <div><dt>22,898</dt><dd>読書の機能を作り込んだ実装の Kotlin の行数(134 ファイル)</dd></div>
+          <div><dt>25,970</dt><dd>同じ実装の単体試験と機器試験の行数</dd></div>
+          <div><dt>60</dt><dd>一話の画像をまとめて重ねる実装で結んだ頁の組(誤り 0)</dd></div>
         </dl>
       </div>
       <figure class="proj-fig phone-fig">
@@ -281,7 +281,7 @@
     <div class="figs3 reveal">
       <div>
         <p class="n">33<small>組</small></p>
-        <p>頁合わせの核は、日本語版 193 頁の中から英語版 57 頁の相手を探して、33 組を結びました。誤った組は 0 でした。相手が見つからなかった頁は重ねていません(2026-10-05、全組を目視で確認)。</p>
+        <p>頁合わせの核は、日本語版 193 枚の中から英語版 57 枚の相手を探して、33 組を結びました。誤った組は 0 でした。相手が見つからなかった頁は重ねていません(2026-10-05、全組を目視で確認)。</p>
       </div>
       <div>
         <p class="n">47<small>頁</small></p>
@@ -305,8 +305,8 @@
     </div>
     <ul class="points reveal">
       <li><b>サーバ</b><span>頁の画像を私たちのサーバに送ることはありません。サーバが画像を持つこともありません。</span></li>
-      <li><b>端末</b><span>画像は、重ねて表示するあいだだけ端末のメモリで扱います。</span></li>
-      <li><b>保存</b><span>画像はファイルとして保存しません。Android アプリの試験では、各回の終わりにアプリのキャッシュと表示用の領域を検査しています。2026-10-07 の 8 回の計測では、画像ファイルはどれも 0 件でした。</span></li>
+      <li><b>端末</b><span>Android アプリ(一話の画像をまとめて重ねる実装)は、画像を、重ねて表示するあいだだけ端末のメモリで扱います。</span></li>
+      <li><b>保存</b><span>この実装は画像をファイルとして保存しません。試験では、各回の終わりにアプリのキャッシュと表示用の領域を検査しています。2026-10-07 の 8 回の計測では、画像ファイルはどれも 0 件でした。</span></li>
       <li><b>デモ</b><span>このページのデモも、ブラウザの中だけで動きます。</span></li>
     </ul>
   </div>
@@ -317,10 +317,10 @@
     <div class="reveal">
       <p class="eyebrow">BUILT WITH CLAUDE</p>
       <h2 class="sec-h">Claude Code が担った部分</h2>
-      <p class="body">kasanegi の開発の多くは Claude Code と進めています。そのうち、次の部分は Claude Code が設計して書きました。</p>
+      <p class="body">kasanegi の開発は Claude Code を軸に進めています。そのうち、次の部分は Claude Code が設計して書きました。</p>
     </div>
     <dl class="facts reveal" style="margin-top:36px">
-      <div><dt>頁合わせの核</dt><dd>位置合わせ(align.py)と頁の照合(pages.py)を設計して書きました。</dd></div>
+      <div><dt>頁合わせの核</dt><dd>核の土台(位置合わせの align.py など)と頁の照合(pages.py)を設計して書き、部品を統合しました。</dd></div>
       <div><dt>順序を仮定しない照合</dt><dd>頁の並び順を前提にせず、絵が一致する頁どうしを結ぶ照合を設計して書きました(2026-09-08)。</dd></div>
       <div><dt>デモ</dt><dd>このページのデモ(ブラウザの中の位置合わせとレンズ)を書きました。</dd></div>
       <div><dt>開発の監督</dt><dd>設計、基準、検収、記録を受け持っています。</dd></div>
@@ -328,10 +328,10 @@
   </div>
 </section>
 
-<section class="block together" id="beta">
+<section class="block together" id="access">
   <div class="wrap reveal">
-    <p class="eyebrow">BETA</p>
-    <h2 class="sec-h">ベータ版を試していただける方を募集しています</h2>
+    <p class="eyebrow">ACCESS</p>
+    <h2 class="sec-h">kasanegi を試していただける方を募集しています</h2>
     <p class="lede">語学を学んでいる方を歓迎します。ご希望の方は、メールでご連絡ください。</p>
     <div class="who3">
       <div><b>英語を学ぶ方</b><span>日本語で読んだことのある漫画を、英語版と重ねて読めます。</span></div>
@@ -339,7 +339,7 @@
       <div><b>ほかの言語を学ぶ方</b><span>学んでいる言語も教えてください。</span></div>
     </div>
     <a class="btn" href="mailto:contact@kasanegi.com">contact@kasanegi.com <span class="arrow">→</span></a>
-    <p class="note">件名に「ベータ希望」と書いていただけると助かります。</p>
+    <p class="note">件名に「kasanegi 利用希望」と書いていただけると助かります。</p>
   </div>
 </section>
 
@@ -352,7 +352,7 @@
         <a class="mark logo-type" href="/" style="font-size:22px">KASANEGI</a>
         <p class="meta">大阪</p>
       </div>
-      <p class="meta"><a href="/">トップ</a> · <a href="/research/">研究</a> · <a href="/reader/">語学</a> · <a href="/demo/">デモ</a> · <a href="/en/reader/" hreflang="en" lang="en">English</a></p>
+      <p class="meta"><a href="/">トップ</a> · <a href="/research/">研究</a> · <a href="/reader/">語学</a> · <a href="/api/">データ API</a> · <a href="/demo/">デモ</a> · <a href="/en/reader/" hreflang="en" lang="en">English</a></p>
     </div>
     <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
   </div>

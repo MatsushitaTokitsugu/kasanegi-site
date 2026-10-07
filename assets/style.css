@@ -315,3 +315,5 @@ code.ep,.facts code,.note code{font-family:ui-monospace,"SFMono-Regular",Menlo,C
 .src-tbl col.c1{width:62%}.src-tbl col.c2{width:38%}
 .stats.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .opening h1.word{font-weight:inherit;letter-spacing:inherit}
+.api-res dt{min-width:0;overflow-wrap:anywhere}
+@media(max-width:860px){.try-grid{grid-template-columns:minmax(0,1fr)}}
