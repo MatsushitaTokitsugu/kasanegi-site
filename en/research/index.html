@@ -122,7 +122,6 @@
     <p class="kicker">RESEARCH</p>
     <h1>Searching for undiscovered meteorite craters in Japan</h1>
     <p>In Japan, Oikeyama in Nagano Prefecture is known as a meteorite crater. Between 2025 and 2026, a red relief image map covering all of Japan became available for anyone to view. In this research, we apply processing that we have verified on known impact structures around the world to the whole country, to look for craters that have not yet been found. Our methods and progress are published on this page.</p>
-    <p class="now-line">We are now finishing the terrain data that AI will learn from (stages I and II). Next comes the main stage: an AI recognition step that misses none of the known craters (stage III), run over the whole of Japan.</p>
   </div>
 </section>
 
@@ -185,7 +184,7 @@
 
     <ol class="steps reveal">
       <li class="step">
-        <span class="k">I</span><span class="state done">Done</span>
+        <span class="k">I</span>
         <h3>Establish the quality of Japan's observations, place by place</h3>
         <dl>
           <dt>Data</dt>
@@ -197,7 +196,7 @@
         </dl>
       </li>
       <li class="step">
-        <span class="k">II</span><span class="state now">Finishing</span>
+        <span class="k">II</span>
         <h3>Apply the same processing to known structures worldwide</h3>
         <dl>
           <dt>Data</dt>
@@ -209,26 +208,26 @@
         </dl>
       </li>
       <li class="step">
-        <span class="k">III</span><span class="state next">Next</span>
+        <span class="k">III</span>
         <h3>A classifier that does not miss known structures</h3>
         <dl>
           <dt>Data</dt>
           <dd>Outputs of stage II; gravity, magnetic and geological data</dd>
           <dt>Work</dt>
           <dd>We test whether known impact structures deliberately left out of training are classified as impact structures without being told their location or type. The pass condition is that no known impact structure is missed. Gravity, magnetic and geological data are combined with the red relief image maps.</dd>
-          <dt>Goal</dt>
-          <dd class="res">To detect even an eroded mountain structure like Oikeyama without prior information. The false-positive rate is not assessed at this stage.</dd>
+          <dt>Aim</dt>
+          <dd class="res">To detect even an eroded mountain structure like Oikeyama without prior information.</dd>
         </dl>
       </li>
       <li class="step">
-        <span class="k">IV</span><span class="state ">Later</span>
+        <span class="k">IV</span>
         <h3>Apply to the whole of Japan</h3>
         <dl>
           <dt>Data</dt>
           <dd>More than a million elevation tiles covering Japan (Q-chizu); nationwide gravity, magnetic and geological data</dd>
           <dt>Work</dt>
           <dd>We apply the same processing and classifier to the whole of Japan at once. As the area covered by 1 m elevation data grows, so does the area we can examine.</dd>
-          <dt>Goal</dt>
+          <dt>Aim</dt>
           <dd class="res">To choose, from the detected candidates, sites to confirm by geological fieldwork. Evidence of impact includes shocked quartz.</dd>
         </dl>
       </li>

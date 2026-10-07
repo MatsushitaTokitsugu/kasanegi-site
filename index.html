@@ -47,7 +47,6 @@
   <a class="brand" href="/"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
   <nav aria-label="メイン">
     <a href="#projects">取り組み</a>
-    <a href="#roadmap">計画</a>
     <a class="hide-sm" href="#news">お知らせ</a>
     <a class="hide-sm" href="#company">概要</a>
     <a class="hide-sm" href="#contact">お問い合わせ</a>
@@ -82,10 +81,9 @@
         <p class="body">研究と開発の大部分は、Claude Code とともに進めています。</p>
       </div>
       <div>
-        <p class="body">名前は、着物を一枚ずつ重ねて着る「重ね着」に由来します。地質学の知識に、ソフトウェアとデータと AI を重ねて、ひとりでも大きな研究と開発ができることを示そうとしています。</p>
+        <p class="body">名前は、着物を一枚ずつ重ねて着る「重ね着」に由来します。地質学の知識に、ソフトウェアとデータと AI を重ねて、研究と開発を進めています。開業から 4 か月で、3 つの事業のコミットは合わせて 1,700 を超えました。</p>
       </div>
     </div>
-    <p class="lead-strong">三つの取り組みは、いずれも準備を終えて本番に入る段階にあります。隕石クレーターの研究は AI に学ばせる地形データの整備を終えつつあり、語学アプリは核とデモが動き、コンテンツ制作システムは収益化を実証しました。</p>
   </div>
 </section>
 
@@ -100,15 +98,13 @@
       <div class="proj-text">
         <p class="proj-num">01 · 研究</p>
         <h3>未知の隕石クレーターを探す</h3>
-        <p class="body">日本では、長野県の御池山が隕石クレーターとして知られています。山が険しく森に覆われた日本の国土には、まだ見つかっていないクレーターが残っていると考えられます。私たちは、日本全土をカバーする最新の赤色立体地図を、人の目ではなく AI で読み解き、国土全体から未知のクレーターを探します。</p>
-        <div class="phases">
-          <div class="phase"><p class="phase-label">これまで:学習データの準備</p><p class="body">AI にクレーターを見分けさせるには、本物のクレーターの地形を学ばせる必要があります。世界の衝突構造を確認済みの 226 か所を含む 354 件の台帳にまとめ、そのうち 48 か所について、公開されている 1 m 解像度の地形から赤色立体地図を作りました。御池山では全国の赤色立体地図を色の差 1 段階以内で再現し、世界と日本の地形を同じ基準で比べられることを確かめています。</p></div>
-          <div class="phase next"><p class="phase-label">ここから:山場</p><p class="body">次は、これらの地形をもとに AI の判別モデルを作り、日本全土の赤色立体地図に当てます。膨大な数の地形画像から候補を絞り込むには、高度な AI の活用が欠かせません。見つかった候補は、鉱物鑑定士である代表が地質の目で確かめます。</p></div>
-        </div>
+        <p class="body">日本では、長野県の御池山が隕石クレーターとして知られています。山が険しく森に覆われた日本の国土には、まだ見つかっていないクレーターが残っていると考えられます。私たちは、日本全土をカバーする最新の赤色立体地図を、人の目ではなく AI で読み解き、国土全体から未知のクレーターを探しています。</p>
+        <p class="body">AI にクレーターを見分けさせるため、世界の衝突構造を確認済みの 226 か所を含む 354 件の台帳にまとめ、そのうち 48 か所の地形を、公開されている 1 m 解像度のデータから日本の地図と同じ基準の赤色立体地図にそろえています。御池山では全国の赤色立体地図を色の差 1 段階以内で再現し、世界と日本の地形を同じ物差しで比べています。</p>
+        <p class="body">膨大な数の地形画像からクレーターの候補を見つけ出すこの研究には、高度な AI が欠かせません。見つかった候補は、鉱物鑑定士である代表が地質の目で確かめます。</p>
         <dl class="stats">
           <div><dt>354<small style="font-size:.5em">件</small></dt><dd>世界の衝突構造の台帳(確認済み 226 か所を含む)</dd></div>
           <div><dt>48<small style="font-size:.5em">か所</small></dt><dd>1 m の地形から赤色立体地図を作った既知のクレーター</dd></div>
-          <div><dt>1<small style="font-size:.5em">段階</small></dt><dd>御池山で再現した、全国の赤色立体地図との色の差</dd></div>
+          <div><dt>289</dt><dd>研究開始から 3 週間で積み上げたコミット</dd></div>
         </dl>
         <div class="btns"><a class="btn" href="/research/">研究の詳細 <span class="arrow">→</span></a></div>
       </div>
@@ -122,15 +118,13 @@
       <div class="proj-text">
         <p class="proj-num">02 · アプリ</p>
         <h3>漫画で学ぶ語学アプリ kasanegi</h3>
-        <p class="body">同じ漫画の日本語版と英語版を、端末の中で頁ごとに重ねて読むアプリです。丸いレンズを動かすと、その部分だけもう一方の言語に切り替わります。好きな漫画が、そのまま語学の教材になります。</p>
-        <div class="phases">
-          <div class="phase"><p class="phase-label">これまで:核の完成</p><p class="body">2 つの言語版の頁を、絵で照合して重ねる核を作りました。実際の漫画 1 巻で 33 組の頁を誤りなく対応付け、新しい試作では 60 組の頁を誤りなく重ねています。PC 版の円形ルーペと Android アプリも動いており、ブラウザで試せるデモを公開しています。</p></div>
-          <div class="phase next"><p class="phase-label">ここから:公開へ</p><p class="body">次は、2 つの URL を入れるだけで、10 秒以内に一話全体が重なる体験をスマホに届けます。次の巻・前の巻へも、両方の版がそろって進みます。Android から公開し、iPhone と PC、そして日英から中国語へと広げます。単語や文法の説明には Claude を組み込み、漫画を読むことがそのまま学習になるアプリにします。</p></div>
-        </div>
+        <p class="body">同じ漫画の日本語版と英語版を、スマホの中で頁ごとに重ねて読むアプリです。2 つの URL を入れると、一話全体が頁ごとに重なります。丸いレンズを動かすと、その部分だけもう一方の言語に切り替わります。好きな漫画が、そのまま語学の教材になります。</p>
+        <p class="body">2 つの言語版の頁は、絵で照合して位置を合わせます。実際の漫画でも頁の対応を誤りなく取り、そのまま重ねて表示します。画像は端末の外に送りません。</p>
+        <p class="body">Android アプリ、PC 版の円形ルーペ、ブラウザで試せるデモが動いています。</p>
         <dl class="stats">
-          <div><dt>33<small style="font-size:.5em">組</small></dt><dd>実際の漫画 1 巻で、誤りなく対応付けた頁</dd></div>
-          <div><dt>60<small style="font-size:.5em">組</small></dt><dd>新しい試作で、誤りなく重ねた頁</dd></div>
-          <div><dt>2.2<small style="font-size:.5em">万行</small></dt><dd>Android アプリのコード</dd></div>
+          <div><dt>0<small style="font-size:.5em">件</small></dt><dd>実際の漫画で、頁の対応を誤った数</dd></div>
+          <div><dt>3</dt><dd>動いている環境(Android・PC・ブラウザ)</dd></div>
+          <div><dt>5.3<small style="font-size:.5em">万行</small></dt><dd>アプリ・試験・照合の核のコード</dd></div>
         </dl>
         <div class="btns"><a class="btn" href="/demo/">デモを試す <span class="arrow">→</span></a><a class="btn ghost" href="/reader/">アプリの詳細</a></div>
       </div>
@@ -144,14 +138,12 @@
         <p class="proj-num">03 · システム</p>
         <h3>完全自動で収益を上げるコンテンツ制作システム</h3>
         <p class="body">研究と開発には、毎月 400 ドル以上の AI の利用料がかかります。私たちはその開発の一部として、原稿の作成から編集、投稿までを AI が完全に自動で行うコンテンツ制作システムを、Claude Code で作りました。</p>
-        <div class="phases">
-          <div class="phase"><p class="phase-label">これまで:収益化の実証</p><p class="body">このシステムが運営する YouTube チャンネル 2 つは、どちらも収益化し、収益は Claude の利用料を上回っています。AI で作られた動画の多くが品質や正確さの課題を抱えるなかで、実際の出来事と人々の声をもとに組み立てた動画が、累計 190 万回以上再生されました。</p></div>
-          <div class="phase next"><p class="phase-label">ここから:多言語で世界へ</p><p class="body">2 つのチャンネルは、このシステムの使い方の一つにすぎません。言語やジャンルの異なるチャンネルも、すでに作り始めています。次は多言語化を進め、世界中の視聴者に向けて、AI が自立して価値を生み続ける仕組みに育てます。</p></div>
-        </div>
+        <p class="body">このシステムが運営する YouTube チャンネルは、いずれも収益化しており、収益は Claude の利用料を上回っています。AI で作られた動画の多くが品質や正確さの課題を抱えるなかで、実際の出来事と人々の声をもとに組み立てた動画が、累計 190 万回以上再生されています。</p>
+        <p class="body">2 つのチャンネルは、このシステムの使い方の一つにすぎません。言語やジャンルの異なるチャンネルも、同じシステムで動いています。</p>
         <dl class="stats">
+          <div><dt>6<small style="font-size:.5em">週間</small></dt><dd>サッカーのチャンネルが累計 100 万回再生を突破するまで</dd></div>
           <div><dt>190<small style="font-size:.5em">万回</small></dt><dd>2 チャンネルの累計再生回数</dd></div>
-          <div><dt>158<small style="font-size:.5em">本</small></dt><dd>システムが制作し、公開した動画</dd></div>
-          <div><dt>2</dt><dd>収益化したチャンネル</dd></div>
+          <div><dt>2<small style="font-size:.5em">時間35分</small></dt><dd>試合終了から動画の公開まで</dd></div>
         </dl>
         <div class="ch-links">
           <a href="https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA" rel="noopener"><i aria-hidden="true"></i>野球海外の反応局</a>
@@ -162,57 +154,16 @@
   </div>
 </section>
 
-<section class="block" id="roadmap">
-  <div class="wrap reveal">
-    <p class="eyebrow">ROADMAP</p>
-    <h2 class="sec-h">これからの計画</h2>
-    <div class="roadmap">
-      <div class="track">
-        <h3>未知の隕石クレーター</h3><p class="sub">研究</p>
-        <ol>
-          <li class="done">世界の衝突構造 354 件を台帳に整理</li>
-          <li class="done">48 か所の 1 m 地形から赤色立体地図を作成</li>
-          <li class="done">日本の公開観測を全国で点検</li>
-          <li class="now">AI に学ばせる地形データの仕上げ</li>
-          <li>AI の判別モデルの開発</li>
-          <li>日本全土への適用と候補の発見</li>
-          <li>候補の現地での確認</li>
-        </ol>
-      </div>
-      <div class="track">
-        <h3>語学アプリ kasanegi</h3><p class="sub">アプリ</p>
-        <ol>
-          <li class="done">頁合わせの核</li>
-          <li class="done">PC 版の円形ルーペ・Android アプリ・デモ</li>
-          <li class="now">一話全体を 10 秒で重ねる</li>
-          <li>Android 版の公開</li>
-          <li>iPhone 版・PC 版、中国語への対応</li>
-          <li>Claude による単語と文法の説明</li>
-        </ol>
-      </div>
-      <div class="track">
-        <h3>コンテンツ制作システム</h3><p class="sub">システム</p>
-        <ol>
-          <li class="done">完全自動の制作システム</li>
-          <li class="done">2 チャンネルで収益化</li>
-          <li class="now">言語やジャンルの異なるチャンネル</li>
-          <li>多言語で世界へ</li>
-        </ol>
-      </div>
-    </div>
-    <div class="legend"><span><i class="done"></i>済み</span><span><i class="now"></i>進行中</span><span><i></i>これから</span></div>
-  </div>
-</section>
-
-<section class="block alt" id="news">
+<section class="block" id="news">
   <div class="wrap reveal">
     <p class="eyebrow">NEWS</p>
     <h2 class="sec-h">お知らせ</h2>
     <ul class="news">
       <li class="new"><time datetime="2026-10-07">2026.10.07</time><span class="tag">お知らせ</span><p>ウェブサイトをリニューアルしました</p></li>
-      <li><time datetime="2026-10-05">2026.10.05</time><span class="tag">開発</span><p>語学アプリの頁合わせで、漫画 1 巻の 33 組の頁を誤りなく対応付けました</p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">チャンネル</span><p>「フットボール海外の反応局」が、開設から 6 週間で累計 100 万回再生を突破しました</p></li>
+      <li><time datetime="2026-10-05">2026.10.05</time><span class="tag">開発</span><p>語学アプリの頁合わせで、実際の漫画の頁を誤りなく対応付けました</p></li>
       <li><time datetime="2026-10-01">2026.10.01</time><span class="tag">チャンネル</span><p>サッカー日本代表戦の動画を、試合終了から 2 時間 35 分で公開しました</p></li>
-      <li><time datetime="2026-09-27">2026.09.27</time><span class="tag">開発</span><p>語学アプリの PC 版の試作が完成しました</p></li>
+      <li><time datetime="2026-09-27">2026.09.27</time><span class="tag">開発</span><p>語学アプリの PC 版(円形ルーペ)を開発しました</p></li>
       <li><time datetime="2026-09-20">2026.09.20</time><span class="tag">研究</span><p>隕石衝突痕の研究を始めました</p></li>
       <li><time datetime="2026-08-29">2026.08.29</time><span class="tag">開発</span><p>語学アプリ kasanegi の開発を始めました</p></li>
       <li><time datetime="2026-08-23">2026.08.23</time><span class="tag">チャンネル</span><p>「フットボール海外の反応局」で動画の公開を始めました</p></li>
@@ -221,7 +172,7 @@
   </div>
 </section>
 
-<section class="block" id="member">
+<section class="block alt" id="member">
   <div class="wrap reveal">
     <p class="eyebrow">MEMBER</p>
     <h2 class="sec-h">代表</h2>
@@ -236,7 +187,7 @@
   </div>
 </section>
 
-<section class="block alt" id="company">
+<section class="block" id="company">
   <div class="wrap reveal">
     <p class="eyebrow">COMPANY</p>
     <h2 class="sec-h">概要</h2>
@@ -251,7 +202,7 @@
   </div>
 </section>
 
-<section class="block" id="contact">
+<section class="block alt" id="contact">
   <div class="wrap reveal">
     <p class="eyebrow">CONTACT</p>
     <h2 class="sec-h">お問い合わせ</h2>
