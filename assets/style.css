@@ -313,3 +313,4 @@ code.ep,.facts code,.note code{font-family:ui-monospace,"SFMono-Regular",Menlo,C
 .phero .btns .btn{margin-top:30px}
 .api-tbl col.c1{width:30%}.api-tbl col.c2{width:46%}.api-tbl col.c3{width:24%}
 .src-tbl col.c1{width:62%}.src-tbl col.c2{width:38%}
+.stats.two{grid-template-columns:repeat(2,minmax(0,1fr))}
