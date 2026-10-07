@@ -31,13 +31,13 @@
   .phero .btns{margin-top:40px}.phero .btns .btn{margin-top:0}
   .phero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.6)}
   .phero .btn.ghost:hover{background:#fff;color:var(--ai,#1b2947)}
-  .loupe{--w:min(360px,74vw);position:relative;width:var(--w);aspect-ratio:800/1100;margin:0 auto;background:#fff;box-shadow:0 34px 80px -34px rgba(0,0,0,.6)}
+  .loupe{--w:min(360px,74vw);position:relative;width:var(--w);aspect-ratio:992/1400;margin:0 auto;background:#fff;box-shadow:0 34px 80px -34px rgba(0,0,0,.6)}
   .loupe img{position:absolute;inset:0;width:100%;height:100%}
-  .loupe .en{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%);animation:lens-clip 15s ease-in-out infinite}
-  .loupe .ring{position:absolute;left:78.75%;top:17.45%;width:calc(var(--w)*.34);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2.5px var(--ai,#1b2947),0 0 0 8px rgba(27,41,71,.12);animation:lens-ring 15s ease-in-out infinite;pointer-events:none}
+  .loupe .en{clip-path:circle(calc(var(--w)*.17) at 24.2% 26.9%);animation:lens-clip 15s ease-in-out infinite}
+  .loupe .ring{position:absolute;left:24.2%;top:26.9%;width:calc(var(--w)*.34);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2.5px var(--ai,#1b2947),0 0 0 8px rgba(27,41,71,.12);animation:lens-ring 15s ease-in-out infinite;pointer-events:none}
   .loupe figcaption{position:absolute;left:0;right:0;top:100%;margin-top:12px;font-size:12px;color:#aeb7c9;text-align:center;letter-spacing:.04em}
-  @keyframes lens-clip{0%,24%{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%)}33%,57%{clip-path:circle(calc(var(--w)*.17) at 41.9% 44.1%)}66%,90%{clip-path:circle(calc(var(--w)*.17) at 58.1% 80.5%)}100%{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%)}}
-  @keyframes lens-ring{0%,24%{left:78.75%;top:17.45%}33%,57%{left:41.9%;top:44.1%}66%,90%{left:58.1%;top:80.5%}100%{left:78.75%;top:17.45%}}
+  @keyframes lens-clip{0%,24%{clip-path:circle(calc(var(--w)*.17) at 24.2% 26.9%)}33%,57%{clip-path:circle(calc(var(--w)*.17) at 82% 55%)}66%,90%{clip-path:circle(calc(var(--w)*.17) at 18% 70%)}100%{clip-path:circle(calc(var(--w)*.17) at 24.2% 26.9%)}}
+  @keyframes lens-ring{0%,24%{left:24.2%;top:26.9%}33%,57%{left:82%;top:55%}66%,90%{left:18%;top:70%}100%{left:24.2%;top:26.9%}}
   @media(max-width:860px){.phero .in{grid-template-columns:1fr}.loupe{--w:min(300px,70vw);margin-bottom:28px}}
   @media(prefers-reduced-motion:reduce){.loupe .en,.loupe .ring{animation:none}}
 
@@ -92,10 +92,10 @@
       <div class="btns"><a class="btn light" href="#demo">Try the demo <span class="arrow">→</span></a><a class="btn ghost" href="#beta">Join the beta</a></div>
     </div>
     <figure class="loupe">
-      <img src="/demo/sample_a.png" width="800" height="1100" alt="Our own sample page. A round lens moves over the Japanese edition, and only inside the lens the English balloon shows.">
-      <img class="en" src="/assets/reader/sample_b_aligned.png" width="800" height="1100" alt="">
+      <img src="/demo/pc/e04p03_ja.jpg" width="992" height="1400" alt="A page of Pepper&amp;Carrot, episode 4. A round lens moves over the Japanese edition, and only inside the lens the English balloon shows.">
+      <img class="en" src="/demo/pc/e04p03_en.jpg" width="992" height="1400" alt="">
       <span class="ring" aria-hidden="true"></span>
-      <figcaption>The sample page is our own drawing</figcaption>
+      <figcaption>Pepper&amp;Carrot episode 4 by David Revoy, CC BY 4.0</figcaption>
     </figure>
   </div>
 </section>
@@ -112,10 +112,11 @@
         <iframe id="demo-frame" src="/demo/?embed=1&amp;lang=en" title="Demo: a round lens shows the English edition over the Japanese page" loading="lazy"></iframe>
       </div>
       <div class="demo-side reveal">
-        <p class="body">The demo page is a sample we drew ourselves. Move the pointer over the Japanese page, or drag a finger across it. The same spot of the English edition appears inside the circle.</p>
-        <p class="body">The alignment is computed in the browser that opened this page. It finds matching points in the two sample images and fits the English page to the shape of the Japanese one. No image is sent anywhere.</p>
+        <p class="body">The demo layers the official Japanese and English editions of <i>Pepper&amp;Carrot</i>, episode 4, which David Revoy publishes under CC BY 4.0. Move the pointer over the Japanese page, or drag a finger across it. The same spot of the English edition appears inside the circle.</p>
+        <p class="body">The alignment is computed in the browser that opened this page. It finds matching points in the two editions of the page and fits the English page to the shape of the Japanese one. No image is sent anywhere.</p>
         <ul class="points">
           <li><b>Move</b><span>Move the lens with the pointer, a finger or the arrow keys.</span></li>
+          <li><b>Pages</b><span>Switch pages with the 1, 3 and 6 buttons.</span></li>
           <li><b>Size</b><span>Change the lens radius with the slider.</span></li>
           <li><b>Swap</b><span>Swap the two editions to read the English page with Japanese inside the lens.</span></li>
           <li><b>Your images</b><span>Choose two language editions of the same page to try them.</span></li>

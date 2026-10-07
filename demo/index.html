@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>Bilingual Manga Reader — demo · Kasanegi</title>
-<meta name="description" content="Align two language editions of the same page in your browser and read one through a lens over the other. Images are never uploaded.">
+<meta name="description" content="The official Japanese and English editions of a comic, aligned page by page in your browser and read through a round lens. Images are never uploaded.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
   // Embedded in /reader/ and /en/reader/ as ?embed=1&lang=ja|en. Set before first paint.
@@ -99,6 +99,15 @@
     padding: 6px 14px; background: rgba(27, 41, 71, .88); color: #fff; font-size: 13px; letter-spacing: .04em; white-space: nowrap;
   }
   .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-top: 14px; }
+  .pages { display: flex; align-items: center; gap: 6px; }
+  .pages-label { font-size: 14px; margin-right: 4px; }
+  .pages-label span[lang="ja"] { margin-left: 6px; color: var(--muted); }
+  html[data-lang] .pages-label span[lang="ja"] { margin-left: 0; color: inherit; }
+  .page-btn { min-width: 44px; padding: 8px 10px; font-variant-numeric: tabular-nums; }
+  .page-btn[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .credit { margin: 10px 0 0; text-align: center; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  .credit span[lang="ja"] { display: block; }
+  html[data-lang] .credit span[lang="ja"] { display: inline; }
   .radius { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 14px; }
   .radius span[lang="ja"] { color: var(--muted); }
   .radius input { width: 170px; max-width: 100%; accent-color: var(--accent); }
@@ -192,8 +201,8 @@
 
     <p class="privacy"><strong>Everything runs in your browser. Images are never uploaded.</strong><span lang="ja">すべてブラウザの中で動きます。画像は送信されません。</span></p>
 
-    <p class="lede">A sample page loads on its own. The demo finds matching points (ORB), keeps only the consistent ones (ratio test, then RANSAC), warps the bottom edition onto the top one, and shows it inside a round lens. Move the pointer, or drag a finger, over the page.</p>
-    <p class="lede" lang="ja">見本の頁を自動で読み込みます。特徴点(ORB)を対応づけ、つじつまの合う対応だけを残し(ratio test・RANSAC)、下の版を上の版に重ねます。丸いレンズの中だけ、下の版が見えます。頁の上でポインタを動かすか、指でなぞってください。</p>
+    <p class="lede">The official Japanese and English editions of a published comic load on their own: <i>Pepper&amp;Carrot</i>, episode 4, by David Revoy. The demo matches the two pages point by point (ORB, ratio test, RANSAC), warps the bottom edition onto the top one, and shows it inside a round lens. Move the pointer, or drag a finger, over the page.</p>
+    <p class="lede" lang="ja">公開されている作品の、公式の日本語版と英語版を自動で読み込みます(David Revoy『Pepper&amp;Carrot』第 4 話)。2 つの版の頁を特徴点(ORB)で照合し、つじつまの合う対応だけを残して(ratio test・RANSAC)、下の版を上の版に重ねます。丸いレンズの中だけ、もう一方の言語が見えます。頁の上でポインタを動かすか、指でなぞってください。</p>
   </div>
 
   <p id="status" class="status" role="status" aria-live="polite"></p>
@@ -203,6 +212,12 @@
       <canvas id="view" width="1" height="1" tabindex="0" aria-label="Top edition, with a round lens that shows the bottom edition. Move the pointer, drag a finger, or use the arrow keys to move the lens."></canvas>
     </div>
     <div class="controls">
+      <div class="pages" role="group" aria-label="Page">
+        <span class="pages-label"><span class="en">Page</span><span lang="ja">頁</span></span>
+        <button type="button" class="page-btn" data-page="0" aria-pressed="true">1</button>
+        <button type="button" class="page-btn" data-page="1" aria-pressed="false">3</button>
+        <button type="button" class="page-btn" data-page="2" aria-pressed="false">6</button>
+      </div>
       <label class="radius" for="radius"><span class="en">Lens radius</span> <span lang="ja">レンズの半径</span>
         <input type="range" id="radius" min="30" max="220" step="1" value="90">
         <output id="radius-out" for="radius">90 px</output>
@@ -212,6 +227,7 @@
     </div>
   </section>
   <p id="stats" class="stats" hidden></p>
+  <p class="credit"><span class="en"><i>Pepper&amp;Carrot</i> episode 4 by David Revoy, <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>. <a href="https://www.peppercarrot.com/en/webcomic-sources/ep04_Stroke-of-genius.html">Source</a>. Resized, and the two editions shown layered.</span><span lang="ja">David Revoy『Pepper&amp;Carrot』第 4 話(日本語訳 guruguru)・<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="license">CC BY 4.0</a>・<a href="https://www.peppercarrot.com/ja/webcomic-sources/ep04_Stroke-of-genius.html">出典</a>。縮小し、2 つの版を重ねて表示しています。</span></p>
 
   <section id="own" class="own" aria-label="Images">
     <h2 class="own-title"><span class="en">Try your own images</span><span lang="ja">自分の画像で試す</span></h2>
@@ -236,13 +252,15 @@
       </div>
     </div>
     <div class="actions">
-      <button type="button" id="sample" class="primary"><span class="en">Load the sample again</span><span lang="ja">見本の頁に戻す</span></button>
+      <button type="button" id="sample" class="primary"><span class="en">Back to the comic</span><span lang="ja">作品の頁に戻す</span></button>
     </div>
   </section>
 
   <footer class="foot">
-    <p>Matching runs on OpenCV.js 4.12.0 (npm package @techstark/opencv-js, served by jsDelivr). It is the only file this page loads from another site; your images stay in this tab. The sample pages are our own drawings.</p>
-    <p lang="ja">位置合わせには OpenCV.js 4.12.0(npm パッケージ @techstark/opencv-js・jsDelivr から配信)を使います。このページが外部から読み込むのはこの 1 ファイルだけで、画像はこのタブの中から出ません。見本の頁は自作の絵です。</p>
+    <p>Matching runs on OpenCV.js 4.12.0 (npm package @techstark/opencv-js, served by jsDelivr). It is the only file this page loads from another site; your images stay in this tab.</p>
+    <p lang="ja">位置合わせには OpenCV.js 4.12.0(npm パッケージ @techstark/opencv-js・jsDelivr から配信)を使います。このページが外部から読み込むのはこの 1 ファイルだけで、画像はこのタブの中から出ません。</p>
+    <p>Comic: <i>Pepper&amp;Carrot</i>, episode 4 &ldquo;Stroke of Genius&rdquo;. Art and story: David Revoy. Japanese translation: guruguru, with H&#7891; Nh&#7921;t Ch&acirc;u. English proofreading: Alex Gryson, Amireeti, Willem Sonke, Luke Bertot, R&eacute;mi Rampin. Hereva universe: created by David Revoy; lead maintainer Craig Maloney; writers Craig Maloney, Nicolas Artance, Scribblemaniac, Valvin; correctors Alex Gryson, CGand, Hali, Marno van der Maas, Moini, Willem Sonke. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0</a>; source: <a href="https://www.peppercarrot.com/en/webcomic-sources/ep04_Stroke-of-genius.html">peppercarrot.com</a>. We resized the pages and show the two editions layered.</p>
+    <p lang="ja">作品: 『Pepper&amp;Carrot』第 4 話「天才のひらめき」。アート・シナリオ: David Revoy。日本語翻訳: guruguru(協力 H&#7891; Nh&#7921;t Ch&acirc;u)。<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="license">クリエイティブ・コモンズ 表示 4.0</a> のもとで掲載しています(出典: <a href="https://www.peppercarrot.com/ja/webcomic-sources/ep04_Stroke-of-genius.html">peppercarrot.com</a>)。頁を縮小し、2 つの版を重ねて表示しています。</p>
   </footer>
 </main>
 
@@ -258,15 +276,21 @@
   const RATIO = 0.75;        // Lowe's ratio test
   const RANSAC_PX = 5.0;     // reprojection threshold
   const MIN_INLIERS = 12;
-  const SAMPLE_LENS = [630, 190];   // first balloon of the sample page
+  // Pepper&Carrot episode 4 (David Revoy, CC BY 4.0): official Japanese and English pages, long side 1400 px.
+  const SAMPLES = [
+    { page: 1, lens: [310, 930] },
+    { page: 3, lens: [840, 770] },
+    { page: 6, lens: [820, 420] },
+  ];
+  const sampleSrc = (n, lang) => `pc/e04p${String(n).padStart(2, '0')}_${lang}.jpg`;
   const EMBED = document.documentElement.classList.contains('embed');
   const LANG = document.documentElement.getAttribute('data-lang');   // 'ja' | 'en' | null (both)
 
   const MSG = {
     loading: ['Loading OpenCV.js…', 'OpenCV.js を読み込んでいます…'],
-    ready: ['Ready. Choose two images, or load the sample.', '準備ができました。画像を 2 枚選ぶか、見本の頁を読み込んでください。'],
+    ready: ['Ready. Choose two images, or go back to the comic.', '準備ができました。画像を 2 枚選ぶか、作品の頁に戻してください。'],
     needOne: ['Now choose the other edition.', 'もう一方の版を選んでください。'],
-    waiting: ['The sample page is in. Loading OpenCV.js…', '見本の頁を読み込みました。OpenCV.js を読み込んでいます…'],
+    waiting: ['The comic pages are in. Loading OpenCV.js…', '作品の頁を読み込みました。OpenCV.js を読み込んでいます…'],
     aligning: ['Aligning…', '位置を合わせています…'],
     aligned: ['Aligned. Move the pointer, or drag a finger, over the page.', '重ねました。頁の上でポインタを動かすか、指でなぞってください。'],
     failed: ['Could not align these two images: not enough matching points. Try two editions of the same page.', '対応する点が足りず、重ねられませんでした。同じ頁の 2 つの版で試してください。'],
@@ -410,14 +434,19 @@
     scheduleAlign();
   }
 
-  async function loadSample() {
+  let sampleIndex = 0;
+  const pageButtons = Array.from(document.querySelectorAll('.page-btn'));
+  async function loadSample(i) {
+    if (typeof i === 'number') sampleIndex = i;
+    const sm = SAMPLES[sampleIndex];
+    pageButtons.forEach((btn, k) => btn.setAttribute('aria-pressed', String(k === sampleIndex)));
     ui.sample.disabled = true;
     try {
-      const [a, b] = await Promise.all([loadImage('sample_a.png'), loadImage('sample_b.png')]);
-      setSlot('top', a, 'sample_a.png · 日本語');
-      setSlot('bottom', b, 'sample_b.png · English');
+      const [a, b] = await Promise.all([loadImage(sampleSrc(sm.page, 'ja')), loadImage(sampleSrc(sm.page, 'en'))]);
+      setSlot('top', a, `Pepper&Carrot ep.4 p.${sm.page} · 日本語`);
+      setSlot('bottom', b, `Pepper&Carrot ep.4 p.${sm.page} · English`);
       state.lensSet = false;
-      state.lensStart = SAMPLE_LENS;
+      state.lensStart = sm.lens;
       scheduleAlign();
     } catch (err) {
       console.warn(LOG, 'sample load failed:', String(err && err.message || err));
@@ -426,7 +455,8 @@
       ui.sample.disabled = false;
     }
   }
-  ui.sample.addEventListener('click', loadSample);
+  ui.sample.addEventListener('click', () => loadSample());
+  pageButtons.forEach((btn, k) => btn.addEventListener('click', () => loadSample(k)));
 
   ui.swap.addEventListener('click', () => {
     if (state.busy || !slots.top.canvas || !slots.bottom.canvas) return;

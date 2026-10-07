@@ -29,13 +29,13 @@
   .phero .btns{margin-top:40px}.phero .btns .btn{margin-top:0}
   .phero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.6)}
   .phero .btn.ghost:hover{background:#fff;color:var(--ai,#1b2947)}
-  .loupe{--w:min(360px,74vw);position:relative;width:var(--w);aspect-ratio:800/1100;margin:0 auto;background:#fff;box-shadow:0 34px 80px -34px rgba(0,0,0,.6)}
+  .loupe{--w:min(360px,74vw);position:relative;width:var(--w);aspect-ratio:992/1400;margin:0 auto;background:#fff;box-shadow:0 34px 80px -34px rgba(0,0,0,.6)}
   .loupe img{position:absolute;inset:0;width:100%;height:100%}
-  .loupe .en{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%);animation:lens-clip 15s ease-in-out infinite}
-  .loupe .ring{position:absolute;left:78.75%;top:17.45%;width:calc(var(--w)*.34);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2.5px var(--ai,#1b2947),0 0 0 8px rgba(27,41,71,.12);animation:lens-ring 15s ease-in-out infinite;pointer-events:none}
+  .loupe .en{clip-path:circle(calc(var(--w)*.17) at 24.2% 26.9%);animation:lens-clip 15s ease-in-out infinite}
+  .loupe .ring{position:absolute;left:24.2%;top:26.9%;width:calc(var(--w)*.34);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2.5px var(--ai,#1b2947),0 0 0 8px rgba(27,41,71,.12);animation:lens-ring 15s ease-in-out infinite;pointer-events:none}
   .loupe figcaption{position:absolute;left:0;right:0;top:100%;margin-top:12px;font-size:12px;color:#aeb7c9;text-align:center;letter-spacing:.04em}
-  @keyframes lens-clip{0%,24%{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%)}33%,57%{clip-path:circle(calc(var(--w)*.17) at 41.9% 44.1%)}66%,90%{clip-path:circle(calc(var(--w)*.17) at 58.1% 80.5%)}100%{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%)}}
-  @keyframes lens-ring{0%,24%{left:78.75%;top:17.45%}33%,57%{left:41.9%;top:44.1%}66%,90%{left:58.1%;top:80.5%}100%{left:78.75%;top:17.45%}}
+  @keyframes lens-clip{0%,24%{clip-path:circle(calc(var(--w)*.17) at 24.2% 26.9%)}33%,57%{clip-path:circle(calc(var(--w)*.17) at 82% 55%)}66%,90%{clip-path:circle(calc(var(--w)*.17) at 18% 70%)}100%{clip-path:circle(calc(var(--w)*.17) at 24.2% 26.9%)}}
+  @keyframes lens-ring{0%,24%{left:24.2%;top:26.9%}33%,57%{left:82%;top:55%}66%,90%{left:18%;top:70%}100%{left:24.2%;top:26.9%}}
   @media(max-width:860px){.phero .in{grid-template-columns:1fr}.loupe{--w:min(300px,70vw);margin-bottom:28px}}
   @media(prefers-reduced-motion:reduce){.loupe .en,.loupe .ring{animation:none}}
 
@@ -89,10 +89,10 @@
       <div class="btns"><a class="btn light" href="#demo">デモを試す <span class="arrow">→</span></a><a class="btn ghost" href="#beta">ベータに参加する</a></div>
     </div>
     <figure class="loupe">
-      <img src="/demo/sample_a.png" width="800" height="1100" alt="自作の見本の頁。日本語版の上を丸いレンズが動き、レンズの中だけ英語版の吹き出しが見えています。">
-      <img class="en" src="/assets/reader/sample_b_aligned.png" width="800" height="1100" alt="">
+      <img src="/demo/pc/e04p03_ja.jpg" width="992" height="1400" alt="『Pepper&amp;Carrot』第 4 話の頁。日本語版の上を丸いレンズが動き、レンズの中だけ英語版の吹き出しが見えています。">
+      <img class="en" src="/demo/pc/e04p03_en.jpg" width="992" height="1400" alt="">
       <span class="ring" aria-hidden="true"></span>
-      <figcaption>見本の頁は自作の絵です</figcaption>
+      <figcaption>David Revoy『Pepper&amp;Carrot』第 4 話・CC BY 4.0</figcaption>
     </figure>
   </div>
 </section>
@@ -109,10 +109,11 @@
         <iframe id="demo-frame" src="/demo/?embed=1&amp;lang=ja" title="デモ: 日本語版の頁の上で、丸いレンズの中に英語版を表示します" loading="lazy"></iframe>
       </div>
       <div class="demo-side reveal">
-        <p class="body">デモの頁は、私たちが自作した見本です。日本語版の上でポインタを動かすか、指でなぞってください。円の中に英語版の同じ場所が表示されます。</p>
-        <p class="body">位置合わせは、このページを開いたブラウザの中で計算しています。2 枚の見本から対応する点を探して、英語版を日本語版の形に合わせます。画像はどこにも送りません。</p>
+        <p class="body">デモでは、David Revoy さんが CC BY 4.0 で公開している『Pepper&amp;Carrot』第 4 話の、公式の日本語版と英語版を重ねています。日本語版の上でポインタを動かすか、指でなぞってください。円の中に英語版の同じ場所が表示されます。</p>
+        <p class="body">位置合わせは、このページを開いたブラウザの中で計算しています。2 つの版の頁から対応する点を探して、英語版を日本語版の形に合わせます。画像はどこにも送りません。</p>
         <ul class="points">
           <li><b>動かす</b><span>ポインタ、指、矢印キーでレンズを動かせます。</span></li>
+          <li><b>頁</b><span>1・3・6 のボタンで頁を切り替えられます。</span></li>
           <li><b>大きさ</b><span>レンズの半径をつまみで変えられます。</span></li>
           <li><b>入れ替え</b><span>上の版と下の版を入れ替えると、英語版の上に日本語版が見えます。</span></li>
           <li><b>自分の画像</b><span>同じ頁の 2 つの言語版の画像を選ぶと、その 2 枚で試せます。</span></li>
