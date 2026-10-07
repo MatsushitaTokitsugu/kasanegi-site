@@ -32,7 +32,7 @@
   "foundingDate": "2026-06-01",
   "address": {"@type": "PostalAddress", "addressLocality": "Osaka", "addressRegion": "Osaka", "addressCountry": "JP"},
   "founder": {"@type": "Person", "name": "Tokitsugu Matsushita", "alternateName": "松下宗嗣", "jobTitle": "Founder"},
-  "description": "Research and development studio in Osaka, Japan: research to find undiscovered meteorite craters in Japan-wide terrain data, the kasanegi language-learning app, public-data APIs for AI agents (JP Local Pack), and a fully automated content production system.",
+  "description": "Research and development studio in Osaka, Japan: research to find undiscovered meteorite craters in Japan-wide terrain data, the kasanegi language-learning app, a family of public-data APIs for AI agents, and a fully automated content production system.",
   "knowsAbout": ["meteorite impact structures", "red relief image maps", "Japanese payroll and withholding tax", "Japanese qualified invoice system", "Model Context Protocol", "image registration"],
   "sameAs": [
     "https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA",
@@ -80,7 +80,7 @@
       <div>
         <p class="body">すでにあるデータに、AI で新しい次元を見出す。かさねぎは、この一つの考えを貫く、大阪の研究開発スタジオです。AI の時代とともに、その価値はもう生まれ、動いています。</p>
         <p class="body">中心にあるのは、日本全土の地形から未知の隕石クレーターを探す研究です。好きな漫画を語学の教材に変えるアプリも、日本の公的データを AI エージェントの道具にするデータ API も、原稿から投稿までを AI が完全に自動で作る動画の制作システムも、同じ考えから育った仕事です。動画の制作システムは実際に収益を上げ、研究と開発を支えています。</p>
-        <p class="body">いま、かさねぎは、開業前から公開してきたデータ API、研究の処理、2 つの言語を重ね合わせる技術、動画の制作システム、そしてここに挙げていない多くの開発まで、そのすべてを、既存のデータ群から AI で新しい価値を生む一つの土台へ、大きく統合しています。無料で公開した JP Local Pack の 10 本は、その土台から最初に外へ開いた一部です。</p>
+        <p class="body">いま、かさねぎは、開業前から公開してきたデータ API、研究の処理、2 つの言語を重ね合わせる技術、動画の制作システム、そしてここに挙げていない多くの開発まで、そのすべてを、既存のデータ群から AI で新しい価値を生む一つの土台へ、大きく統合しています。その間も、データ API 群の一例として、JP Local Pack の 10 本を無料で開いています。</p>
       </div>
       <div>
         <p class="body">名前は、十二単のように衣を重ねて装う「重ね着」に由来します。重ねることで美しく、実用的になり、新しい価値が生まれる。データに AI を、知見に技術を重ね、進化を続ける。それが、かさねぎの仕事です。語学アプリにも、同じ名前を付けました。研究と開発は、Claude Code を軸に進めています。</p>
@@ -143,16 +143,16 @@
       <div class="proj-text">
         <p class="proj-num">03 · データ API</p>
         <h3>日本の公的データを、AI エージェントがそのまま使える形に</h3>
-        <p class="body">国税庁、協会けんぽ、厚生労働省、内閣府、経済産業省の gBizINFO などが公開している表や登録簿を、AI エージェントやソフトウェアが一度の呼び出しで使える API に作り替えています。開業前から、kasanegi.com と開発者向けのマーケットで提供してきました。</p>
-        <p class="body">JP Local Pack の 10 本は、かさねぎが統合している土台から、最初に外へ開いた一部です。給与の控除、社会保険の等級、源泉所得税、消費税率、祝日、法人番号、インボイスの登録、Peppol の請求書の検証を返します。</p>
-        <p class="body">源泉所得税は、国税庁の月額表の 1,856 マスをそのまま持ち、公式の表と全マス一致します。円未満の端数の扱いも、74 万円以上の給与の計算式も、制度の決まりどおりです。</p>
-        <p class="body">MCP サーバ、OpenAPI、llms.txt をそろえ、AI エージェントが自分で API を見つけ、使い方と呼び出し先を受け取って、そのまま使えます。</p>
+        <p class="body">国税庁、協会けんぽ、厚生労働省、内閣府、経済産業省の gBizINFO など、日本の公的機関が公開している表や登録簿を、AI エージェントやソフトウェアが一度の呼び出しで使える API に作り替える。かさねぎは開業前から、こうしたデータ API の群を開発し、kasanegi.com と開発者向けのマーケットで提供してきました。</p>
+        <p class="body">いま、そのデータ API 群は、かさねぎのすべてを一つにする土台へ統合しています。その間も実物に触れていただけるよう、群の中の一つのアプローチとして、日本のバックオフィスの公的データを扱う JP Local Pack の 10 本を、登録なしで無料で開いています。</p>
+        <p class="body">一例であっても、源泉所得税は国税庁の月額表の 1,856 マスをそのまま持ち、公式の表と全マス一致します。</p>
+        <p class="body">データ API 群は、AI エージェントが自分で見つけて使えるように作っています。MCP サーバ、OpenAPI、llms.txt をそろえ、AI エージェントが使い方と呼び出し先を受け取って、そのまま使えます。</p>
         <dl class="stats">
-          <div><dt>1,856<small style="font-size:.5em">マス</small></dt><dd>国税庁の源泉徴収税額表と全マス一致</dd></div>
-          <div><dt>500<small style="font-size:.5em">万件</small></dt><dd>インボイス(適格請求書発行事業者)の登録簿</dd></div>
-          <div><dt>10<small style="font-size:.5em">本</small></dt><dd>無料で公開している API(MCP 対応)</dd></div>
+          <div><dt>1,856<small style="font-size:.5em">マス</small></dt><dd>一例の JP Local Pack でも、国税庁の源泉徴収税額表と全マス一致</dd></div>
+          <div><dt>500<small style="font-size:.5em">万件</small></dt><dd>インボイスの登録簿を、AI エージェントが一度で引ける</dd></div>
+          <div><dt>10<small style="font-size:.5em">本</small></dt><dd>群の一例として、いま無料で開いている API(MCP 対応)</dd></div>
         </dl>
-        <div class="btns"><a class="btn" href="/api/">データ API の詳細 <span class="arrow">→</span></a><a class="btn ghost" href="/api/#try">無料で試す</a></div>
+        <div class="btns"><a class="btn" href="/api/">データ API の詳細 <span class="arrow">→</span></a><a class="btn ghost" href="/api/#try">一例を無料で試す</a></div>
       </div>
       <figure class="proj-fig api-fig">
         <div class="api-card">
@@ -167,7 +167,7 @@
             <div class="sum"><dt>手取り</dt><dd>249,610</dd></div>
           </dl>
         </div>
-        <figcaption>月給 30 万円・東京都・30 歳を JP Local Pack に渡したときの実際の応答(円)。協会けんぽと国税庁の令和 8 年度の表どおりです。</figcaption>
+        <figcaption>月給 30 万円・東京都・30 歳を、一例の JP Local Pack に渡したときの実際の応答(円)。協会けんぽと国税庁の令和 8 年度の表どおりです。</figcaption>
       </figure>
     </article>
 
@@ -196,8 +196,8 @@
     <p class="eyebrow">NEWS &amp; HISTORY</p>
     <h2 class="sec-h">お知らせとあゆみ</h2>
     <ul class="news">
-      <li class="new"><time datetime="2026-10-08">2026.10.08</time><span class="tag">データ API</span><p>統合している土台から最初に外へ開いた一部として、JP Local Pack の 10 本を無料で公開しました。給与、社会保険、源泉所得税、消費税、祝日、法人番号、インボイス、Peppol を、登録なしで試せます</p></li>
-      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">お知らせ</span><p>ウェブサイトを一新しました。開業前から公開してきたデータ API も含め、かさねぎのすべてを、AI で新しい価値を生む一つの土台へ統合しています</p></li>
+      <li class="new"><time datetime="2026-10-08">2026.10.08</time><span class="tag">データ API</span><p>データ API 群を統合しているあいだの一例として、JP Local Pack の 10 本を無料で公開しました。給与、社会保険、源泉所得税、消費税、祝日、法人番号、インボイス、Peppol を、登録なしで試せます</p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">お知らせ</span><p>ウェブサイトを一新しました。開業前から公開してきたデータ API 群も含め、かさねぎのすべてを、AI で新しい価値を生む一つの土台へ統合しています</p></li>
       <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">アプリ</span><p>Android アプリで、実際の漫画の一話から 60 組の頁を誤りなく重ねました</p></li>
       <li><time datetime="2026-10-06">2026.10.06</time><span class="tag">研究</span><p>全国の赤色立体地図の計算を式と定数まで特定し、御池山で色の差 1 段階以内で再現しました</p></li>
       <li><time datetime="2026-10-05">2026.10.05</time><span class="tag">アプリ</span><p>語学アプリの頁合わせで、実際の漫画の頁を誤りなく対応付けました</p></li>
@@ -237,7 +237,7 @@
       <div><dt>所在地</dt><dd>大阪府大阪市</dd></div>
       <div><dt>開業</dt><dd>2026 年 6 月 1 日</dd></div>
       <div><dt>事業内容</dt><dd>AI で既存のデータから新しい価値を生む基盤の開発<br>地球科学の研究開発(AI による地形の解析)<br>AI エージェントのためのデータ API の開発と提供<br>語学アプリをはじめとするソフトウェアの企画・開発<br>AI による動画の制作システムの開発と運営</dd></div>
-      <div><dt>外部での実績</dt><dd>YouTube パートナープログラム(2026 年 5 月承認)<br>RapidAPI に JP Local Pack を出品<br>MCP サーバを公開(mcp.kasanegi.com)</dd></div>
+      <div><dt>外部での実績</dt><dd>YouTube パートナープログラム(2026 年 5 月承認)<br>RapidAPI にデータ API を出品<br>MCP サーバを公開(mcp.kasanegi.com)</dd></div>
       <div><dt>連絡先</dt><dd><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></dd></div>
     </dl>
   </div>
