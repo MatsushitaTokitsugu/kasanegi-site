@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Bilingual Manga Reader — demo · Kasanegi</title>
+<meta name="description" content="Align two language editions of the same page in your browser and read one through a lens over the other. Images are never uploaded.">
+<link rel="icon" href="data:,">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --ink: #111111;
+    --muted: #5a5a5a;
+    --rule: #e6e6e6;
+    --line: #c4c4c4;
+    --accent: #1f4ea0;
+    --accent-soft: #eef3fb;
+    --error: #a3261b;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-wrap: break-word;
+  }
+  [lang="ja"] {
+    font-family: system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+    line-break: strict;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, #view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .back { max-width: 760px; margin: 0 auto; padding: 20px 16px 0; }
+  .back a { font-weight: 600; text-decoration: none; }
+  .back a:hover { text-decoration: underline; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { margin: 0; font-size: 30px; line-height: 1.25; letter-spacing: -0.01em; }
+  .tag {
+    display: inline-block; margin-left: 4px; padding: 0 9px;
+    border: 1.5px solid var(--accent); border-radius: 999px;
+    color: var(--accent); font-size: 13px; font-weight: 600; line-height: 1.6;
+    vertical-align: 5px; letter-spacing: 0.03em;
+  }
+  .sub { margin: 4px 0 0; color: var(--muted); }
+
+  .privacy {
+    margin: 20px 0 0; padding: 12px 14px;
+    border-left: 3px solid var(--accent); background: var(--accent-soft);
+  }
+  .privacy strong { font-weight: 650; }
+  .privacy span { display: block; margin-top: 2px; font-weight: 600; }
+
+  .lede { margin: 18px 0 0; }
+  .lede + .lede { margin-top: 6px; color: var(--muted); font-size: 15px; }
+
+  .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .slot { min-width: 0; }
+  .drop {
+    position: relative;
+    display: flex; flex-direction: column; gap: 6px;
+    height: 100%; min-height: 148px; padding: 14px;
+    border: 1.5px dashed var(--line); border-radius: 12px;
+    cursor: pointer;
+  }
+  .drop:hover, .slot.over .drop { border-color: var(--accent); background: var(--accent-soft); }
+  .drop:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .slot.filled .drop { border-style: solid; }
+  .slot-title { font-weight: 650; line-height: 1.4; }
+  .slot-title span { display: block; font-size: 14px; font-weight: 600; color: var(--muted); }
+  .slot-hint { font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .slot.filled .slot-hint { display: none; }
+  .thumb { display: block; max-width: 100%; max-height: 120px; width: auto; height: auto; border: 1px solid var(--rule); }
+  .file-name { font-size: 12px; line-height: 1.45; color: var(--muted); overflow-wrap: anywhere; }
+  .vh {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  button {
+    min-height: 44px; padding: 8px 16px;
+    border: 1.5px solid var(--accent); border-radius: 8px;
+    background: #fff; color: var(--accent);
+    font: inherit; font-size: 15px; font-weight: 600; line-height: 1.3;
+    cursor: pointer;
+  }
+  button:hover { background: var(--accent-soft); }
+  button.primary { background: var(--accent); color: #fff; }
+  button.primary:hover { background: #193f82; }
+  button:disabled { opacity: 0.5; cursor: default; }
+  button span[lang="ja"] { margin-left: 6px; font-weight: 500; }
+
+  .status { margin: 18px 0 0; min-height: 3.2em; font-size: 15px; line-height: 1.55; }
+  .status span { display: block; }
+  .status span[lang="ja"] { color: var(--muted); font-size: 14px; }
+  .status[data-state="failed"], .status[data-state="cvFailed"], .status[data-state="imageFailed"] { color: var(--error); }
+
+  .viewer { margin-top: 12px; }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-bottom: 12px; }
+  .radius { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 14px; }
+  .radius span[lang="ja"] { color: var(--muted); }
+  .radius input { width: 170px; max-width: 100%; accent-color: var(--accent); }
+  .radius output { min-width: 4.5em; font-variant-numeric: tabular-nums; }
+  #view {
+    display: block; margin: 0 auto;
+    width: auto; height: auto; max-width: 100%; max-height: 82vh;
+    border: 1px solid var(--rule); background: #fff;
+    touch-action: none; cursor: crosshair;
+  }
+  .stats {
+    margin: 10px 0 0; text-align: center;
+    font-size: 12.5px; line-height: 1.6; color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats b { font-weight: 600; color: var(--ink); }
+  .stats .sep { margin: 0 6px; color: var(--line); }
+
+  .foot { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .foot p { margin: 0 0 6px; }
+
+  @media (max-width: 480px) {
+    .back { padding-top: 16px; }
+    main { padding-top: 18px; padding-bottom: 48px; }
+    h1 { font-size: 25px; }
+    .inputs { gap: 10px; margin-top: 22px; }
+    .drop { min-height: 132px; padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<nav class="back"><a href="../">← Kasanegi</a></nav>
+<main>
+  <h1>Bilingual Manga Reader <span class="tag">demo</span></h1>
+  <p class="sub" lang="ja">バイリンガル漫画リーダー(デモ)</p>
+
+  <p class="privacy"><strong>Everything runs in your browser. Images are never uploaded.</strong><span lang="ja">すべてブラウザの中で動きます。画像は送信されません。</span></p>
+
+  <p class="lede">Choose two language editions of the same page. The demo finds matching points (ORB), keeps only the consistent ones (ratio test, then RANSAC), warps the bottom edition onto the top one, and shows it inside a round lens.</p>
+  <p class="lede" lang="ja">同じ頁の 2 つの言語版を選んでください。特徴点(ORB)を対応づけ、つじつまの合う対応だけを残し(ratio test・RANSAC)、下の版を上の版に重ねます。丸いレンズの中だけ、下の版が見えます。</p>
+
+  <section class="inputs" aria-label="Images">
+    <div class="slot" data-slot="top">
+      <label class="drop">
+        <input class="vh" type="file" accept="image/*">
+        <span class="slot-title">Top edition <span lang="ja">上の版</span></span>
+        <span class="slot-hint">Drop an image here, or click to choose.<br><span lang="ja">画像をここにドロップ、またはクリックして選ぶ</span></span>
+        <canvas class="thumb" width="1" height="1" hidden></canvas>
+        <span class="file-name"></span>
+      </label>
+    </div>
+    <div class="slot" data-slot="bottom">
+      <label class="drop">
+        <input class="vh" type="file" accept="image/*">
+        <span class="slot-title">Bottom edition <span lang="ja">下の版(レンズの中)</span></span>
+        <span class="slot-hint">Seen through the lens. Drop or click.<br><span lang="ja">レンズの中に見える版。ドロップ/クリック</span></span>
+        <canvas class="thumb" width="1" height="1" hidden></canvas>
+        <span class="file-name"></span>
+      </label>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button type="button" id="sample" class="primary">Load sample<span lang="ja">サンプルを読み込む</span></button>
+  </div>
+
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+
+  <section id="viewer" class="viewer" aria-label="Overlay" hidden>
+    <div class="controls">
+      <label class="radius" for="radius">Lens radius <span lang="ja">レンズの半径</span>
+        <input type="range" id="radius" min="30" max="220" step="1" value="90">
+        <output id="radius-out" for="radius">90 px</output>
+      </label>
+      <button type="button" id="swap">Swap editions<span lang="ja">上下を入れ替える</span></button>
+    </div>
+    <canvas id="view" width="1" height="1" tabindex="0" aria-label="Top edition, with a round lens that shows the bottom edition. Move the pointer, drag a finger, or use the arrow keys to move the lens."></canvas>
+  </section>
+  <p id="stats" class="stats" hidden></p>
+
+  <footer class="foot">
+    <p>Matching runs on OpenCV.js 4.12.0 (npm package @techstark/opencv-js, served by jsDelivr). It is the only file this page loads from another site; your images stay in this tab. The sample pages are our own drawings.</p>
+    <p lang="ja">位置合わせには OpenCV.js 4.12.0(npm パッケージ @techstark/opencv-js・jsDelivr から配信)を使います。このページが外部から読み込むのはこの 1 ファイルだけで、画像はこのタブの中から出ません。サンプルの頁は自作の絵です。</p>
+  </footer>
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const CV_URL = 'https://cdn.jsdelivr.net/npm/@techstark/opencv-js@4.12.0-release.1/dist/opencv.js';
+  const CV_SRI = 'sha256-vQw+ZEgEPeBPamShLLe3WfeMOrj3w1yfLg9xyIuxcQM=';
+  const LOG = '[kasanegi-demo]';
+  const MAX_SIDE = 1400;     // longest side used for matching and display
+  const N_FEATURES = 3000;   // ORB keypoints per image
+  const RATIO = 0.75;        // Lowe's ratio test
+  const RANSAC_PX = 5.0;     // reprojection threshold
+  const MIN_INLIERS = 12;
+  const SAMPLE_LENS = [630, 190];   // first balloon of the sample page
+
+  const MSG = {
+    loading: ['Loading OpenCV.js…', 'OpenCV.js を読み込んでいます…'],
+    ready: ['Ready. Choose two images, or load the sample.', '準備ができました。画像を 2 枚選ぶか、サンプルを読み込んでください。'],
+    needOne: ['Now choose the other edition.', 'もう一方の版を選んでください。'],
+    waiting: ['Images are in. Waiting for OpenCV.js…', '画像はそろいました。OpenCV.js の読み込みを待っています…'],
+    aligning: ['Aligning…', '位置を合わせています…'],
+    aligned: ['Aligned. Move the pointer, or drag a finger, over the page.', '重ねました。頁の上でポインタを動かすか、指でなぞってください。'],
+    failed: ['Could not align these two images: not enough matching points. Try two editions of the same page.', '対応する点が足りず、重ねられませんでした。同じ頁の 2 つの版で試してください。'],
+    cvFailed: ['Could not load OpenCV.js. Check the connection and reload the page.', 'OpenCV.js を読み込めませんでした。接続を確かめて、ページを再読み込みしてください。'],
+    imageFailed: ['Could not read that image.', 'その画像を読み込めませんでした。'],
+  };
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const ui = {
+    status: $('#status'), sample: $('#sample'), viewer: $('#viewer'), view: $('#view'),
+    radius: $('#radius'), radiusOut: $('#radius-out'), swap: $('#swap'), stats: $('#stats'),
+  };
+  const state = {
+    cv: null, busy: false, again: false,
+    top: null, lens: null,
+    lensX: 0, lensY: 0, lensSet: false, lensStart: null, frame: 0,
+  };
+  // Read-only handle for debugging in DevTools.
+  const api = window.kasanegiDemo = { ready: false, opencvVersion: '', last: null, lens: null, canvases: { top: null, lens: null } };
+
+  const elapsed = (t0) => Math.round(performance.now() - t0);
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const nextPaint = () => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)));
+
+  function span(text, lang) {
+    const s = document.createElement('span');
+    s.textContent = text;
+    if (lang) s.lang = lang;
+    return s;
+  }
+
+  function setStatus(key) {
+    ui.status.dataset.state = key;
+    ui.status.replaceChildren(span(MSG[key][0]), span(MSG[key][1], 'ja'));
+  }
+
+  // ---------------------------------------------------------------- inputs
+
+  const slots = { top: makeSlot('top'), bottom: makeSlot('bottom') };
+
+  function makeSlot(name) {
+    const root = $(`[data-slot="${name}"]`);
+    const slot = {
+      name, root,
+      input: $('input[type=file]', root), thumb: $('.thumb', root), label: $('.file-name', root),
+      canvas: null, fileName: '',
+    };
+    slot.input.addEventListener('change', () => {
+      const files = Array.from(slot.input.files || []);
+      slot.input.value = '';
+      if (files.length) acceptFiles(files, name);
+    });
+    root.addEventListener('dragenter', (e) => { e.preventDefault(); root.classList.add('over'); });
+    root.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
+      root.classList.add('over');
+    });
+    root.addEventListener('dragleave', (e) => { if (!root.contains(e.relatedTarget)) root.classList.remove('over'); });
+    root.addEventListener('drop', (e) => {
+      e.preventDefault();
+      root.classList.remove('over');
+      const files = Array.from((e.dataTransfer && e.dataTransfer.files) || []).filter((f) => /^image\//.test(f.type));
+      if (files.length) acceptFiles(files, name);
+    });
+    return slot;
+  }
+
+  // Dropping outside a slot must not navigate away to the image.
+  window.addEventListener('dragover', (e) => e.preventDefault());
+  window.addEventListener('drop', (e) => e.preventDefault());
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('could not decode image'));
+      img.src = src;
+    });
+  }
+
+  async function fileToImage(file) {
+    const url = URL.createObjectURL(file);   // local to this tab; nothing is sent anywhere
+    try { return await loadImage(url); } finally { URL.revokeObjectURL(url); }
+  }
+
+  // Normalise to at most MAX_SIDE on a white background (transparent PNGs stay readable).
+  function toWorkCanvas(img) {
+    const w0 = img.naturalWidth || img.width;
+    const h0 = img.naturalHeight || img.height;
+    const s = Math.min(1, MAX_SIDE / Math.max(w0, h0));
+    const c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(w0 * s));
+    c.height = Math.max(1, Math.round(h0 * s));
+    const g = c.getContext('2d', { willReadFrequently: true });
+    g.fillStyle = '#fff';
+    g.fillRect(0, 0, c.width, c.height);
+    g.imageSmoothingQuality = 'high';
+    g.drawImage(img, 0, 0, c.width, c.height);
+    return c;
+  }
+
+  function renderSlot(slot) {
+    const src = slot.canvas;
+    slot.root.classList.toggle('filled', !!src);
+    if (!src) { slot.thumb.hidden = true; slot.label.textContent = ''; return; }
+    const s = Math.min(1, 240 / Math.max(src.width, src.height));
+    slot.thumb.width = Math.max(1, Math.round(src.width * s));
+    slot.thumb.height = Math.max(1, Math.round(src.height * s));
+    slot.thumb.getContext('2d').drawImage(src, 0, 0, slot.thumb.width, slot.thumb.height);
+    slot.thumb.hidden = false;
+    slot.label.textContent = `${slot.fileName} · ${src.width}×${src.height}`;
+  }
+
+  function setSlot(name, img, fileName) {
+    const slot = slots[name];
+    slot.canvas = toWorkCanvas(img);
+    slot.fileName = fileName;
+    renderSlot(slot);
+  }
+
+  async function acceptFiles(files, firstSlot) {
+    const order = firstSlot === 'top' ? ['top', 'bottom'] : ['bottom', 'top'];
+    const picked = files.slice(0, 2);
+    try {
+      const images = await Promise.all(picked.map(fileToImage));
+      images.forEach((img, i) => setSlot(order[i], img, picked[i].name));
+    } catch (err) {
+      console.warn(LOG, 'image read failed:', String(err && err.message || err));
+      setStatus('imageFailed');
+      return;
+    }
+    state.lensSet = false;
+    state.lensStart = null;
+    scheduleAlign();
+  }
+
+  ui.sample.addEventListener('click', async () => {
+    ui.sample.disabled = true;
+    try {
+      const [a, b] = await Promise.all([loadImage('sample_a.png'), loadImage('sample_b.png')]);
+      setSlot('top', a, 'sample_a.png · 日本語');
+      setSlot('bottom', b, 'sample_b.png · English');
+      state.lensSet = false;
+      state.lensStart = SAMPLE_LENS;
+      scheduleAlign();
+    } catch (err) {
+      console.warn(LOG, 'sample load failed:', String(err && err.message || err));
+      setStatus('imageFailed');
+    } finally {
+      ui.sample.disabled = false;
+    }
+  });
+
+  ui.swap.addEventListener('click', () => {
+    if (state.busy || !slots.top.canvas || !slots.bottom.canvas) return;
+    const t = slots.top, b = slots.bottom;
+    [t.canvas, b.canvas] = [b.canvas, t.canvas];
+    [t.fileName, b.fileName] = [b.fileName, t.fileName];
+    renderSlot(t);
+    renderSlot(b);
+    scheduleAlign();
+  });
+
+  // ---------------------------------------------------------------- OpenCV
+
+  function loadOpenCv() {
+    setStatus('loading');
+    const t0 = performance.now();
+    const s = document.createElement('script');
+    s.src = CV_URL;
+    s.integrity = CV_SRI;
+    s.crossOrigin = 'anonymous';
+    s.async = true;
+    s.onload = () => {
+      const c = window.cv;
+      if (!c) { cvFailed('no cv global'); return; }
+      const done = () => cvReady(window.cv, t0);
+      // This build's `cv` is an Emscripten thenable that resolves to itself; wait with the
+      // runtime callback instead of `await`, which would never settle.
+      if (c.Mat) done(); else c.onRuntimeInitialized = done;
+    };
+    s.onerror = () => cvFailed('script failed to load');
+    document.head.appendChild(s);
+  }
+
+  function cvFailed(why) {
+    console.error(LOG, 'opencv failed:', why);
+    setStatus('cvFailed');
+  }
+
+  function cvReady(c, t0) {
+    state.cv = c;
+    try {
+      const m = c.getBuildInformation().match(/OpenCV (\d+\.\d+\.\d+)/);
+      api.opencvVersion = m ? m[1] : '';
+    } catch (_) { /* informational only */ }
+    api.ready = true;
+    console.info(`${LOG} opencv ready: OpenCV ${api.opencvVersion || '?'} in ${elapsed(t0)} ms`);
+    if (slots.top.canvas && slots.bottom.canvas) runAlign();
+    else setStatus(slots.top.canvas || slots.bottom.canvas ? 'needOne' : 'ready');
+  }
+
+  function describeError(err) {
+    if (typeof err === 'number' && state.cv && state.cv.exceptionFromPtr) {
+      try { return state.cv.exceptionFromPtr(err).msg; } catch (_) { /* fall through */ }
+    }
+    return String((err && err.message) || err);
+  }
+
+  // ---------------------------------------------------------------- alignment
+
+  function scheduleAlign() {
+    if (!slots.top.canvas || !slots.bottom.canvas) { setStatus('needOne'); return; }
+    if (!state.cv) { setStatus('waiting'); return; }   // cvReady() picks it up
+    runAlign();
+  }
+
+  async function runAlign() {
+    if (state.busy) { state.again = true; return; }
+    state.busy = true;
+    ui.swap.disabled = true;
+    setStatus('aligning');
+    await nextPaint();
+    let r;
+    try {
+      r = align(state.cv, slots.top.canvas, slots.bottom.canvas);
+    } catch (err) {
+      r = { ok: false, reason: 'error: ' + describeError(err), matches: 0, inliers: 0, keypointsTop: 0, keypointsBottom: 0, ms: 0 };
+    }
+    state.busy = false;
+    ui.swap.disabled = false;
+    report(r);
+    if (r.ok) showOverlay(r); else showFailure();
+    showStats(r);
+    if (state.again) { state.again = false; scheduleAlign(); }
+  }
+
+  // ORB keypoints -> kNN (k=2) + ratio test -> RANSAC homography (bottom -> top) -> warp.
+  function align(cv, topCanvas, bottomCanvas) {
+    const t0 = performance.now();
+    const owned = [];
+    const own = (m) => { owned.push(m); return m; };
+    try {
+      const top = own(cv.imread(topCanvas));
+      const bottom = own(cv.imread(bottomCanvas));
+      const gTop = own(new cv.Mat());
+      const gBottom = own(new cv.Mat());
+      cv.cvtColor(top, gTop, cv.COLOR_RGBA2GRAY);
+      cv.cvtColor(bottom, gBottom, cv.COLOR_RGBA2GRAY);
+
+      const orb = own(new cv.ORB(N_FEATURES));
+      const noMask = own(new cv.Mat());
+      const kpTop = own(new cv.KeyPointVector());
+      const kpBottom = own(new cv.KeyPointVector());
+      const dTop = own(new cv.Mat());
+      const dBottom = own(new cv.Mat());
+      orb.detectAndCompute(gTop, noMask, kpTop, dTop);
+      orb.detectAndCompute(gBottom, noMask, kpBottom, dBottom);
+
+      const r = { ok: false, reason: '', matches: 0, inliers: 0, keypointsTop: kpTop.size(), keypointsBottom: kpBottom.size(), ms: 0, H: null };
+      if (dTop.rows < 2 || dBottom.rows < 2) { r.reason = 'too few keypoints'; r.ms = elapsed(t0); return r; }
+
+      const matcher = own(new cv.BFMatcher(cv.NORM_HAMMING, false));
+      const knn = own(new cv.DMatchVectorVector());
+      matcher.knnMatch(dBottom, dTop, knn, 2);
+      const src = [];
+      const dst = [];
+      for (let i = 0; i < knn.size(); i++) {
+        const pair = knn.get(i);
+        if (pair.size() >= 2) {
+          const m = pair.get(0);
+          const n = pair.get(1);
+          if (m.distance < RATIO * n.distance) {
+            const pb = kpBottom.get(m.queryIdx).pt;
+            const pt = kpTop.get(m.trainIdx).pt;
+            src.push(pb.x, pb.y);
+            dst.push(pt.x, pt.y);
+          }
+        }
+        pair.delete();
+      }
+      r.matches = src.length / 2;
+      if (r.matches < 4) { r.reason = 'too few matches'; r.ms = elapsed(t0); return r; }
+
+      const srcPts = own(cv.matFromArray(r.matches, 1, cv.CV_32FC2, src));
+      const dstPts = own(cv.matFromArray(r.matches, 1, cv.CV_32FC2, dst));
+      const inlierMask = own(new cv.Mat());
+      const Hm = own(cv.findHomography(srcPts, dstPts, cv.RANSAC, RANSAC_PX, inlierMask));
+      if (Hm.empty()) { r.reason = 'no homography'; r.ms = elapsed(t0); return r; }
+      for (let i = 0; i < inlierMask.rows; i++) if (inlierMask.data[i]) r.inliers++;
+      r.H = Array.from(Hm.data64F);
+
+      const check = checkHomography(r.H, bottomCanvas.width, bottomCanvas.height, topCanvas.width, topCanvas.height);
+      if (r.inliers < MIN_INLIERS) { r.reason = 'too few inliers'; r.ms = elapsed(t0); return r; }
+      if (!check.ok) { r.reason = check.reason; r.ms = elapsed(t0); return r; }
+
+      const warped = own(new cv.Mat());
+      cv.warpPerspective(bottom, warped, Hm, new cv.Size(top.cols, top.rows),
+        cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar(255, 255, 255, 255));
+      const lensCanvas = document.createElement('canvas');
+      cv.imshow(lensCanvas, warped);
+      r.ok = true;
+      r.lensCanvas = lensCanvas;
+      r.ms = elapsed(t0);
+      return r;
+    } finally {
+      for (const m of owned) { try { m.delete(); } catch (_) { /* already freed */ } }
+    }
+  }
+
+  // Reject warps that fold, mirror or collapse the page.
+  function checkHomography(H, bw, bh, tw, th) {
+    const pts = [[0, 0], [bw, 0], [bw, bh], [0, bh]].map(([x, y]) => {
+      const w = H[6] * x + H[7] * y + H[8];
+      return w > 1e-9 ? [(H[0] * x + H[1] * y + H[2]) / w, (H[3] * x + H[4] * y + H[5]) / w] : null;
+    });
+    if (pts.some((p) => !p)) return { ok: false, reason: 'degenerate homography' };
+    let sign = 0;
+    let area = 0;
+    for (let i = 0; i < 4; i++) {
+      const [ax, ay] = pts[i];
+      const [bx, by] = pts[(i + 1) % 4];
+      const [cx, cy] = pts[(i + 2) % 4];
+      const s = Math.sign((bx - ax) * (cy - by) - (by - ay) * (cx - bx));
+      if (s === 0 || (sign !== 0 && s !== sign)) return { ok: false, reason: 'warp folds the page' };
+      sign = s;
+      area += ax * by - bx * ay;
+    }
+    if (sign < 0) return { ok: false, reason: 'mirrored warp' };
+    const ratio = Math.abs(area / 2) / (tw * th);
+    if (ratio < 0.1 || ratio > 10) return { ok: false, reason: 'implausible scale' };
+    return { ok: true };
+  }
+
+  function report(r) {
+    const line = `${LOG} matches=${r.matches} inliers=${r.inliers} homography=${r.ok ? 'ok' : 'failed'}` +
+      (r.ok ? '' : ` reason="${r.reason}"`) +
+      ` keypoints=${r.keypointsTop}/${r.keypointsBottom} time=${r.ms}ms`;
+    if (r.ok) console.info(line); else console.warn(line);
+    if (r.H) console.info(`${LOG} H(bottom->top)=${JSON.stringify(r.H.map((v) => +v.toFixed(6)))}`);
+    api.last = {
+      ok: r.ok, reason: r.reason || null, matches: r.matches, inliers: r.inliers,
+      keypointsTop: r.keypointsTop, keypointsBottom: r.keypointsBottom, ms: r.ms, H: r.H || null,
+    };
+  }
+
+  function showStats(r) {
+    const items = [
+      ['Matches', 'マッチ', String(r.matches)],
+      ['Inliers', 'インライア', String(r.inliers)],
+      ['Homography', 'ホモグラフィ', r.ok ? 'OK' : 'failed'],
+      ['Time', '時間', (r.ms / 1000).toFixed(2) + ' s'],
+    ];
+    const nodes = [];
+    items.forEach(([en, ja, value], i) => {
+      if (i) { const sep = span('·'); sep.className = 'sep'; nodes.push(sep); }
+      const b = document.createElement('b');
+      b.textContent = value;
+      nodes.push(document.createTextNode(en + ' '), span(ja, 'ja'), document.createTextNode(' '), b);
+    });
+    ui.stats.replaceChildren(...nodes);
+    ui.stats.hidden = false;
+  }
+
+  function showFailure() {
+    state.top = null;
+    state.lens = null;
+    api.canvases.top = null;
+    api.canvases.lens = null;
+    ui.viewer.hidden = true;
+    setStatus('failed');
+  }
+
+  // ---------------------------------------------------------------- lens view
+
+  function showOverlay(r) {
+    state.top = slots.top.canvas;
+    state.lens = r.lensCanvas;
+    api.canvases.top = state.top;
+    api.canvases.lens = state.lens;
+    ui.view.width = state.top.width;
+    ui.view.height = state.top.height;
+    ui.viewer.hidden = false;
+    if (state.lensStart) {
+      [state.lensX, state.lensY] = state.lensStart;
+      state.lensStart = null;
+      state.lensSet = true;
+    } else if (!state.lensSet) {
+      state.lensX = ui.view.width / 2;
+      state.lensY = ui.view.height / 2;
+      state.lensSet = true;
+    }
+    state.lensX = clamp(state.lensX, 0, ui.view.width);
+    state.lensY = clamp(state.lensY, 0, ui.view.height);
+    setStatus('aligned');
+    draw();
+  }
+
+  // Canvas pixels per CSS pixel, so the slider means the same on a phone and a desktop.
+  function pixelScale() {
+    const w = ui.view.getBoundingClientRect().width;
+    return w > 0 ? ui.view.width / w : 1;
+  }
+
+  function requestDraw() {
+    if (!state.frame) state.frame = requestAnimationFrame(draw);
+  }
+
+  function draw() {
+    state.frame = 0;
+    if (!state.top || !state.lens) return;
+    const g = ui.view.getContext('2d');
+    const k = pixelScale();
+    const r = Number(ui.radius.value) * k;
+    g.drawImage(state.top, 0, 0);
+    g.save();
+    g.beginPath();
+    g.arc(state.lensX, state.lensY, r, 0, Math.PI * 2);
+    g.clip();
+    g.drawImage(state.lens, 0, 0);
+    g.restore();
+    g.beginPath();
+    g.arc(state.lensX, state.lensY, r, 0, Math.PI * 2);
+    g.lineWidth = 2.5 * k;
+    g.strokeStyle = '#1f4ea0';
+    g.stroke();
+    api.lens = { x: Math.round(state.lensX), y: Math.round(state.lensY), r: Math.round(r) };
+  }
+
+  function moveLensTo(e) {
+    const rect = ui.view.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    state.lensX = clamp((e.clientX - rect.left) * ui.view.width / rect.width, 0, ui.view.width);
+    state.lensY = clamp((e.clientY - rect.top) * ui.view.height / rect.height, 0, ui.view.height);
+    requestDraw();
+  }
+
+  ui.view.addEventListener('pointerdown', (e) => {
+    if (ui.view.setPointerCapture) { try { ui.view.setPointerCapture(e.pointerId); } catch (_) { /* not capturable */ } }
+    moveLensTo(e);
+  });
+  ui.view.addEventListener('pointermove', moveLensTo);
+  ui.view.addEventListener('keydown', (e) => {
+    const step = (e.shiftKey ? 40 : 10) * pixelScale();
+    const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+    if (!d || !state.top) return;
+    e.preventDefault();
+    state.lensX = clamp(state.lensX + d[0], 0, ui.view.width);
+    state.lensY = clamp(state.lensY + d[1], 0, ui.view.height);
+    requestDraw();
+  });
+  ui.radius.addEventListener('input', () => {
+    ui.radiusOut.textContent = `${ui.radius.value} px`;
+    requestDraw();
+  });
+  window.addEventListener('resize', requestDraw);
+
+  setStatus('loading');
+  loadOpenCv();
+})();
+</script>
+</body>
+</html>
