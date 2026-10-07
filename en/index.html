@@ -53,6 +53,7 @@
   <a class="brand" href="/en/"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
   <nav aria-label="Main">
     <a href="#projects">Projects</a>
+    <a href="#roadmap">Roadmap</a>
     <a class="hide-sm" href="#news">News</a>
     <a class="hide-sm" href="#company">Company</a>
     <a class="hide-sm" href="#contact">Contact</a>
@@ -83,13 +84,14 @@
     <h2 class="sec-h">About Kasanegi</h2>
     <div class="about-grid">
       <div>
-        <p class="body">Kasanegi is a research and development studio based in Osaka, Japan. We work on three things: research on meteorite impact structures using Japan-wide terrain data, a language-learning app that uses manga, and a system that produces content fully automatically.</p>
+        <p class="body">Kasanegi is a research and development studio based in Osaka, Japan. We work on three things: research to find undiscovered meteorite craters in Japan's terrain, a language-learning app that uses manga, and a content production system that earns revenue fully automatically.</p>
         <p class="body">Most of our research and development is done with Claude Code.</p>
       </div>
       <div>
-        <p class="body">The name comes from <i>kasanegi</i> (重ね着), wearing kimono in layers. We layer software, data and AI onto geological knowledge, so that a small team can take on large research and development work.</p>
+        <p class="body">The name comes from <i>kasanegi</i> (重ね着), wearing kimono in layers. We layer software, data and AI onto geological knowledge, to show that a single person can take on large-scale research and development.</p>
       </div>
     </div>
+    <p class="lead-strong">All three are now moving from preparation into the main stage. The crater research is finishing the terrain data that AI will learn from, the language app has a working core and demo, and the content system has proven that it can earn revenue.</p>
   </div>
 </section>
 
@@ -104,12 +106,15 @@
       <div class="proj-text">
         <p class="proj-num">01 · Research</p>
         <h3>Searching for undiscovered meteorite craters</h3>
-        <p class="body">In Japan, Oikeyama in Nagano is known as a meteorite crater. Japan's steep, forested land is likely to hold craters that have not yet been found. We combine the latest Japan-wide red relief map with AI image analysis to search the whole country for undiscovered craters, and we validate the method on Oikeyama and on impact craters confirmed around the world.</p>
-        <p class="body">We think the same method can also be applied to terrain data abroad, to craters on the Moon, and to archaeological sites such as kofun burial mounds.</p>
+        <p class="body">In Japan, Oikeyama in Nagano is known as a meteorite crater. Japan&#39;s steep, forested land is likely to hold craters that have not yet been found. We read the latest Japan-wide red relief map with AI instead of the human eye, to search the whole country for undiscovered craters.</p>
+        <div class="phases">
+          <div class="phase"><p class="phase-label">So far: preparing the training data</p><p class="body">For AI to recognise craters, it has to learn from the landforms of real ones. We built an inventory of 354 impact structures worldwide, including 226 confirmed sites, and made red relief maps from public 1 m terrain data for 48 of them. At Oikeyama we reproduced the Japan-wide red relief map to within one colour level, which confirms that terrain from around the world and from Japan can be compared on the same basis.</p></div>
+          <div class="phase next"><p class="phase-label">Next: the main stage</p><p class="body">Next, we will build an AI model from these landforms and run it over the red relief map of the whole of Japan. Narrowing an enormous number of terrain images down to candidates requires advanced AI. Our founder, a certified mineral appraiser, will then check the candidates in the field.</p></div>
+        </div>
         <dl class="stats">
-          <div><dt>48</dt><dd>known impact craters the method has been applied to</dd></div>
-          <div><dt>1 <small style="font-size:.5em">level</small></dt><dd>colour difference from the Japan-wide red relief map, reproduced at Oikeyama</dd></div>
-          <div><dt>289</dt><dd>commits since the research began in September 2026</dd></div>
+          <div><dt>354</dt><dd>impact structures in our inventory, including 226 confirmed</dd></div>
+          <div><dt>48</dt><dd>known craters mapped from 1 m terrain data</dd></div>
+          <div><dt>1 <small style="font-size:.5em">level</small></dt><dd>colour difference from the Japan-wide map, reproduced at Oikeyama</dd></div>
         </dl>
         <div class="btns"><a class="btn" href="/en/research/">Read the research <span class="arrow">→</span></a></div>
       </div>
@@ -123,11 +128,14 @@
       <div class="proj-text">
         <p class="proj-num">02 · App</p>
         <h3>kasanegi, a language app that uses manga</h3>
-        <p class="body">kasanegi shows the Japanese and English editions of the same manga layered page by page on your device. Move the round lens, and that part switches to the other language. Images never leave the device.</p>
-        <p class="body">A demo you can try in your browser is available.</p>
+        <p class="body">kasanegi layers the Japanese and English editions of the same manga page by page on your device. Move the round lens, and that part switches to the other language. Any manga you love becomes study material.</p>
+        <div class="phases">
+          <div class="phase"><p class="phase-label">So far: the core is done</p><p class="body">We built a core that matches two language editions page by page by their artwork and layers them. It aligned 33 page pairs of a real manga volume without error, and a newer prototype layered 60 page pairs without error. A PC version with a round lens and an Android app are running, and a demo you can try in your browser is available.</p></div>
+          <div class="phase next"><p class="phase-label">Next: release</p><p class="body">Next, we will bring this to phones: enter two URLs, and within 10 seconds a whole episode is layered. Moving to the next or previous volume will keep both editions in step. We will release on Android first, then iPhone and PC, and expand from Japanese and English to Chinese. We will build Claude in to explain words and grammar, so that reading manga becomes learning.</p></div>
+        </div>
         <dl class="stats">
           <div><dt>33</dt><dd>page pairs matched without error on a real volume</dd></div>
-          <div><dt>47</dt><dd>pages matched automatically to the right counterpart by the PC version</dd></div>
+          <div><dt>60</dt><dd>page pairs layered without error by the newer prototype</dd></div>
           <div><dt>22k</dt><dd>lines of code in the Android app</dd></div>
         </dl>
         <div class="btns"><a class="btn" href="/demo/">Try the demo <span class="arrow">→</span></a><a class="btn ghost" href="/en/reader/">About the app</a></div>
@@ -141,10 +149,13 @@
       <div class="proj-text">
         <p class="proj-num">03 · System</p>
         <h3>A fully automated content system that earns revenue</h3>
-        <p class="body">Our research and development cost more than $400 a month in AI subscriptions. As part of that work, we built a production system with Claude Code in which AI writes the script, edits and uploads on its own. Both YouTube channels run by the system are monetized, and the revenue exceeds what we pay for Claude.</p>
-        <p class="body">Much AI-generated video struggles with low quality and inaccurate content. Our system builds each video from real events and real people's voices. The two channels are one use of the system; channels in other languages and genres are already being built on it. What we learn here about getting AI to do reliable, high-quality work feeds back into our research and the language app.</p>
+        <p class="body">Our research and development cost more than $400 a month in AI subscriptions. As part of that work, we built a content production system with Claude Code in which AI handles everything from writing the script to editing and uploading, fully automatically.</p>
+        <div class="phases">
+          <div class="phase"><p class="phase-label">So far: proven revenue</p><p class="body">Both YouTube channels run by the system are monetized, and the revenue exceeds what we pay for Claude. While much AI-generated video struggles with quality and accuracy, our videos, built from real events and real people&#39;s voices, have passed 1.9 million total views.</p></div>
+          <div class="phase next"><p class="phase-label">Next: many languages, worldwide</p><p class="body">The two channels are one use of the system, and channels in other languages and genres are already being built on it. Next, we will expand into more languages and grow it into a system where AI keeps creating value on its own for viewers around the world.</p></div>
+        </div>
         <dl class="stats">
-          <div><dt>1.9M</dt><dd>total views across the two channels run by the system</dd></div>
+          <div><dt>1.9M</dt><dd>total views across the two channels</dd></div>
           <div><dt>158</dt><dd>videos produced and published by the system</dd></div>
           <div><dt>2</dt><dd>monetized channels</dd></div>
         </dl>
@@ -157,7 +168,49 @@
   </div>
 </section>
 
-<section class="block" id="news">
+<section class="block" id="roadmap">
+  <div class="wrap reveal">
+    <p class="eyebrow">ROADMAP</p>
+    <h2 class="sec-h">Roadmap</h2>
+    <div class="roadmap">
+      <div class="track">
+        <h3>Undiscovered meteorite craters</h3><p class="sub">Research</p>
+        <ol>
+          <li class="done">Inventory of 354 impact structures</li>
+          <li class="done">Red relief maps of 48 craters from 1 m terrain</li>
+          <li class="done">Nationwide check of Japan&#39;s public surveys</li>
+          <li class="now">Finishing the terrain data for AI training</li>
+          <li>AI recognition model</li>
+          <li>Running it over all of Japan and finding candidates</li>
+          <li>Field checks of candidates</li>
+        </ol>
+      </div>
+      <div class="track">
+        <h3>kasanegi, the language app</h3><p class="sub">App</p>
+        <ol>
+          <li class="done">Page-matching core</li>
+          <li class="done">PC round lens, Android app and demo</li>
+          <li class="now">Layering a whole episode in 10 seconds</li>
+          <li>Android release</li>
+          <li>iPhone and PC versions, Chinese</li>
+          <li>Word and grammar help with Claude</li>
+        </ol>
+      </div>
+      <div class="track">
+        <h3>Content production system</h3><p class="sub">System</p>
+        <ol>
+          <li class="done">Fully automated production system</li>
+          <li class="done">Monetized on two channels</li>
+          <li class="now">Channels in other languages and genres</li>
+          <li>Many languages, worldwide</li>
+        </ol>
+      </div>
+    </div>
+    <div class="legend"><span><i class="done"></i>Done</span><span><i class="now"></i>Now</span><span><i></i>Next</span></div>
+  </div>
+</section>
+
+<section class="block alt" id="news">
   <div class="wrap reveal">
     <p class="eyebrow">NEWS</p>
     <h2 class="sec-h">News</h2>
@@ -174,7 +227,7 @@
   </div>
 </section>
 
-<section class="block alt" id="member">
+<section class="block" id="member">
   <div class="wrap reveal">
     <p class="eyebrow">MEMBER</p>
     <h2 class="sec-h">Founder</h2>
@@ -189,7 +242,7 @@
   </div>
 </section>
 
-<section class="block" id="company">
+<section class="block alt" id="company">
   <div class="wrap reveal">
     <p class="eyebrow">COMPANY</p>
     <h2 class="sec-h">Company</h2>
@@ -204,7 +257,7 @@
   </div>
 </section>
 
-<section class="block alt" id="contact">
+<section class="block" id="contact">
   <div class="wrap reveal">
     <p class="eyebrow">CONTACT</p>
     <h2 class="sec-h">Contact</h2>
