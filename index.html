@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Kasanegi</title>
+<meta name="description" content="Independent product studio — Japan">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --text: #111111;
+    --muted: #5a5a5a;
+    --rule: #e6e6e6;
+    --accent: #1f4ea0;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-wrap: break-word;
+  }
+  main { max-width: 680px; margin: 0 auto; padding: 64px 16px 80px; }
+  h1, h2, h3 { margin: 0; line-height: 1.3; }
+  p { margin: 0 0 1em; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .brand h1 { font-size: 44px; letter-spacing: -0.02em; }
+  .brand p { margin: 0; font-size: 19px; }
+  .brand .tagline { margin-top: 6px; color: var(--muted); }
+  .brand .lede { margin-top: 20px; }
+  .brand::after { content: ""; display: block; width: 48px; height: 3px; margin-top: 32px; background: var(--accent); }
+
+  section { margin-top: 48px; }
+  h2 { margin-bottom: 14px; font-size: 22px; }
+  .num { color: var(--accent); }
+
+  .product { padding-top: 22px; border-top: 1px solid var(--rule); }
+  h2 + .product { padding-top: 4px; border-top: 0; }
+  .product h3 { margin-bottom: 10px; font-size: 19px; }
+  .status { font-weight: 400; color: var(--muted); }
+  .done strong { font-weight: 600; }
+
+  .founded { margin-top: 40px; font-size: 15px; color: var(--muted); }
+
+  hr { margin: 72px 0 56px; border: 0; border-top: 1px solid var(--rule); }
+
+  [lang="ja"] {
+    font-family: system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+    font-size: 16px;
+    line-height: 1.85;
+    line-break: strict;
+  }
+  [lang="ja"] h2 { font-size: 20px; }
+  [lang="ja"] h3 { margin: 32px 0 12px; font-size: 17px; }
+  [lang="ja"] .item { margin-bottom: 20px; }
+  [lang="ja"] .item p { margin-bottom: 4px; }
+  [lang="ja"] .contact { margin-top: 32px; }
+  [lang="ja"] .founded { margin-top: 8px; }
+
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    main { padding-top: 40px; padding-bottom: 56px; }
+    .brand h1 { font-size: 36px; }
+    .brand p { font-size: 17px; }
+    h2 { font-size: 20px; }
+    .product h3 { font-size: 18px; }
+    hr { margin: 56px 0 40px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="brand">
+    <h1>Kasanegi</h1>
+    <p class="tagline">Independent product studio — Japan</p>
+    <p class="lede">One founder. Claude Code as lead engineer.</p>
+  </header>
+
+  <section aria-labelledby="how">
+    <h2 id="how">How we build</h2>
+    <p>Every product here is built the same way: Claude Code designs, writes the core, reviews the work against primary sources, and keeps the records. The founder decides; the models do the engineering. Other models take mechanical tasks.</p>
+  </section>
+
+  <section aria-labelledby="products">
+    <h2 id="products">Products</h2>
+
+    <article class="product">
+      <h3><span class="num">1.</span> Bilingual Manga Reader <span class="status">— next flagship, in development</span></h3>
+      <p>A mobile app for language learners. The reader takes two language editions of the same manga that the user already reads, aligns the pages on the device, and lets the learner look at the other language through a movable lens over the page. No images are stored on our servers; everything stays on the user's device.</p>
+      <p class="done"><strong>Done so far:</strong> the page-alignment core (Python, written by Claude) matches a real volume page by page with zero mismatches; Android app shell of 20,000+ lines; PC prototype running.</p>
+    </article>
+
+    <article class="product">
+      <h3><span class="num">2.</span> Impact-Structure Screening <span class="status">— research tooling, in development</span></h3>
+      <p>Tools that apply one consistent processing to public terrain, gravity and magnetic surveys, calibrate it on known impact structures around the world, and screen all of Japan for candidates.</p>
+      <p class="done"><strong>Done so far:</strong> processing reproduced on 28 known structures; the Japanese reference site (Oikeyama) matched tile for tile; 260+ commits.</p>
+    </article>
+
+    <article class="product">
+      <h3><span class="num">3.</span> Automated Sports Video Line <span class="status">— live, monetized</span></h3>
+      <p>Our first product to reach revenue. The line turns overseas fan reactions to baseball and soccer games into narrated Japanese-language videos, with a human review step before anything is published.</p>
+      <p class="done"><strong>Done so far:</strong> baseball channel monetized; 119 videos and 600,000+ views as of August 2026; soccer channel launched October 2026.</p>
+    </article>
+  </section>
+
+  <section aria-labelledby="contact">
+    <h2 id="contact">Contact</h2>
+    <p><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></p>
+    <p class="founded">Founded 2026 · Japan</p>
+  </section>
+
+  <hr>
+
+  <section lang="ja" aria-labelledby="ja">
+    <h2 id="ja">Kasanegi — 日本の独立プロダクトスタジオ。</h2>
+    <p>創業者一人、Claude Code を主任エンジニアとして製品を作っています。</p>
+    <p><strong>作り方:</strong> 設計・核心の実装・一次資料に当てた検収・記録を Claude Code が担い、創業者が判断します。機械的な作業は他のモデルも使います。</p>
+
+    <h3>製品</h3>
+    <div class="item">
+      <p><strong><span class="num">1.</span> バイリンガル漫画リーダー(開発中・次の主力):</strong> 読者が自分で開いた同じ漫画の 2 言語版を端末の中で頁ごとに重ね、動かせるレンズでもう一方の言語を見る語学学習アプリ。画像はサーバに置かず、端末の中だけで扱います。</p>
+      <p><strong>これまで:</strong> 頁合わせの核(Python・Claude 作)が実物の 1 巻を誤対応 0 で合わせた。Android 版の器 2 万行超。PC 版の試作が動作。</p>
+    </div>
+    <div class="item">
+      <p><strong><span class="num">2.</span> 衝突痕の選別ツール(開発中・研究用):</strong> 公開されている地形・重力・磁気の観測に同じ処理を施し、世界の既知の衝突痕で確かめ、日本全土から候補を選別します。</p>
+      <p><strong>これまで:</strong> 既知 28 構造で処理を再現。日本の基準地(御池山)がタイル単位で一致。260 コミット超。</p>
+    </div>
+    <div class="item">
+      <p><strong><span class="num">3.</span> スポーツ動画の自動制作ライン(稼働中・収益化済み):</strong> 野球・サッカーの試合への海外ファンの反応を、日本語の読み上げ動画にして公開します。公開前に人が確認します。</p>
+      <p><strong>これまで:</strong> 野球チャンネルは収益化済み。2026 年 8 月時点で動画 119 本・再生 60 万回超。サッカーチャンネルは 2026 年 10 月に開始。</p>
+    </div>
+
+    <p class="contact"><strong>連絡先:</strong> <a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></p>
+    <p class="founded">2026 年設立・日本</p>
+  </section>
+</main>
+</body>
+</html>
