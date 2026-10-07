@@ -6,18 +6,31 @@
 <meta name="color-scheme" content="light">
 <title>Bilingual Manga Reader — demo · Kasanegi</title>
 <meta name="description" content="Align two language editions of the same page in your browser and read one through a lens over the other. Images are never uploaded.">
-<link rel="icon" href="data:,">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+  // Embedded in /reader/ and /en/reader/ as ?embed=1&lang=ja|en. Set before first paint.
+  (function () {
+    var q = new URLSearchParams(location.search);
+    if (q.get('embed') === '1') document.documentElement.classList.add('embed');
+    var l = q.get('lang');
+    if (l === 'ja' || l === 'en') document.documentElement.setAttribute('data-lang', l);
+  })();
+</script>
 <style>
   :root {
     color-scheme: light;
-    --bg: #ffffff;
-    --ink: #111111;
-    --muted: #5a5a5a;
-    --rule: #e6e6e6;
-    --line: #c4c4c4;
-    --accent: #1f4ea0;
-    --accent-soft: #eef3fb;
-    --error: #a3261b;
+    --bg: #f7f4ee;
+    --paper: #ffffff;
+    --ink: #16181d;
+    --muted: #5f6573;
+    --rule: #e2dacb;
+    --line: #c9bfac;
+    --accent: #1b2947;
+    --accent-2: #24365c;
+    --accent-soft: #ece7dc;
+    --gold: #a8863a;
+    --error: #a5332b;
+    --serif: "Shippori Mincho", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", Georgia, serif;
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -27,7 +40,7 @@
     color: var(--ink);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
-    line-height: 1.65;
+    line-height: 1.7;
     overflow-wrap: break-word;
   }
   [lang="ja"] {
@@ -37,22 +50,22 @@
   a { color: var(--accent); text-underline-offset: 3px; }
   a:focus-visible, button:focus-visible, #view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  .back { max-width: 760px; margin: 0 auto; padding: 20px 16px 0; }
+  .back { max-width: 820px; margin: 0 auto; padding: 22px 16px 0; font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 14px; }
   .back a { font-weight: 600; text-decoration: none; }
   .back a:hover { text-decoration: underline; }
 
-  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-  h1 { margin: 0; font-size: 30px; line-height: 1.25; letter-spacing: -0.01em; }
+  main { max-width: 820px; margin: 0 auto; padding: 28px 16px 72px; }
+  h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 34px; line-height: 1.25; letter-spacing: .01em; }
   .tag {
-    display: inline-block; margin-left: 4px; padding: 0 9px;
-    border: 1.5px solid var(--accent); border-radius: 999px;
-    color: var(--accent); font-size: 13px; font-weight: 600; line-height: 1.6;
-    vertical-align: 5px; letter-spacing: 0.03em;
+    display: inline-block; margin-left: 8px; padding: 0 10px;
+    border: 1px solid var(--accent); border-radius: 2px;
+    color: var(--accent); font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; line-height: 1.8;
+    vertical-align: 7px; letter-spacing: .08em; text-transform: uppercase;
   }
-  .sub { margin: 4px 0 0; color: var(--muted); }
+  .sub { margin: 6px 0 0; color: var(--muted); }
 
   .privacy {
-    margin: 20px 0 0; padding: 12px 14px;
+    margin: 22px 0 0; padding: 12px 16px;
     border-left: 3px solid var(--accent); background: var(--accent-soft);
   }
   .privacy strong { font-weight: 650; }
@@ -61,20 +74,74 @@
   .lede { margin: 18px 0 0; }
   .lede + .lede { margin-top: 6px; color: var(--muted); font-size: 15px; }
 
-  .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .status { display: flex; gap: 10px; align-items: flex-start; margin: 26px 0 0; min-height: 3.2em; font-size: 15px; line-height: 1.55; }
+  .status::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: .5em; border-radius: 50%; background: var(--line); }
+  .status[data-state="loading"]::before, .status[data-state="waiting"]::before, .status[data-state="aligning"]::before { background: var(--gold); animation: pulse 1.2s ease-in-out infinite; }
+  .status[data-state="aligned"]::before { background: var(--accent); }
+  .status[data-state="failed"]::before, .status[data-state="cvFailed"]::before, .status[data-state="imageFailed"]::before { background: var(--error); }
+  .status span { display: block; }
+  .status span[lang="ja"] { color: var(--muted); font-size: 14px; }
+  .status[data-state="failed"], .status[data-state="cvFailed"], .status[data-state="imageFailed"] { color: var(--error); }
+  @keyframes pulse { 50% { opacity: .35; } }
+
+  .viewer { margin-top: 12px; }
+  .stage { position: relative; }
+  #view {
+    display: block; margin: 0 auto;
+    width: auto; height: auto; max-width: 100%; max-height: 82vh;
+    border: 1px solid var(--rule); background: #fff;
+    box-shadow: 0 18px 50px -30px rgba(27, 41, 71, .45);
+    touch-action: none; cursor: crosshair;
+  }
+  .viewer.waiting #view { cursor: progress; }
+  .viewer.waiting .stage::after {
+    content: attr(data-wait); position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+    padding: 6px 14px; background: rgba(27, 41, 71, .88); color: #fff; font-size: 13px; letter-spacing: .04em; white-space: nowrap;
+  }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-top: 14px; }
+  .radius { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 14px; }
+  .radius span[lang="ja"] { color: var(--muted); }
+  .radius input { width: 170px; max-width: 100%; accent-color: var(--accent); }
+  .radius output { min-width: 4.5em; font-variant-numeric: tabular-nums; }
+
+  button {
+    min-height: 44px; padding: 8px 16px;
+    border: 1px solid var(--accent); border-radius: 2px;
+    background: transparent; color: var(--accent);
+    font: inherit; font-size: 14.5px; font-weight: 600; line-height: 1.3; letter-spacing: .02em;
+    cursor: pointer; transition: background .2s, color .2s;
+  }
+  button:hover { background: var(--accent); color: #fff; }
+  button.primary { background: var(--accent); color: #fff; }
+  button.primary:hover { background: var(--accent-2); }
+  button:disabled { opacity: 0.5; cursor: default; }
+  button span[lang="ja"] { margin-left: 6px; font-weight: 500; }
+
+  .stats {
+    margin: 12px 0 0; text-align: center;
+    font-size: 12.5px; line-height: 1.6; color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats b { font-weight: 600; color: var(--ink); }
+  .stats .sep { margin: 0 6px; color: var(--line); }
+
+  .own { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--rule); }
+  .own-title { margin: 0; font-size: 16px; font-weight: 650; }
+  .own-title span[lang="ja"] { margin-left: 8px; font-weight: 500; color: var(--muted); }
+  .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
   .slot { min-width: 0; }
   .drop {
     position: relative;
     display: flex; flex-direction: column; gap: 6px;
     height: 100%; min-height: 148px; padding: 14px;
-    border: 1.5px dashed var(--line); border-radius: 12px;
+    border: 1px dashed var(--line); border-radius: 2px; background: var(--paper);
     cursor: pointer;
   }
   .drop:hover, .slot.over .drop { border-color: var(--accent); background: var(--accent-soft); }
   .drop:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
   .slot.filled .drop { border-style: solid; }
   .slot-title { font-weight: 650; line-height: 1.4; }
-  .slot-title span { display: block; font-size: 14px; font-weight: 600; color: var(--muted); }
+  .slot-title span[lang="ja"] { display: block; font-size: 14px; font-weight: 600; color: var(--muted); }
   .slot-hint { font-size: 13px; line-height: 1.5; color: var(--muted); }
   .slot.filled .slot-hint { display: none; }
   .thumb { display: block; max-width: 100%; max-height: 120px; width: auto; height: auto; border: 1px solid var(--rule); }
@@ -83,111 +150,99 @@
     position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
-
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-  button {
-    min-height: 44px; padding: 8px 16px;
-    border: 1.5px solid var(--accent); border-radius: 8px;
-    background: #fff; color: var(--accent);
-    font: inherit; font-size: 15px; font-weight: 600; line-height: 1.3;
-    cursor: pointer;
-  }
-  button:hover { background: var(--accent-soft); }
-  button.primary { background: var(--accent); color: #fff; }
-  button.primary:hover { background: #193f82; }
-  button:disabled { opacity: 0.5; cursor: default; }
-  button span[lang="ja"] { margin-left: 6px; font-weight: 500; }
-
-  .status { margin: 18px 0 0; min-height: 3.2em; font-size: 15px; line-height: 1.55; }
-  .status span { display: block; }
-  .status span[lang="ja"] { color: var(--muted); font-size: 14px; }
-  .status[data-state="failed"], .status[data-state="cvFailed"], .status[data-state="imageFailed"] { color: var(--error); }
-
-  .viewer { margin-top: 12px; }
-  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-bottom: 12px; }
-  .radius { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 14px; }
-  .radius span[lang="ja"] { color: var(--muted); }
-  .radius input { width: 170px; max-width: 100%; accent-color: var(--accent); }
-  .radius output { min-width: 4.5em; font-variant-numeric: tabular-nums; }
-  #view {
-    display: block; margin: 0 auto;
-    width: auto; height: auto; max-width: 100%; max-height: 82vh;
-    border: 1px solid var(--rule); background: #fff;
-    touch-action: none; cursor: crosshair;
-  }
-  .stats {
-    margin: 10px 0 0; text-align: center;
-    font-size: 12.5px; line-height: 1.6; color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
-  .stats b { font-weight: 600; color: var(--ink); }
-  .stats .sep { margin: 0 6px; color: var(--line); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  #own-toggle { display: none; }
 
   .foot { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; line-height: 1.6; color: var(--muted); }
   .foot p { margin: 0 0 6px; }
 
   @media (max-width: 480px) {
     .back { padding-top: 16px; }
-    main { padding-top: 18px; padding-bottom: 48px; }
-    h1 { font-size: 25px; }
-    .inputs { gap: 10px; margin-top: 22px; }
+    main { padding-top: 20px; padding-bottom: 48px; }
+    h1 { font-size: 27px; }
+    .inputs { gap: 10px; }
     .drop { min-height: 132px; padding: 12px; }
   }
+
+  /* ---- embedded in /reader/ ---- */
+  html.embed body { background: transparent; }
+  html.embed .back, html.embed .intro, html.embed .foot { display: none; }
+  html.embed main { max-width: none; padding: 0; }
+  html.embed .status { margin-top: 0; }
+  html.embed #view { max-height: none; width: 100%; touch-action: pan-y; }
+  html.embed .own { margin-top: 18px; padding-top: 0; border-top: 0; }
+  html.embed .own .own-title { display: none; }
+  html.embed .own:not(.open) .inputs, html.embed .own:not(.open) .actions { display: none; }
+  html.embed #own-toggle { display: inline-flex; }
+  html[data-lang="ja"] .en { display: none; }
+  html[data-lang="ja"] button span[lang="ja"], html[data-lang="ja"] .own-title span[lang="ja"] { margin-left: 0; }
+  html[data-lang="ja"] .status span[lang="ja"], html[data-lang="ja"] .radius span[lang="ja"] { color: inherit; font-size: inherit; }
+  html[data-lang="ja"] .slot-title span[lang="ja"] { color: var(--ink); font-size: 15px; font-weight: 650; }
+  html[data-lang="en"] [lang="ja"] { display: none; }
+  html[data-lang] .slot-hint br { display: none; }
+  @media (prefers-reduced-motion: reduce) { .status::before { animation: none; } button { transition: none; } }
 </style>
 </head>
 <body>
-<nav class="back"><a href="../">← Kasanegi</a></nav>
+<nav class="back"><a href="/reader/" lang="ja">← かさねぎ 語学</a><a href="/en/reader/">← Kasanegi Reader</a></nav>
 <main>
-  <h1>Bilingual Manga Reader <span class="tag">demo</span></h1>
-  <p class="sub" lang="ja">バイリンガル漫画リーダー(デモ)</p>
+  <div class="intro">
+    <h1>Bilingual Manga Reader <span class="tag">demo</span></h1>
+    <p class="sub" lang="ja">バイリンガル漫画リーダー(デモ)</p>
 
-  <p class="privacy"><strong>Everything runs in your browser. Images are never uploaded.</strong><span lang="ja">すべてブラウザの中で動きます。画像は送信されません。</span></p>
+    <p class="privacy"><strong>Everything runs in your browser. Images are never uploaded.</strong><span lang="ja">すべてブラウザの中で動きます。画像は送信されません。</span></p>
 
-  <p class="lede">Choose two language editions of the same page. The demo finds matching points (ORB), keeps only the consistent ones (ratio test, then RANSAC), warps the bottom edition onto the top one, and shows it inside a round lens.</p>
-  <p class="lede" lang="ja">同じ頁の 2 つの言語版を選んでください。特徴点(ORB)を対応づけ、つじつまの合う対応だけを残し(ratio test・RANSAC)、下の版を上の版に重ねます。丸いレンズの中だけ、下の版が見えます。</p>
-
-  <section class="inputs" aria-label="Images">
-    <div class="slot" data-slot="top">
-      <label class="drop">
-        <input class="vh" type="file" accept="image/*">
-        <span class="slot-title">Top edition <span lang="ja">上の版</span></span>
-        <span class="slot-hint">Drop an image here, or click to choose.<br><span lang="ja">画像をここにドロップ、またはクリックして選ぶ</span></span>
-        <canvas class="thumb" width="1" height="1" hidden></canvas>
-        <span class="file-name"></span>
-      </label>
-    </div>
-    <div class="slot" data-slot="bottom">
-      <label class="drop">
-        <input class="vh" type="file" accept="image/*">
-        <span class="slot-title">Bottom edition <span lang="ja">下の版(レンズの中)</span></span>
-        <span class="slot-hint">Seen through the lens. Drop or click.<br><span lang="ja">レンズの中に見える版。ドロップ/クリック</span></span>
-        <canvas class="thumb" width="1" height="1" hidden></canvas>
-        <span class="file-name"></span>
-      </label>
-    </div>
-  </section>
-
-  <div class="actions">
-    <button type="button" id="sample" class="primary">Load sample<span lang="ja">サンプルを読み込む</span></button>
+    <p class="lede">A sample page loads on its own. The demo finds matching points (ORB), keeps only the consistent ones (ratio test, then RANSAC), warps the bottom edition onto the top one, and shows it inside a round lens. Move the pointer, or drag a finger, over the page.</p>
+    <p class="lede" lang="ja">見本の頁を自動で読み込みます。特徴点(ORB)を対応づけ、つじつまの合う対応だけを残し(ratio test・RANSAC)、下の版を上の版に重ねます。丸いレンズの中だけ、下の版が見えます。頁の上でポインタを動かすか、指でなぞってください。</p>
   </div>
 
   <p id="status" class="status" role="status" aria-live="polite"></p>
 
   <section id="viewer" class="viewer" aria-label="Overlay" hidden>
+    <div class="stage" id="stage">
+      <canvas id="view" width="1" height="1" tabindex="0" aria-label="Top edition, with a round lens that shows the bottom edition. Move the pointer, drag a finger, or use the arrow keys to move the lens."></canvas>
+    </div>
     <div class="controls">
-      <label class="radius" for="radius">Lens radius <span lang="ja">レンズの半径</span>
+      <label class="radius" for="radius"><span class="en">Lens radius</span> <span lang="ja">レンズの半径</span>
         <input type="range" id="radius" min="30" max="220" step="1" value="90">
         <output id="radius-out" for="radius">90 px</output>
       </label>
-      <button type="button" id="swap">Swap editions<span lang="ja">上下を入れ替える</span></button>
+      <button type="button" id="swap"><span class="en">Swap editions</span><span lang="ja">上下を入れ替える</span></button>
+      <button type="button" id="own-toggle" aria-controls="own" aria-expanded="false"><span class="en">Try your own images</span><span lang="ja">自分の画像で試す</span></button>
     </div>
-    <canvas id="view" width="1" height="1" tabindex="0" aria-label="Top edition, with a round lens that shows the bottom edition. Move the pointer, drag a finger, or use the arrow keys to move the lens."></canvas>
   </section>
   <p id="stats" class="stats" hidden></p>
 
+  <section id="own" class="own" aria-label="Images">
+    <h2 class="own-title"><span class="en">Try your own images</span><span lang="ja">自分の画像で試す</span></h2>
+    <div class="inputs">
+      <div class="slot" data-slot="top">
+        <label class="drop">
+          <input class="vh" type="file" accept="image/*">
+          <span class="slot-title"><span class="en">Top edition</span> <span lang="ja">上の版</span></span>
+          <span class="slot-hint"><span class="en">Drop an image here, or click to choose.</span><br><span lang="ja">画像をここにドロップ、またはクリックして選ぶ</span></span>
+          <canvas class="thumb" width="1" height="1" hidden></canvas>
+          <span class="file-name"></span>
+        </label>
+      </div>
+      <div class="slot" data-slot="bottom">
+        <label class="drop">
+          <input class="vh" type="file" accept="image/*">
+          <span class="slot-title"><span class="en">Bottom edition</span> <span lang="ja">下の版(レンズの中)</span></span>
+          <span class="slot-hint"><span class="en">Seen through the lens. Drop or click.</span><br><span lang="ja">レンズの中に見える版。ドロップ/クリック</span></span>
+          <canvas class="thumb" width="1" height="1" hidden></canvas>
+          <span class="file-name"></span>
+        </label>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" id="sample" class="primary"><span class="en">Load the sample again</span><span lang="ja">見本の頁に戻す</span></button>
+    </div>
+  </section>
+
   <footer class="foot">
     <p>Matching runs on OpenCV.js 4.12.0 (npm package @techstark/opencv-js, served by jsDelivr). It is the only file this page loads from another site; your images stay in this tab. The sample pages are our own drawings.</p>
-    <p lang="ja">位置合わせには OpenCV.js 4.12.0(npm パッケージ @techstark/opencv-js・jsDelivr から配信)を使います。このページが外部から読み込むのはこの 1 ファイルだけで、画像はこのタブの中から出ません。サンプルの頁は自作の絵です。</p>
+    <p lang="ja">位置合わせには OpenCV.js 4.12.0(npm パッケージ @techstark/opencv-js・jsDelivr から配信)を使います。このページが外部から読み込むのはこの 1 ファイルだけで、画像はこのタブの中から出ません。見本の頁は自作の絵です。</p>
   </footer>
 </main>
 
@@ -204,28 +259,33 @@
   const RANSAC_PX = 5.0;     // reprojection threshold
   const MIN_INLIERS = 12;
   const SAMPLE_LENS = [630, 190];   // first balloon of the sample page
+  const EMBED = document.documentElement.classList.contains('embed');
+  const LANG = document.documentElement.getAttribute('data-lang');   // 'ja' | 'en' | null (both)
 
   const MSG = {
     loading: ['Loading OpenCV.js…', 'OpenCV.js を読み込んでいます…'],
-    ready: ['Ready. Choose two images, or load the sample.', '準備ができました。画像を 2 枚選ぶか、サンプルを読み込んでください。'],
+    ready: ['Ready. Choose two images, or load the sample.', '準備ができました。画像を 2 枚選ぶか、見本の頁を読み込んでください。'],
     needOne: ['Now choose the other edition.', 'もう一方の版を選んでください。'],
-    waiting: ['Images are in. Waiting for OpenCV.js…', '画像はそろいました。OpenCV.js の読み込みを待っています…'],
+    waiting: ['The sample page is in. Loading OpenCV.js…', '見本の頁を読み込みました。OpenCV.js を読み込んでいます…'],
     aligning: ['Aligning…', '位置を合わせています…'],
     aligned: ['Aligned. Move the pointer, or drag a finger, over the page.', '重ねました。頁の上でポインタを動かすか、指でなぞってください。'],
     failed: ['Could not align these two images: not enough matching points. Try two editions of the same page.', '対応する点が足りず、重ねられませんでした。同じ頁の 2 つの版で試してください。'],
     cvFailed: ['Could not load OpenCV.js. Check the connection and reload the page.', 'OpenCV.js を読み込めませんでした。接続を確かめて、ページを再読み込みしてください。'],
     imageFailed: ['Could not read that image.', 'その画像を読み込めませんでした。'],
   };
+  const WAIT_LABEL = { ja: '位置を合わせる準備をしています…', en: 'Preparing to align…' };
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const ui = {
-    status: $('#status'), sample: $('#sample'), viewer: $('#viewer'), view: $('#view'),
+    status: $('#status'), sample: $('#sample'), viewer: $('#viewer'), view: $('#view'), stage: $('#stage'),
     radius: $('#radius'), radiusOut: $('#radius-out'), swap: $('#swap'), stats: $('#stats'),
+    own: $('#own'), ownToggle: $('#own-toggle'),
   };
   const state = {
     cv: null, busy: false, again: false,
     top: null, lens: null,
     lensX: 0, lensY: 0, lensSet: false, lensStart: null, frame: 0,
+    radiusTouched: false,
   };
   // Read-only handle for debugging in DevTools.
   const api = window.kasanegiDemo = { ready: false, opencvVersion: '', last: null, lens: null, canvases: { top: null, lens: null } };
@@ -243,7 +303,10 @@
 
   function setStatus(key) {
     ui.status.dataset.state = key;
-    ui.status.replaceChildren(span(MSG[key][0]), span(MSG[key][1], 'ja'));
+    const [en, ja] = MSG[key];
+    if (LANG === 'ja') ui.status.replaceChildren(span(ja, 'ja'));
+    else if (LANG === 'en') ui.status.replaceChildren(span(en));
+    else ui.status.replaceChildren(span(en), span(ja, 'ja'));
   }
 
   // ---------------------------------------------------------------- inputs
@@ -347,7 +410,7 @@
     scheduleAlign();
   }
 
-  ui.sample.addEventListener('click', async () => {
+  async function loadSample() {
     ui.sample.disabled = true;
     try {
       const [a, b] = await Promise.all([loadImage('sample_a.png'), loadImage('sample_b.png')]);
@@ -362,7 +425,8 @@
     } finally {
       ui.sample.disabled = false;
     }
-  });
+  }
+  ui.sample.addEventListener('click', loadSample);
 
   ui.swap.addEventListener('click', () => {
     if (state.busy || !slots.top.canvas || !slots.bottom.canvas) return;
@@ -374,10 +438,14 @@
     scheduleAlign();
   });
 
+  ui.ownToggle.addEventListener('click', () => {
+    const open = ui.own.classList.toggle('open');
+    ui.ownToggle.setAttribute('aria-expanded', String(open));
+  });
+
   // ---------------------------------------------------------------- OpenCV
 
   function loadOpenCv() {
-    setStatus('loading');
     const t0 = performance.now();
     const s = document.createElement('script');
     s.src = CV_URL;
@@ -398,6 +466,7 @@
 
   function cvFailed(why) {
     console.error(LOG, 'opencv failed:', why);
+    ui.viewer.classList.remove('waiting');
     setStatus('cvFailed');
   }
 
@@ -424,7 +493,7 @@
 
   function scheduleAlign() {
     if (!slots.top.canvas || !slots.bottom.canvas) { setStatus('needOne'); return; }
-    if (!state.cv) { setStatus('waiting'); return; }   // cvReady() picks it up
+    if (!state.cv) { showPreview(); setStatus('waiting'); return; }   // cvReady() picks it up
     runAlign();
   }
 
@@ -559,9 +628,9 @@
 
   function showStats(r) {
     const items = [
-      ['Matches', 'マッチ', String(r.matches)],
+      ['Matches', '対応', String(r.matches)],
       ['Inliers', 'インライア', String(r.inliers)],
-      ['Homography', 'ホモグラフィ', r.ok ? 'OK' : 'failed'],
+      ['Homography', '射影変換', r.ok ? 'OK' : 'failed'],
       ['Time', '時間', (r.ms / 1000).toFixed(2) + ' s'],
     ];
     const nodes = [];
@@ -569,7 +638,9 @@
       if (i) { const sep = span('·'); sep.className = 'sep'; nodes.push(sep); }
       const b = document.createElement('b');
       b.textContent = value;
-      nodes.push(document.createTextNode(en + ' '), span(ja, 'ja'), document.createTextNode(' '), b);
+      if (LANG === 'ja') nodes.push(span(ja, 'ja'), document.createTextNode(' '), b);
+      else if (LANG === 'en') nodes.push(document.createTextNode(en + ' '), b);
+      else nodes.push(document.createTextNode(en + ' '), span(ja, 'ja'), document.createTextNode(' '), b);
     });
     ui.stats.replaceChildren(...nodes);
     ui.stats.hidden = false;
@@ -580,11 +651,34 @@
     state.lens = null;
     api.canvases.top = null;
     api.canvases.lens = null;
+    ui.viewer.classList.remove('waiting');
     ui.viewer.hidden = true;
     setStatus('failed');
   }
 
   // ---------------------------------------------------------------- lens view
+
+  // While OpenCV.js is still loading, show the top edition so the page is there at once.
+  function showPreview() {
+    const top = slots.top.canvas;
+    if (!top) return;
+    ui.view.width = top.width;
+    ui.view.height = top.height;
+    ui.viewer.hidden = false;
+    ui.stage.dataset.wait = LANG === 'en' ? WAIT_LABEL.en : (LANG === 'ja' ? WAIT_LABEL.ja : `${WAIT_LABEL.en} / ${WAIT_LABEL.ja}`);
+    ui.viewer.classList.add('waiting');
+    ui.view.getContext('2d').drawImage(top, 0, 0);
+  }
+
+  // Unless the reader has moved the slider, size the lens to the displayed page.
+  function autoRadius() {
+    if (state.radiusTouched) return;
+    const w = ui.view.getBoundingClientRect().width;
+    if (!w) return;
+    const r = Math.round(clamp(w * 0.16, 40, 140));
+    ui.radius.value = String(r);
+    ui.radiusOut.textContent = `${r} px`;
+  }
 
   function showOverlay(r) {
     state.top = slots.top.canvas;
@@ -594,6 +688,7 @@
     ui.view.width = state.top.width;
     ui.view.height = state.top.height;
     ui.viewer.hidden = false;
+    ui.viewer.classList.remove('waiting');
     if (state.lensStart) {
       [state.lensX, state.lensY] = state.lensStart;
       state.lensStart = null;
@@ -606,6 +701,7 @@
     state.lensX = clamp(state.lensX, 0, ui.view.width);
     state.lensY = clamp(state.lensY, 0, ui.view.height);
     setStatus('aligned');
+    autoRadius();
     draw();
   }
 
@@ -633,9 +729,14 @@
     g.drawImage(state.lens, 0, 0);
     g.restore();
     g.beginPath();
+    g.arc(state.lensX, state.lensY, r + 3.5 * k, 0, Math.PI * 2);
+    g.lineWidth = 5 * k;
+    g.strokeStyle = 'rgba(27, 41, 71, .12)';
+    g.stroke();
+    g.beginPath();
     g.arc(state.lensX, state.lensY, r, 0, Math.PI * 2);
     g.lineWidth = 2.5 * k;
-    g.strokeStyle = '#1f4ea0';
+    g.strokeStyle = '#1b2947';
     g.stroke();
     api.lens = { x: Math.round(state.lensX), y: Math.round(state.lensY), r: Math.round(r) };
   }
@@ -649,7 +750,8 @@
   }
 
   ui.view.addEventListener('pointerdown', (e) => {
-    if (ui.view.setPointerCapture) { try { ui.view.setPointerCapture(e.pointerId); } catch (_) { /* not capturable */ } }
+    // Embedded: let a vertical swipe scroll the page (touch-action: pan-y); a tap or sideways drag moves the lens.
+    if (!EMBED && ui.view.setPointerCapture) { try { ui.view.setPointerCapture(e.pointerId); } catch (_) { /* not capturable */ } }
     moveLensTo(e);
   });
   ui.view.addEventListener('pointermove', moveLensTo);
@@ -663,13 +765,31 @@
     requestDraw();
   });
   ui.radius.addEventListener('input', () => {
+    state.radiusTouched = true;
     ui.radiusOut.textContent = `${ui.radius.value} px`;
     requestDraw();
   });
-  window.addEventListener('resize', requestDraw);
+  window.addEventListener('resize', () => { autoRadius(); requestDraw(); });
+
+  // ---------------------------------------------------------------- embedding
+
+  // Tell the page that embeds us how tall we are, so the frame never needs its own scrollbar.
+  if (EMBED && window.parent !== window) {
+    let last = 0;
+    const post = () => {
+      const h = Math.ceil(document.documentElement.scrollHeight);
+      if (h === last) return;
+      last = h;
+      try { window.parent.postMessage({ type: 'kasanegi-demo:height', height: h }, location.origin); } catch (_) { /* detached */ }
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(post).observe(document.body);
+    window.addEventListener('load', post);
+    post();
+  }
 
   setStatus('loading');
   loadOpenCv();
+  loadSample();
 })();
 </script>
 </body>

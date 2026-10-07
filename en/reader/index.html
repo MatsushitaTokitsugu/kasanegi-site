@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>kasanegi, a language app that uses manga | Kasanegi</title>
+<meta name="description" content="kasanegi layers the Japanese and English editions of the same manga page by page on your device. Move the round lens to read that spot in the other language. Try the demo in your browser.">
+<link rel="canonical" href="https://kasanegi.com/en/reader/">
+<link rel="alternate" hreflang="ja" href="https://kasanegi.com/reader/">
+<link rel="alternate" hreflang="en" href="https://kasanegi.com/en/reader/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kasanegi">
+<meta property="og:title" content="kasanegi, a language app that uses manga">
+<meta property="og:description" content="kasanegi layers the Japanese and English editions of the same manga page by page on your device.">
+<meta property="og:url" content="https://kasanegi.com/en/reader/">
+<meta property="og:image" content="https://kasanegi.com/assets/reader/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/kasanegi-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  /* Layout for this page only. Colours and type come from /assets/style.css. */
+  body{letter-spacing:.005em}
+  .phero h1,.sec-h,.proj h3,.steps h3,.stats dt,.figs3 .n,.points b,.who3 b{font-family:"Source Serif 4",var(--serif);letter-spacing:.01em}
+  .body{line-height:1.85}
+  .phero .in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(36px,6vw,88px);align-items:center}
+  .phero .btns{margin-top:40px}.phero .btns .btn{margin-top:0}
+  .phero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+  .phero .btn.ghost:hover{background:#fff;color:var(--ai,#1b2947)}
+  .loupe{--w:min(360px,74vw);position:relative;width:var(--w);aspect-ratio:800/1100;margin:0 auto;background:#fff;box-shadow:0 34px 80px -34px rgba(0,0,0,.6)}
+  .loupe img{position:absolute;inset:0;width:100%;height:100%}
+  .loupe .en{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%);animation:lens-clip 15s ease-in-out infinite}
+  .loupe .ring{position:absolute;left:78.75%;top:17.45%;width:calc(var(--w)*.34);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2.5px var(--ai,#1b2947),0 0 0 8px rgba(27,41,71,.12);animation:lens-ring 15s ease-in-out infinite;pointer-events:none}
+  .loupe figcaption{position:absolute;left:0;right:0;top:100%;margin-top:12px;font-size:12px;color:#aeb7c9;text-align:center;letter-spacing:.04em}
+  @keyframes lens-clip{0%,24%{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%)}33%,57%{clip-path:circle(calc(var(--w)*.17) at 41.9% 44.1%)}66%,90%{clip-path:circle(calc(var(--w)*.17) at 58.1% 80.5%)}100%{clip-path:circle(calc(var(--w)*.17) at 78.75% 17.45%)}}
+  @keyframes lens-ring{0%,24%{left:78.75%;top:17.45%}33%,57%{left:41.9%;top:44.1%}66%,90%{left:58.1%;top:80.5%}100%{left:78.75%;top:17.45%}}
+  @media(max-width:860px){.phero .in{grid-template-columns:1fr}.loupe{--w:min(300px,70vw);margin-bottom:28px}}
+  @media(prefers-reduced-motion:reduce){.loupe .en,.loupe .ring{animation:none}}
+
+  .demo-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:start}
+  #demo-frame{display:block;width:100%;aspect-ratio:800/1230;border:0;background:transparent}
+  .demo-side .points{margin-top:28px}
+  .demo-side .points li{grid-template-columns:112px 1fr}
+  .demo-side .points b{font-size:17px}
+  @media(max-width:860px){.demo-grid{grid-template-columns:1fr}}
+
+  .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px);margin-top:12px}
+  .steps li{background:#fff;border:1px solid var(--line,#d9d0bf);padding:clamp(18px,2.4vw,28px)}
+  .steps svg{display:block;width:100%;height:auto;margin-bottom:18px}
+  .steps h3{font-size:clamp(19px,1.9vw,22px);margin-bottom:12px}
+  .steps .body{font-size:14.5px;line-height:1.85}
+  @media(max-width:900px){.steps{grid-template-columns:1fr}}
+  .fig-t{font-family:var(--sans);font-size:11px;letter-spacing:.04em;fill:var(--mute,#6d7381)}
+  .fig-a{fill:var(--beni,#a5332b);font-family:var(--sans);font-size:10.5px}
+
+  .phone{max-width:300px;margin:0 auto;border:10px solid #16181d;border-radius:34px;overflow:hidden;box-shadow:0 30px 70px -32px rgba(27,41,71,.55);background:#16181d}
+  .phone img{border-radius:24px}
+  .proj-fig.phone-fig figcaption{text-align:center}
+
+  .dark .body{color:#cfd5e2}
+  .goal{margin-top:56px;padding-top:28px;border-top:1px solid rgba(255,255,255,.18);font-size:15px;line-height:1.9;color:#cfd5e2;max-width:820px}
+  .goal b{color:#fff;font-weight:600}
+  .points li{grid-template-columns:150px 1fr}
+  @media(max-width:480px){.points li{grid-template-columns:1fr}}
+  .together .note{margin-top:16px}
+</style>
+</head>
+<body>
+
+<header class="top always" id="top">
+  <a class="brand" href="/en/" aria-label="Kasanegi home"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
+  <nav aria-label="Main">
+    <a href="/en/research/">Research</a>
+    <a href="/en/reader/" aria-current="page">Reader</a>
+    <a class="lang" href="/reader/" hreflang="ja" lang="ja">日本語</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="phero" aria-labelledby="page-title">
+  <div class="wrap in">
+    <div>
+      <p class="kicker">LANGUAGE APP · KASANEGI</p>
+      <h1 id="page-title">Read the same manga in two languages, layered</h1>
+      <p>kasanegi is an app for people learning a language. It shows the Japanese and English editions of the same manga layered page by page on your device. Move the round lens, and that spot appears in the other language.</p>
+      <p>Page images are handled only on your device. We never send them to our servers.</p>
+      <div class="btns"><a class="btn light" href="#demo">Try the demo <span class="arrow">→</span></a><a class="btn ghost" href="#beta">Join the beta</a></div>
+    </div>
+    <figure class="loupe">
+      <img src="/demo/sample_a.png" width="800" height="1100" alt="Our own sample page. A round lens moves over the Japanese edition, and only inside the lens the English balloon shows.">
+      <img class="en" src="/assets/reader/sample_b_aligned.png" width="800" height="1100" alt="">
+      <span class="ring" aria-hidden="true"></span>
+      <figcaption>The sample page is our own drawing</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="kasane" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="block" id="demo">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">DEMO</p>
+      <h2 class="sec-h">Try it in your browser</h2>
+    </div>
+    <div class="demo-grid">
+      <div class="reveal">
+        <iframe id="demo-frame" src="/demo/?embed=1&amp;lang=en" title="Demo: a round lens shows the English edition over the Japanese page" loading="lazy"></iframe>
+      </div>
+      <div class="demo-side reveal">
+        <p class="body">The demo page is a sample we drew ourselves. Move the pointer over the Japanese page, or drag a finger across it. The same spot of the English edition appears inside the circle.</p>
+        <p class="body">The alignment is computed in the browser that opened this page. It finds matching points in the two sample images and fits the English page to the shape of the Japanese one. No image is sent anywhere.</p>
+        <ul class="points">
+          <li><b>Move</b><span>Move the lens with the pointer, a finger or the arrow keys.</span></li>
+          <li><b>Size</b><span>Change the lens radius with the slider.</span></li>
+          <li><b>Swap</b><span>Swap the two editions to read the English page with Japanese inside the lens.</span></li>
+          <li><b>Your images</b><span>Choose two language editions of the same page to try them.</span></li>
+        </ul>
+        <p class="note">The only file the demo loads from another site is OpenCV.js, which does the alignment. <a href="/demo/">Open the demo on its own page</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="how">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">HOW IT WORKS</p>
+      <h2 class="sec-h">Three steps to layer two editions</h2>
+      <p class="body">Language editions of the same manga are usually made from the same artwork. What differs is mainly the text in the speech balloons. kasanegi uses this to find the pages and the places where the drawings match.</p>
+    </div>
+    <ol class="steps">
+      <li class="reveal">
+        <svg viewBox="0 0 360 214" role="img" aria-labelledby="f1t">
+          <title id="f1t">Pages of the Japanese and English editions joined by lines where the drawings match. The cover and an extra page have no partner.</title>
+          <text class="fig-t" x="8" y="18">Japanese</text>
+          <text class="fig-t" x="8" y="208">English</text>
+          <g fill="#fff" stroke="#16181d" stroke-width="1.4">
+            <rect x="8" y="28" width="46" height="62" stroke-dasharray="4 3"/><rect x="66" y="28" width="46" height="62"/><rect x="124" y="28" width="46" height="62"/><rect x="182" y="28" width="46" height="62"/><rect x="240" y="28" width="46" height="62"/><rect x="298" y="28" width="46" height="62"/>
+            <rect x="8" y="128" width="46" height="62"/><rect x="66" y="128" width="46" height="62"/><rect x="124" y="128" width="46" height="62" stroke-dasharray="4 3"/><rect x="182" y="128" width="46" height="62"/><rect x="240" y="128" width="46" height="62"/><rect x="298" y="128" width="46" height="62"/>
+          </g>
+          <g stroke="none">
+            <path d="M31 50l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" fill="#d7d0c2"/>
+            <circle cx="89" cy="59" r="11" fill="#1b2947"/><path d="M147 47l12 22h-24z" fill="#a5332b"/><rect x="194" y="48" width="22" height="22" fill="#a8863a"/><path d="M252 64q11-16 22 0" fill="none" stroke="#55704f" stroke-width="4"/><path d="M321 46l11 13-11 13-11-13z" fill="#24365c"/>
+            <circle cx="31" cy="159" r="11" fill="#1b2947"/><path d="M89 147l12 22H77z" fill="#a5332b"/><g fill="#d7d0c2"><circle cx="139" cy="159" r="2.5"/><circle cx="147" cy="159" r="2.5"/><circle cx="155" cy="159" r="2.5"/></g><rect x="194" y="148" width="22" height="22" fill="#a8863a"/><path d="M252 164q11-16 22 0" fill="none" stroke="#55704f" stroke-width="4"/><path d="M321 146l11 13-11 13-11-13z" fill="#24365c"/>
+          </g>
+          <g stroke="#1b2947" stroke-width="1.6" fill="none"><path d="M89 90L31 128"/><path d="M147 90L89 128"/><path d="M205 90v38"/><path d="M263 90v38"/><path d="M321 90v38"/></g>
+          <text class="fig-a" x="8" y="104">no partner</text>
+          <text class="fig-a" x="124" y="122">no partner</text>
+        </svg>
+        <h3>1. Match the pages</h3>
+        <p class="body">kasanegi does not assume the pages are in the same order. For each English page, it picks the 8 Japanese pages with the closest small signature (64 bits). It then tries to align the drawings of each of these pages. Among the pairs that align, it keeps the one with the most matching points. Pages that exist in only one edition, such as covers or extras, are left without a partner.</p>
+      </li>
+      <li class="reveal">
+        <svg viewBox="0 0 360 214" role="img" aria-labelledby="f2t">
+          <title id="f2t">A Japanese page and a slightly tilted English page, with lines joining matching points on the drawings. The text in the balloons is not used for matching.</title>
+          <text class="fig-t" x="20" y="16">Japanese</text>
+          <text class="fig-t" x="206" y="16">English</text>
+          <g fill="#fff" stroke="#16181d" stroke-width="1.4">
+            <rect x="20" y="26" width="132" height="176"/>
+            <g transform="rotate(3 272 114)"><rect x="206" y="26" width="132" height="176"/></g>
+          </g>
+          <g fill="none" stroke="#16181d" stroke-width="1.2">
+            <rect x="30" y="36" width="112" height="70"/><rect x="30" y="114" width="112" height="78"/>
+            <path d="M36 92l18-22 14 12 16-18 20 20 14-10 18 18"/>
+            <circle cx="62" cy="152" r="14"/><path d="M48 192q14-22 28 0"/>
+            <g transform="rotate(3 272 114)"><rect x="216" y="36" width="112" height="70"/><rect x="216" y="114" width="112" height="78"/><path d="M222 92l18-22 14 12 16-18 20 20 14-10 18 18"/><circle cx="248" cy="152" r="14"/><path d="M234 192q14-22 28 0"/></g>
+          </g>
+          <g fill="#fff" stroke="#16181d" stroke-width="1.2"><ellipse cx="116" cy="62" rx="20" ry="22"/><g transform="rotate(3 272 114)"><ellipse cx="302" cy="62" rx="20" ry="22"/></g></g>
+          <g fill="#a5332b" fill-opacity=".16" stroke="none"><ellipse cx="116" cy="62" rx="14" ry="16"/><g transform="rotate(3 272 114)"><ellipse cx="302" cy="62" rx="14" ry="16"/></g></g>
+          <g stroke="#16181d" stroke-width="2" stroke-linecap="round"><path d="M122 52v20M116 50v24M110 54v14"/></g>
+          <g transform="rotate(3 272 114)" stroke="#16181d" stroke-width="2" stroke-linecap="round"><path d="M292 56h20M290 63h24M294 70h14"/></g>
+          <g stroke="#1b2947" stroke-width="1.1" stroke-opacity=".75" fill="none">
+            <path d="M54 70L235.7 76.6"/><path d="M84 64L265.5 72.2"/><path d="M104 84L284.5 93.2"/><path d="M62 138L241.8 147.3"/><path d="M76 152L255 162"/><path d="M30 114L210.6 120.5"/>
+          </g>
+          <g fill="#fff" stroke="#1b2947" stroke-width="1.3">
+            <circle cx="54" cy="70" r="3"/><circle cx="84" cy="64" r="3"/><circle cx="104" cy="84" r="3"/><circle cx="62" cy="138" r="3"/><circle cx="76" cy="152" r="3"/><circle cx="30" cy="114" r="3"/>
+            <circle cx="235.7" cy="76.6" r="3"/><circle cx="265.5" cy="72.2" r="3"/><circle cx="284.5" cy="93.2" r="3"/><circle cx="241.8" cy="147.3" r="3"/><circle cx="255" cy="162" r="3"/><circle cx="210.6" cy="120.5" r="3"/>
+          </g>
+        </svg>
+        <h3>2. Align by the drawings</h3>
+        <p class="body">It matches feature points (SIFT) on the pages. The balloon text differs between editions, so small dark areas that look like text are not used for matching. From the matched points, it estimates a projective transform for the whole page with MAGSAC. The transform is accepted only when the corners of the mapped page, its area ratio and the spread of the points all look right.</p>
+      </li>
+      <li class="reveal">
+        <svg viewBox="0 0 360 214" role="img" aria-labelledby="f3t">
+          <title id="f3t">A round lens over a Japanese page. Only inside the lens, the English balloon shows.</title>
+          <rect x="110" y="14" width="140" height="190" fill="#fff" stroke="#16181d" stroke-width="1.4"/>
+          <g fill="none" stroke="#16181d" stroke-width="1.2"><rect x="120" y="24" width="120" height="78"/><rect x="120" y="110" width="56" height="84"/><rect x="184" y="110" width="56" height="84"/><path d="M126 90l16-18 14 10 14-14 18 16 14-8 18 14"/><circle cx="148" cy="150" r="12"/></g>
+          <g fill="#fff" stroke="#16181d" stroke-width="1.2"><ellipse cx="208" cy="52" rx="22" ry="22"/><ellipse cx="214" cy="140" rx="16" ry="20"/></g>
+          <g stroke="#16181d" stroke-width="2" stroke-linecap="round"><path d="M214 132v18M208 130v22"/></g>
+          <clipPath id="f3c"><circle cx="208" cy="52" r="34"/></clipPath>
+          <g clip-path="url(#f3c)"><rect x="160" y="14" width="96" height="88" fill="#eef1f6"/><path d="M174 90l14-12 18 14 14-8 18 14" fill="none" stroke="#16181d" stroke-width="1.2"/><ellipse cx="208" cy="52" rx="22" ry="22" fill="#fff" stroke="#16181d" stroke-width="1.2"/><path d="M198 45h20M196 52h24M200 59h16" stroke="#1b2947" stroke-width="2" stroke-linecap="round"/></g>
+          <circle cx="208" cy="52" r="34" fill="none" stroke="#1b2947" stroke-width="2.6"/>
+          <circle cx="208" cy="52" r="38" fill="none" stroke="#1b2947" stroke-opacity=".14" stroke-width="5"/>
+          <text class="fig-t" x="256" y="40">Inside the lens:</text>
+          <text class="fig-t" x="256" y="56">English</text>
+          <text class="fig-t" x="256" y="150">Outside:</text>
+          <text class="fig-t" x="256" y="166">Japanese</text>
+        </svg>
+        <h3>3. Show only inside the circle</h3>
+        <p class="body">The transform maps the other edition onto the shape of the page you are reading. Only the inside of the lens shows it. Outside the circle, you still see the edition you are reading. You can check just the balloons you are curious about in the other language.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="products">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">IN DEVELOPMENT</p>
+      <h2 class="sec-h">What we are building</h2>
+    </div>
+
+    <article class="proj reveal">
+      <div class="proj-text">
+        <p class="proj-num">01 · Python</p>
+        <h3>The page-matching core</h3>
+        <p class="body">A program that pairs the pages of two language editions and aligns their drawings. It is written in Python with OpenCV. Of the three steps above, it handles matching and alignment.</p>
+        <p class="body">The figure shows part of the matches the core found between our two sample pages. The light red areas are small dark areas, such as text, that were left out of matching.</p>
+        <dl class="stats">
+          <div><dt>311</dt><dd>matching points kept for the sample pair (MAGSAC inliers)</dd></div>
+          <div><dt>0.13 <small style="font-size:.5em">px</small></dt><dd>median error of the matching points</dd></div>
+          <div><dt>4,734</dt><dd>lines of Python (19 files)</dd></div>
+        </dl>
+      </div>
+      <figure class="proj-fig">
+        <img src="/assets/reader/core_matches.png" width="1176" height="768" loading="lazy" decoding="async" alt="The Japanese sample page on the left and the English sample page on the right, with lines joining matching points on the drawings. The areas around the balloon text are tinted light red and are not used for matching.">
+        <figcaption>Output of the page-matching core. Left: the Japanese sample; right: the English sample (both our own drawings). The lines are 78 of the 311 matches that were kept.</figcaption>
+      </figure>
+    </article>
+
+    <article class="proj flip reveal">
+      <div class="proj-text">
+        <p class="proj-num">02 · PC</p>
+        <h3>Kasane-yomi for PC (round loupe)</h3>
+        <p class="body">Enter the URLs of the edition you read and the reference edition, then open them. The app decides the partner of each page automatically. There is no step where you pick the partner page by hand. Move the cursor over the page you are reading, and the same spot of the other edition appears inside the circle.</p>
+        <p class="body">You can change the circle size and switch to black and white. You move between pages by scrolling or by entering a page number.</p>
+        <dl class="stats">
+          <div><dt>47</dt><dd>pages matched automatically to the right partner page</dd></div>
+          <div><dt>63 / 58</dt><dd>pages in the reading and reference editions at the time</dd></div>
+          <div><dt>2026.09</dt><dd>month the prototype was completed</dd></div>
+        </dl>
+      </div>
+      <figure class="proj-fig">
+        <img src="/assets/reader/pc_loupe.png" width="1280" height="800" loading="lazy" decoding="async" alt="The Kasane-yomi for PC screen. URL fields for the reading and reference editions are at the top, and the English balloon shows inside a circle over the page.">
+        <figcaption>Sample screen (the app's interface is in Japanese), showing our own sample page. The URLs are examples.</figcaption>
+      </figure>
+    </article>
+
+    <article class="proj reveal">
+      <div class="proj-text">
+        <p class="proj-num">03 · Android</p>
+        <h3>Android app</h3>
+        <p class="body">An app for reading on a phone, written in Kotlin. Enter the URLs of the edition you read and the reference edition, then tap Start. The pages of the chapter are matched. Where you drag your finger, a round window shows the other edition. You can move to the previous or next page, and swap the two editions.</p>
+        <p class="body">The latest prototype paired 60 pages from the two editions of one chapter (64 and 58 pages). None of the pairs was wrong. Two-page spreads are paired one half at a time, so there can be more pairs than pages.</p>
+        <dl class="stats">
+          <div><dt>22,898</dt><dd>lines of Kotlin for reading (134 files)</dd></div>
+          <div><dt>25,970</dt><dd>lines of unit and instrumented tests</dd></div>
+          <div><dt>60</dt><dd>page pairs in the latest prototype (0 wrong)</dd></div>
+        </dl>
+      </div>
+      <figure class="proj-fig phone-fig">
+        <div class="phone"><img src="/assets/reader/android_screen.png" width="720" height="1560" loading="lazy" decoding="async" alt="The Android app screen. Two URL fields and the Start, Previous, Next and Swap buttons are at the top, and the English balloon shows inside a round window over the page."></div>
+        <figcaption>Sample screen. It reproduces the app's layout (URL fields, the buttons 開始 Start, 前頁 Previous, 次頁 Next and 入替 Swap, the status line and the round window) with our own sample page.</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<section class="block dark" id="results">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">RESULTS</p>
+      <h2 class="sec-h">Results on real editions</h2>
+      <p class="body">These results come from two language editions of manga that are on sale. The titles and images belong to their rights holders, so we do not show them on this page.</p>
+    </div>
+    <div class="figs3 reveal">
+      <div>
+        <p class="n">33<small>pairs</small></p>
+        <p>The page-matching core searched 193 Japanese pages for the partners of 57 English pages, and paired 33 of them. None of the pairs was wrong. Pages without a partner found were not layered (October 5, 2026; every pair checked by eye).</p>
+      </div>
+      <div>
+        <p class="n">47<small>pages</small></p>
+        <p>Kasane-yomi for PC matched 47 pages to the right partner page automatically, from 63 pages of the reading edition and 58 of the reference edition. This was checked against a separate visual review (September 27, 2026).</p>
+      </div>
+      <div>
+        <p class="n">60<small>pairs</small></p>
+        <p>The latest Android prototype paired 60 pages from the two editions of one chapter. None of the pairs was wrong. On another title it made 54 pairs, again with none wrong (October 7, 2026; every pair checked by eye).</p>
+      </div>
+    </div>
+    <p class="goal reveal"><b>Our goal</b> is that, within 10 seconds of entering the two URLs, the whole chapter is ready to read with the two editions layered.</p>
+  </div>
+</section>
+
+<section class="block" id="privacy">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">PRIVACY</p>
+      <h2 class="sec-h">We do not keep images on a server</h2>
+      <p class="body">Manga images belong to the rights holders of each work. kasanegi handles images on your device only to show the two editions you opened yourself, one over the other.</p>
+    </div>
+    <ul class="points reveal">
+      <li><b>Server</b><span>We never send page images to our servers. Our servers do not hold any images.</span></li>
+      <li><b>Device</b><span>Images stay in the device's memory only while they are shown layered.</span></li>
+      <li><b>Storage</b><span>Images are not saved as files. In testing, the Android app's cache and display storage are checked at the end of each run. In 8 runs on October 7, 2026, no image file was found.</span></li>
+      <li><b>Demo</b><span>The demo on this page also runs only in your browser.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block alt" id="claude">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">BUILT WITH CLAUDE</p>
+      <h2 class="sec-h">What Claude Code did</h2>
+      <p class="body">Much of kasanegi's development is done with Claude Code. Claude Code designed and wrote the following parts.</p>
+    </div>
+    <dl class="facts reveal" style="margin-top:36px">
+      <div><dt>Page-matching core</dt><dd>Designed and wrote the alignment (align.py) and the page matching (pages.py). The first version dates from September 5, 2026.</dd></div>
+      <div><dt>Order-free matching</dt><dd>Designed and wrote the matching that pairs pages whose drawings agree, without assuming the page order (September 8, 2026).</dd></div>
+      <div><dt>Demo</dt><dd>Wrote the demo on this page (alignment and lens in the browser).</dd></div>
+      <div><dt>Supervision</dt><dd>Handles design, standards, review and records for the project.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block together" id="beta">
+  <div class="wrap reveal">
+    <p class="eyebrow">BETA</p>
+    <h2 class="sec-h">We are looking for beta testers</h2>
+    <p class="lede">We welcome people who are learning a language. If you are interested, please contact us by email.</p>
+    <div class="who3">
+      <div><b>Learning English</b><span>Read a manga you know in Japanese with the English edition layered on it.</span></div>
+      <div><b>Learning Japanese</b><span>Check scenes you know from the English edition in the Japanese balloons.</span></div>
+      <div><b>Learning another language</b><span>After Japanese and English, we plan to support Chinese (simplified and traditional). Tell us which language you are learning.</span></div>
+    </div>
+    <a class="btn" href="mailto:contact@kasanegi.com">contact@kasanegi.com <span class="arrow">→</span></a>
+    <p class="note">Please write “Beta” in the subject line.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <a class="mark logo-type" href="/en/" style="font-size:22px">KASANEGI</a>
+        <p class="meta">Osaka, Japan</p>
+      </div>
+      <p class="meta"><a href="/en/">Home</a> · <a href="/en/research/">Research</a> · <a href="/en/reader/">Reader</a> · <a href="/demo/">Demo</a> · <a href="/reader/" hreflang="ja" lang="ja">日本語</a></p>
+    </div>
+    <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Size the embedded demo to the height it reports (same origin only).
+  window.addEventListener('message', function(e){
+    if (e.origin !== location.origin || !e.data || e.data.type !== 'kasanegi-demo:height') return;
+    var f = document.getElementById('demo-frame');
+    var h = Number(e.data.height);
+    if (f && h > 200 && h < 4000) { f.style.aspectRatio = 'auto'; f.style.height = h + 'px'; }
+  });
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(el){ el.classList.add('on'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('on'); io.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
