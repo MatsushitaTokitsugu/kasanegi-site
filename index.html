@@ -1,36 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
-<title>Kasanegi — Independent product studio, Japan</title>
-<meta name="description" content="Independent product studio — Japan. Tools for planetary science and language learning, built with Claude Code.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>かさねぎ Kasanegi</title>
+<meta name="description" content="かさねぎは、大阪を拠点に研究とソフトウェア開発を行う研究開発スタジオです。日本全土の地形データを使った隕石衝突痕の研究、漫画で学ぶ語学アプリ kasanegi の開発、YouTube チャンネルの運営を行っています。">
 <link rel="canonical" href="https://kasanegi.com/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="ja" href="https://kasanegi.com/">
+<link rel="alternate" hreflang="en" href="https://kasanegi.com/en/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Kasanegi">
-<meta property="og:title" content="Kasanegi — Independent product studio, Japan">
-<meta property="og:description" content="Independent product studio — Japan. Tools for planetary science and language learning, built with Claude Code.">
-<meta property="og:url" content="https://kasanegi.com/">
+<meta property="og:site_name" content="かさねぎ Kasanegi">
+<meta property="og:title" content="かさねぎ Kasanegi">
+<meta property="og:description" content="大阪を拠点に、隕石衝突痕の研究、語学アプリの開発、YouTube チャンネルの運営を行う研究開発スタジオです。">
 <meta property="og:image" content="https://kasanegi.com/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kasanegi">
+<meta property="og:url" content="https://kasanegi.com/">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/kasanegi-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Kasanegi",
-  "url": "https://kasanegi.com",
+  "alternateName": "かさねぎ",
+  "url": "https://kasanegi.com/",
+  "logo": "https://kasanegi.com/assets/kasanegi-mark.svg",
   "email": "contact@kasanegi.com",
-  "foundingDate": "2026-01",
-  "founder": {
-    "@type": "Person",
-    "name": "Shinichi Matsushita"
-  },
+  "foundingDate": "2026-06-01",
+  "address": {"@type": "PostalAddress", "addressLocality": "Osaka", "addressRegion": "Osaka", "addressCountry": "JP"},
+  "founder": {"@type": "Person", "name": "Tokitsugu Matsushita", "alternateName": "松下宗嗣", "jobTitle": "Founder"},
+  "description": "Research and development studio in Osaka, Japan: meteorite impact structure research on Japan-wide terrain data, the kasanegi language-learning app, and two YouTube channels.",
   "sameAs": [
     "https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA",
     "https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA",
@@ -38,387 +40,197 @@
   ]
 }
 </script>
-<style>
-  :root {
-    color-scheme: light;
-    --bg: #ffffff;
-    --ink: #1a1a1a;
-    --ink-2: #3a3d42;
-    --muted: #5d6168;
-    --rule: #e6e8ec;
-    --soft: #f5f6f8;
-    --accent: #1f4ea0;
-    --accent-ink: #183f82;
-    --accent-soft: #eef2fa;
-    --radius: 12px;
-    --shadow: 0 1px 2px rgba(26, 26, 26, .06), 0 10px 28px rgba(26, 26, 26, .08);
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --sans-ja: system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.7;
-    overflow-wrap: break-word;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 792px; margin: 0 auto; padding: 0 16px; }
-  h1, h2, h3 { margin: 0; line-height: 1.2; font-weight: 800; letter-spacing: -0.015em; }
-  p, ul, figure { margin: 0; }
-  ul { padding: 0; }
-  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  a:hover { color: var(--accent-ink); text-decoration-thickness: 2px; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-  img { display: block; max-width: 100%; height: auto; }
-  [lang="ja"] { font-family: var(--sans-ja); line-break: strict; }
-
-  /* Hero */
-  .hero { padding: 120px 0 88px; }
-  .hero h1 { font-size: 72px; letter-spacing: -0.035em; }
-  .tagline { margin-top: 18px; font-size: 22px; font-weight: 700; line-height: 1.4; }
-  .lede { margin-top: 6px; max-width: 34em; font-size: 22px; line-height: 1.45; color: var(--ink-2); }
-  .founder { margin-top: 26px; font-size: 15px; color: var(--muted); }
-  .bar { width: 56px; height: 4px; margin-top: 34px; border-radius: 2px; background: var(--accent); }
-
-  /* Sections */
-  .section { padding: 80px 0; border-top: 1px solid var(--rule); }
-  .section h2 { font-size: 30px; }
-  .h-ja { display: inline-block; margin-left: .45em; font-size: 15px; font-weight: 600; letter-spacing: 0; color: var(--muted); vertical-align: .2em; }
-  .lead { margin-top: 24px; font-size: 19px; line-height: 1.65; }
-
-  /* Japanese companion text */
-  .ja { margin-top: 28px; padding-left: 16px; border-left: 2px solid var(--rule); font-size: 15px; line-height: 1.85; color: var(--ink-2); }
-  .ja > * + * { margin-top: 10px; }
-  .ja-h { font-weight: 700; color: var(--ink); }
-  .ja-why { font-weight: 600; color: var(--ink); }
-
-  /* Products */
-  .product { margin-top: 64px; padding-top: 64px; border-top: 1px solid var(--rule); }
-  .section h2 + .product { margin-top: 36px; padding-top: 0; border-top: 0; }
-  .p-num { font-size: 13px; font-weight: 800; letter-spacing: .12em; color: var(--accent); }
-  .product h3 { margin-top: 8px; font-size: 27px; }
-  .status { font-weight: 500; color: var(--muted); }
-  .why { margin-top: 24px; padding: 18px 20px; border-radius: var(--radius); background: var(--accent-soft); }
-  .why-text { font-size: 18px; line-height: 1.6; }
-  .desc { margin-top: 20px; }
-  .demo { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 700; line-height: 1.2; text-decoration: none; }
-  .btn::after { content: "\2192"; }
-  .btn:hover { background: var(--accent-ink); color: #fff; }
-  .demo-note { font-size: 15px; line-height: 1.5; color: var(--muted); }
-  .cols { margin-top: 28px; display: grid; gap: 24px; }
-  .label { margin-bottom: 8px; font-size: 13px; font-weight: 800; letter-spacing: .04em; color: var(--accent); }
-  .why .label { margin-bottom: 6px; }
-  .list { padding-left: 1.15em; }
-  .list li { font-size: 16px; line-height: 1.65; }
-  .list li + li { margin-top: 10px; }
-  .list li::marker { color: var(--accent); }
-  .ja .cols { margin-top: 16px; gap: 14px; }
-  .ja .label { margin-bottom: 4px; font-size: 12.5px; }
-  .ja .list li { font-size: 14.5px; line-height: 1.8; }
-  .ja .list li + li { margin-top: 6px; }
-
-  /* Figures */
-  .fig { margin-top: 36px; }
-  .fig a { display: block; border-radius: var(--radius); }
-  .fig img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); background: var(--soft); }
-  .fig figcaption { margin-top: 12px; font-size: 13px; line-height: 1.55; color: var(--muted); }
-  .fig-narrow { max-width: 480px; margin-left: auto; margin-right: auto; }
-  .figs { margin-top: 36px; display: grid; gap: 28px; align-items: start; }
-  .figs .fig { margin-top: 0; }
-
-  /* Video channels */
-  .stat { margin-top: 22px; font-size: 18px; font-weight: 700; line-height: 1.5; }
-  .claude-line { margin-top: 20px; }
-  .cards { margin-top: 28px; display: grid; gap: 16px; }
-  .card { position: relative; display: block; padding: 20px 56px 20px 22px; border: 1px solid var(--rule); border-radius: var(--radius); background: #fff; color: var(--ink); text-decoration: none; box-shadow: 0 1px 2px rgba(26, 26, 26, .04); transition: border-color .15s ease, box-shadow .15s ease; }
-  .card:hover { color: var(--ink); border-color: var(--accent); box-shadow: var(--shadow); }
-  .card-icon { position: absolute; top: 20px; right: 20px; width: 24px; height: 24px; }
-  .card-kicker { display: block; font-size: 12.5px; font-weight: 800; letter-spacing: .03em; color: var(--accent); }
-  .card-name { display: block; margin-top: 6px; font-size: 19px; font-weight: 700; line-height: 1.4; }
-  .card-handle { display: block; margin-top: 2px; font-size: 15px; color: var(--muted); }
-  .card-url { display: block; margin-top: 12px; font-size: 12.5px; line-height: 1.5; color: var(--accent); overflow-wrap: anywhere; }
-
-  /* Built with Claude Code */
-  .roles { margin-top: 24px; list-style: none; display: grid; gap: 14px; }
-  .roles li { position: relative; padding-left: 22px; }
-  .roles li::before { content: ""; position: absolute; left: 2px; top: .68em; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
-  .roles .roles-lead { font-size: 18px; font-weight: 600; line-height: 1.6; }
-  .ja .roles { margin-top: 0; gap: 6px; }
-  .ja .roles li { padding-left: 18px; }
-  .ja .roles li::before { top: .8em; width: 6px; height: 6px; }
-
-  /* Contact */
-  .mail { margin-top: 24px; font-size: 24px; font-weight: 700; }
-  .meta { margin-top: 14px; list-style: none; font-size: 16px; color: var(--muted); }
-  .meta li + li { margin-top: 4px; }
-
-  /* Footer */
-  .footer { padding: 32px 0 48px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
-
-  @media (min-width: 720px) {
-    .cols { grid-template-columns: 1fr 1fr; gap: 40px; }
-    .ja .cols { gap: 28px; }
-    .figs { grid-template-columns: 1.0973fr 1fr; gap: 24px; }
-    .cards { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 480px) {
-    body { font-size: 16px; }
-    .hero { padding: 72px 0 56px; }
-    .hero h1 { font-size: 48px; }
-    .tagline, .lede { font-size: 19px; }
-    .section { padding: 56px 0; }
-    .section h2 { font-size: 25px; }
-    .product { margin-top: 44px; padding-top: 44px; }
-    .product h3 { font-size: 22px; }
-    .why { padding: 16px; }
-    .why-text { font-size: 17px; }
-    .mail { font-size: 20px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .card { transition: none; }
-  }
-</style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <h1>Kasanegi</h1>
-    <p class="tagline">Independent product studio — Japan</p>
-    <p class="lede">Tools for planetary science and language learning, built with Claude Code.</p>
-    <p class="founder">Founder: Shinichi Matsushita</p>
-    <div class="bar" aria-hidden="true"></div>
-    <div class="ja" lang="ja">
-      <p>Kasanegi — 日本の独立プロダクトスタジオ。</p>
-      <p>惑星科学と語学学習の道具を、Claude Code と作る。</p>
-    </div>
-  </div>
+<header class="top" id="top">
+  <a class="brand" href="/"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
+  <nav aria-label="メイン">
+    <a href="#projects">取り組み</a>
+    <a class="hide-sm" href="#news">お知らせ</a>
+    <a class="hide-sm" href="#company">概要</a>
+    <a class="hide-sm" href="#contact">お問い合わせ</a>
+    <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>
+  </nav>
 </header>
 
 <main>
 
-<section class="section" id="how-we-build" aria-labelledby="how-h">
-  <div class="wrap">
-    <h2 id="how-h">How we build <span class="h-ja" lang="ja">作り方</span></h2>
-    <p class="lead">Every product here is built the same way: Claude Code designs, writes the core, reviews the work against primary sources, and keeps the records. The founder decides; the models do the engineering. Other models take mechanical tasks.</p>
-    <div class="ja" lang="ja">
-      <p>設計・核心の実装・一次資料に当てた検収・記録を Claude Code が担い、創業者が判断します。機械的な作業は他のモデルも使います。</p>
+<section class="opening" aria-label="かさねぎ">
+  <div class="in">
+    <svg viewBox="0 0 120 120" role="img" aria-label="かさねぎのマーク">
+      <rect x="38" y="8" width="72" height="72" rx="26" fill="#e3b04b"/>
+      <rect x="24" y="24" width="72" height="72" rx="26" fill="#d2584c" fill-opacity=".92"/>
+      <rect x="10" y="40" width="72" height="72" rx="26" fill="#2c3d6b" fill-opacity=".92"/>
+    </svg>
+    <p class="word logo-type">KASANEGI</p>
+    <p class="yomi">かさねぎ</p>
+  </div>
+  <p class="cue">SCROLL</p>
+</section>
+
+<div class="kasane" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="block" id="about">
+  <div class="wrap reveal">
+    <p class="eyebrow">ABOUT</p>
+    <h2 class="sec-h">かさねぎについて</h2>
+    <div class="about-grid">
+      <div>
+        <p class="body">かさねぎは、大阪を拠点に研究とソフトウェア開発を行う研究開発スタジオです。日本全土の地形データを使った隕石衝突痕の研究、漫画で学ぶ語学アプリの開発、YouTube チャンネルの運営の三つに取り組んでいます。</p>
+        <p class="body">研究と開発の大部分は、Claude Code とともに進めています。</p>
+      </div>
+      <div>
+        <p class="body">名前は、着物を一枚ずつ重ねて着る「重ね着」に由来します。地質学の知識に、ソフトウェアとデータと AI を重ねて、ひとりでも大きな研究と開発ができるようにすることを目指しています。</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="products" aria-labelledby="products-h">
+<section class="block alt" id="projects">
   <div class="wrap">
-    <h2 id="products-h">Products <span class="h-ja" lang="ja">製品</span></h2>
+    <div class="reveal">
+      <p class="eyebrow">PROJECTS</p>
+      <h2 class="sec-h">取り組んでいること</h2>
+    </div>
 
-    <article class="product" id="impact-screening" aria-labelledby="p1-h">
-      <p class="p-num">01</p>
-      <h3 id="p1-h">Impact-Structure Screening <span class="status">— research tooling, in development (no candidate output yet)</span></h3>
-      <div class="why">
-        <p class="label">Why it matters</p>
-        <p class="why-text">Japan has no confirmed impact structure yet — only one probable crater, Oikeyama in Nagano (Sakamoto et al., 2010). This tooling is built to find the first confirmed ones from public surveys alone, with one processing applied to the whole country.</p>
+    <article class="proj reveal">
+      <div class="proj-text">
+        <p class="proj-num">01 · 研究</p>
+        <h3>日本初の隕石クレーターを探す</h3>
+        <p class="body">日本ではまだ、隕石の衝突でできたクレーターは確認されていません。2026 年に公開された日本全土の赤色立体地図と AI による画像解析を組み合わせて、国土全体から候補を探す研究を進めています。手法は、世界で確認されている衝突クレーターを使って検証しています。</p>
+        <p class="body">同じ手法は、海外の地形データや月面のクレーター、古墳などの遺跡の調査にも応用できると考えています。</p>
+        <dl class="stats">
+          <div><dt>48</dt><dd>手法を当てた、世界の既知の衝突クレーター</dd></div>
+          <div><dt>1<small style="font-size:.5em">段階</small></dt><dd>御池山で再現した全国の赤色立体地図との色の差</dd></div>
+          <div><dt>287</dt><dd>2026 年 9 月の研究開始からのコミット</dd></div>
+        </dl>
+        <div class="btns"><a class="btn" href="/research/">研究の詳細 <span class="arrow">→</span></a></div>
       </div>
-      <p class="desc">Research tooling for finding undiscovered meteorite impact structures in Japan. It applies the same terrain, gravity and magnetic processing that can be run across all of Japan to known impact structures worldwide, to test whether known structures are picked up without per-site tuning, before the processing is run over Japan's public observations.</p>
-      <div class="cols">
-        <div>
-          <p class="label">Done so far</p>
-          <ul class="list">
-            <li>Same red relief image map processing applied to public 1 m-class terrain models of 48 known structures (US 28, Canada 13, Estonia 5, Germany 2), out of a 354-row inventory.</li>
-            <li>At Oikeyama (Nagano, Japan), the in-house processing matched the nationwide Q-chizu rendering within 1 level per RGB channel on the central tile.</li>
-            <li>Quality of Japan-wide public observations pinned down from primary sources, e.g. national aeromagnetic main line spacing 3–4 km; 7 public gravity stations within 10 km of Oikeyama. 262 commits since 2026-09-20.</li>
-          </ul>
-        </div>
-        <div>
-          <p class="label">Built with Claude</p>
-          <ul class="list">
-            <li>Claude Code acts as the supervisor: writes the task briefs for ChatGPT Pro and Codex, checks every returned result against primary sources (papers, survey reports, distributor pages), and records the verified premises in git.</li>
-            <li>Claude Code designed the checks that decide what data exist, e.g. confirming that none of 36 Australian structures has a 1 m product in the public ELVIS portal, against a control site where 1 m products do appear.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="figs">
-        <figure class="fig">
-          <a href="assets/known-structures.png"><img src="assets/known-structures.png" width="1500" height="1367" loading="lazy" decoding="async" alt="Known impact structures shown side by side, each rendered with the same red relief image map processing from public 1 m-class terrain models."></a>
-          <figcaption>Source: public 1 m-class DTMs (US, Canada, Estonia, Germany); in-house red relief image map (Chiba et al. 2007 definition, same constants as Q-chizu).</figcaption>
-        </figure>
-        <figure class="fig">
-          <a href="assets/oikeyama.png"><img src="assets/oikeyama.png" width="768" height="768" loading="lazy" decoding="async" alt="Oikeyama, Nagano: in-house red relief image map of an area about 1.8 km square, made from GSI elevation tiles."></a>
-          <figcaption>Source: GSI Basic Map Information DEM1A elevation tiles (z17); same in-house processing; about 1.8 km square around Oikeyama.</figcaption>
-        </figure>
-      </div>
-      <div class="ja" lang="ja">
-        <p class="ja-why">日本には確認済みの衝突痕がまだ無い——長野の御池山が probable とされているだけ(Sakamoto et al., 2010)。この道具は、公開観測だけから、一つの処理を国土全体に当てて、最初の確認済み衝突痕を見つけるために作っている。</p>
-        <p>日本の未発見の隕石衝突痕を探す研究用の道具。日本全土に施せる地形・重力・磁気の処理を、世界の既知の衝突痕に同じ形で施し、例ごとの調整なしに既知を拾えるかを確かめてから、日本全土の公開観測に当てる。</p>
-        <div class="cols">
-          <div>
-            <p class="label">これまで</p>
-            <ul class="list">
-              <li>台帳 354 行のうち既知 48 構造の公開 1 m 級地形に、同じ赤色立体地図の処理を施した。</li>
-              <li>御池山で、自家製の処理が全国 Q 地図の描画と RGB 各 1 段階以内で一致した(中央タイル)。</li>
-              <li>全国の空中磁気の主測線 3〜4 km、御池山の周り 10 km の公開重力測点 7 点など、日本の観測の質を一次資料で固めた。262 コミット(2026-09-20 から)。</li>
-            </ul>
-          </div>
-          <div>
-            <p class="label">Claude が担った所</p>
-            <ul class="list">
-              <li>Claude Code が監督として、依頼文を書き、返ってきた成果を一次資料と照合して検収し、確かめた前提を git に記帳する。</li>
-              <li>豪州の 36 構造に公開 1 m 製品が無いことを、1 m が出る対照地点と比べて確定する確認の設計と判定を Claude Code が行った。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="product" id="manga-reader" aria-labelledby="p2-h">
-      <p class="p-num">02</p>
-      <h3 id="p2-h">Bilingual Manga Reader <span class="status">— next flagship, in development</span></h3>
-      <div class="demo">
-        <a class="btn" href="demo/">Try the demo</a>
-        <p class="demo-note">Alignment runs entirely in your browser — nothing is uploaded.</p>
-      </div>
-      <p class="desc">A mobile reader for language learners. Open the two language editions of the same manga you already read; the app aligns the pages on your device and lets you look at the other language through a movable lens over the page. Everything stays on the device — no images are stored on our servers. Android first, then iPhone and PC.</p>
-      <div class="cols">
-        <div>
-          <p class="label">Done so far</p>
-          <ul class="list">
-            <li>Page-alignment core (Python; feature matching with MAGSAC and geometric verification) written by Claude: on a real volume, 33 page pairs matched with zero mismatches (Oct 5, 2026).</li>
-            <li>Android app shell on a Mihon fork: 134 Kotlin files, 22,000+ lines, with page matching and lens display running on an emulator.</li>
-            <li>PC prototype (Electron) running; HQ at 270 commits since Aug 29, 2026.</li>
-          </ul>
-        </div>
-        <div>
-          <p class="label">Built with Claude</p>
-          <ul class="list">
-            <li>Claude Code designed and wrote the alignment core and the page-matching logic that does not assume page order.</li>
-            <li>Claude Code supervises the whole build: specifications, reviews of code from other models, bookkeeping and git.</li>
-          </ul>
-        </div>
-      </div>
-      <figure class="fig fig-narrow">
-        <img src="assets/reader.svg" width="480" height="412" loading="lazy" decoding="async" alt="Diagram: the Japanese and English editions of the same page lie one on top of the other; inside a round lens, the English page underneath shows through.">
+      <figure class="proj-fig">
+        <img src="/assets/oikeyama.png" width="768" height="768" loading="lazy" decoding="async" alt="長野県・御池山の赤色立体地図">
+        <figcaption>長野県・御池山の赤色立体地図。国土地理院の 1 m 標高データから作成しました。</figcaption>
       </figure>
-      <div class="ja" lang="ja">
-        <p class="ja-h">バイリンガル漫画リーダー — 次の主力・開発中</p>
-        <p>位置合わせはブラウザの中だけで動き、何も送信しません。</p>
-        <p>語学学習者のためのスマホのリーダー。自分が読んでいる同じ漫画の 2 言語版を開くと、アプリが端末の中で頁を合わせ、動かせるレンズでもう一方の言語を見られます。画像はサーバに置かず、すべて端末の中だけで扱います。Android を先に、次に iPhone と PC。</p>
-        <div class="cols">
-          <div>
-            <p class="label">これまで</p>
-            <ul class="list">
-              <li>頁合わせの核(Python・特徴点照合+MAGSAC+幾何検証)を Claude が書き、実物の 1 巻で 33 組の頁を誤対応 0 で合わせた(2026-10-05)。</li>
-              <li>Android 版の器(Mihon の fork): Kotlin 134 ファイル・2 万 2 千行超。頁の照合とレンズ表示がエミュレータで動作。</li>
-              <li>PC 版の試作(Electron)が動作。HQ は 2026-08-29 から 270 コミット。</li>
-            </ul>
-          </div>
-          <div>
-            <p class="label">Claude が担った所</p>
-            <ul class="list">
-              <li>頁合わせの核と、頁の順序を仮定しない照合の論理を Claude Code が設計し書いた。</li>
-              <li>仕様・他のモデルが書いたコードの検収・記帳・git を Claude Code が監督。</li>
-            </ul>
-          </div>
+    </article>
+
+    <article class="proj flip reveal">
+      <div class="proj-text">
+        <p class="proj-num">02 · アプリ</p>
+        <h3>漫画で学ぶ語学アプリ kasanegi</h3>
+        <p class="body">同じ漫画の日本語版と英語版を、端末の中で頁ごとに重ねて表示するアプリです。丸いレンズを動かすと、その部分だけもう一方の言語に切り替わります。画像は端末の外に送りません。</p>
+        <p class="body">ブラウザで試せるデモを公開しています。</p>
+        <dl class="stats">
+          <div><dt>33<small style="font-size:.5em">組</small></dt><dd>実際の漫画 1 巻で、誤りなく対応付けた頁</dd></div>
+          <div><dt>47<small style="font-size:.5em">頁</small></dt><dd>PC 版で、正しい相手に自動で対応した頁</dd></div>
+          <div><dt>2.2<small style="font-size:.5em">万行</small></dt><dd>Android アプリのコード</dd></div>
+        </dl>
+        <div class="btns"><a class="btn" href="/demo/">デモを試す <span class="arrow">→</span></a><a class="btn ghost" href="/reader/">アプリの詳細</a></div>
+      </div>
+      <figure class="proj-fig svg">
+        <img src="/assets/reader.svg" width="560" height="420" loading="lazy" alt="二つの言語版の頁が重なり、丸いレンズの中だけもう一方の言語が見える図">
+      </figure>
+    </article>
+
+    <article class="proj solo reveal">
+      <div class="proj-text">
+        <p class="proj-num">03 · チャンネル</p>
+        <h3>海外の反応を日本語で届ける YouTube チャンネル</h3>
+        <p class="body">海外のスポーツファンの反応を日本語で紹介するチャンネルを、二つ運営しています。原稿の作成から編集、投稿までを自動化した制作の仕組みを自分たちで開発し、二つのチャンネルとも収益化しています。</p>
+        <dl class="stats">
+          <div><dt>190<small style="font-size:.5em">万回</small></dt><dd>二つのチャンネルの累計再生回数</dd></div>
+          <div><dt>158<small style="font-size:.5em">本</small></dt><dd>公開した動画</dd></div>
+          <div><dt>2</dt><dd>収益化したチャンネル</dd></div>
+        </dl>
+        <div class="ch-links">
+          <a href="https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA" rel="noopener"><i aria-hidden="true"></i>野球海外の反応局</a>
+          <a href="https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA" rel="noopener"><i aria-hidden="true"></i>フットボール海外の反応局</a>
         </div>
       </div>
     </article>
-
-    <article class="product" id="ai-run-production" aria-labelledby="p3-h">
-      <p class="p-num">03</p>
-      <h3 id="p3-h">An experiment in AI-run production <span class="status">— two sports video channels (live; one monetized)</span></h3>
-      <p class="desc">We run two YouTube channels as a live experiment: can a production line built and operated by Claude Code reach real audiences and revenue with a single human reviewer? It did. The line detects a game's end, assembles the facts and fan commentary, writes and narrates, and uploads as private; a person reviews and publishes. The experiment funds the studio, and what we learn about running AI operations feeds the other products.</p>
-      <p class="stat">Two channels: 158 public videos, 1.9M+ lifetime views, about 2,500 subscribers (Oct 2026).</p>
-      <div class="claude-line">
-        <p class="label">Built with Claude</p>
-        <p>Claude Code designed the soccer line end to end and wrote the baseball line's rulebook and machine checks; it supervises daily operations.</p>
-      </div>
-      <div class="cards">
-        <a class="card" href="https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA">
-          <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="12" fill="#1f4ea0"/><path d="M10 7.8l6 4.2-6 4.2z" fill="#fff"/></svg>
-          <span class="card-kicker">MLB Fan-Reaction Videos</span>
-          <span class="card-name" lang="ja">野球海外の反応局</span>
-          <span class="card-handle">@humikiribaseball</span>
-          <span class="card-url">https://www.youtube.com/channel/UCr4dIbm6vfsW-pssR5_RQnA</span>
-        </a>
-        <a class="card" href="https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA">
-          <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="12" fill="#1f4ea0"/><path d="M10 7.8l6 4.2-6 4.2z" fill="#fff"/></svg>
-          <span class="card-kicker">Football: Overseas Reactions</span>
-          <span class="card-name" lang="ja">フットボール海外の反応局</span>
-          <span class="card-handle">@premier-kaigai</span>
-          <span class="card-url">https://www.youtube.com/channel/UCf-gMNIpV0E3yTS85WeJYdA</span>
-        </a>
-      </div>
-      <div class="ja" lang="ja">
-        <p class="ja-h">AI が回す制作の実験——スポーツ動画チャンネル 2 本(稼働中・1 本は収益化)</p>
-        <p>YouTube チャンネル 2 本を、稼働中の実験として運営している——Claude Code が作り運用する制作ラインは、確認者一人で本物の視聴者と収益に届くか。届いた。ラインは試合終了を検知し、事実とファンの反応をまとめて原稿と読み上げを作り、非公開で投稿する。人が確認して公開する。この実験がスタジオの資金になり、AI の運用で学んだことが他の製品に還る。</p>
-        <p class="ja-h">2 チャンネル合計: 公開 158 本・累計 190 万回超・登録者 約 2,500(2026 年 10 月)</p>
-        <div>
-          <p class="label">Claude が担った所</p>
-          <p>Claude Code がサッカーのラインを端から端まで設計し、野球のラインの規則と機械検品を書いた。日々の運用を監督している。</p>
-        </div>
-      </div>
-    </article>
-
-    <!-- Hidden for now. Remove these comment markers to show this section.
-    <article class="product" id="public-data-apis" aria-labelledby="p4-h">
-      <p class="p-num">04</p>
-      <h3 id="p4-h">Japan Public-Data APIs for AI Agents (MDAF) <span class="status">— live</span></h3>
-      <p class="desc">Small, documented APIs over Japanese public datasets, built for AI agents; served from kasanegi.com.</p>
-      <div class="ja" lang="ja">
-        <p>日本の公的オープンデータを AI エージェント向けの小さな API にして kasanegi.com で提供。</p>
-      </div>
-    </article>
-    -->
   </div>
 </section>
 
-<section class="section" id="built-with-claude-code" aria-labelledby="claude-h">
-  <div class="wrap">
-    <h2 id="claude-h">Built with Claude Code <span class="h-ja" lang="ja">Claude Code が担う所</span></h2>
-    <ul class="roles">
-      <li class="roles-lead">Across all products, Claude Code (Fable and Opus models) is the supervisor and core engineer: specifications, core implementation, review against primary sources, and the git ledger.</li>
-      <li><strong>Impact screening:</strong> task briefs for research models and verification of every returned result against primary sources.</li>
-      <li><strong>Manga reader:</strong> the page-alignment core and order-free page matching.</li>
-      <li><strong>Video lines:</strong> the soccer line end to end; the baseball line's rulebook, machine checks and operations.</li>
-      <li>Other models (Codex, ChatGPT Pro) take mechanical and long-running research tasks under Claude's supervision.</li>
+<section class="block" id="news">
+  <div class="wrap reveal">
+    <p class="eyebrow">NEWS</p>
+    <h2 class="sec-h">お知らせ</h2>
+    <ul class="news">
+      <li class="new"><time datetime="2026-10-07">2026.10.07</time><span class="tag">お知らせ</span><p>ウェブサイトをリニューアルしました</p></li>
+      <li><time datetime="2026-10-05">2026.10.05</time><span class="tag">開発</span><p>語学アプリの頁合わせで、漫画 1 巻の 33 組の頁を誤りなく対応付けました</p></li>
+      <li><time datetime="2026-10-01">2026.10.01</time><span class="tag">チャンネル</span><p>サッカー日本代表戦の動画を、試合終了から 2 時間 35 分で公開しました</p></li>
+      <li><time datetime="2026-09-27">2026.09.27</time><span class="tag">開発</span><p>語学アプリの PC 版の試作が完成しました</p></li>
+      <li><time datetime="2026-09-20">2026.09.20</time><span class="tag">研究</span><p>隕石衝突痕の研究を始めました</p></li>
+      <li><time datetime="2026-08-29">2026.08.29</time><span class="tag">開発</span><p>語学アプリ kasanegi の開発を始めました</p></li>
+      <li><time datetime="2026-08-23">2026.08.23</time><span class="tag">チャンネル</span><p>「フットボール海外の反応局」で動画の公開を始めました</p></li>
+      <li><time datetime="2026-06-01">2026.06.01</time><span class="tag">お知らせ</span><p>かさねぎを開業しました</p></li>
     </ul>
-    <div class="ja" lang="ja">
-      <ul class="roles">
-        <li>全製品で、Claude Code(Fable と Opus のモデル)が監督と中核のエンジニアを務める。仕様・核心の実装・一次資料に当てた検収・git の記帳。</li>
-        <li><strong>衝突痕の選別:</strong> 調査を担うモデルへの依頼文と、返ってきた成果すべてを一次資料と照合する検収。</li>
-        <li><strong>漫画リーダー:</strong> 頁合わせの核と、頁の順序を仮定しない照合。</li>
-        <li><strong>動画ライン:</strong> サッカーのラインは端から端まで、野球のラインは規則・機械検品・運用。</li>
-        <li>他のモデル(Codex・ChatGPT Pro)は、Claude の監督の下で機械的な作業と長時間の調査を担う。</li>
-      </ul>
+  </div>
+</section>
+
+<section class="block alt" id="member">
+  <div class="wrap reveal">
+    <p class="eyebrow">MEMBER</p>
+    <h2 class="sec-h">代表</h2>
+    <div class="profile">
+      <div>
+        <p class="name">松下 宗嗣</p>
+        <p class="kana">Tokitsugu Matsushita</p>
+        <p class="role">代表</p>
+      </div>
+      <p class="body">鉱物鑑定士。大阪府の和泉層群で鉱物の野外調査を行い、2019 年に信達層のドーソン石に関する<a href="https://cir.nii.ac.jp/crid/1522262179823947136" rel="noopener">論文</a>を『地学研究』に発表。2026 年 6 月にかさねぎを開業。</p>
     </div>
   </div>
 </section>
 
-<section class="section" id="contact" aria-labelledby="contact-h">
-  <div class="wrap">
-    <h2 id="contact-h">Contact <span class="h-ja" lang="ja">連絡先</span></h2>
-    <p class="mail"><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></p>
-    <ul class="meta">
-      <li>Founded 2026 · Japan</li>
-      <li>GitHub <a href="https://github.com/MatsushitaTokitsugu">github.com/MatsushitaTokitsugu</a></li>
-    </ul>
-    <div class="ja" lang="ja">
-      <p>2026 年設立・日本</p>
-    </div>
+<section class="block" id="company">
+  <div class="wrap reveal">
+    <p class="eyebrow">COMPANY</p>
+    <h2 class="sec-h">概要</h2>
+    <dl class="facts">
+      <div><dt>屋号</dt><dd>かさねぎ(英語表記 Kasanegi)</dd></div>
+      <div><dt>代表</dt><dd>松下 宗嗣</dd></div>
+      <div><dt>所在地</dt><dd>大阪府大阪市</dd></div>
+      <div><dt>開業</dt><dd>2026 年 6 月 1 日</dd></div>
+      <div><dt>事業内容</dt><dd>地球科学の研究開発<br>ソフトウェアの企画・開発<br>動画コンテンツの制作</dd></div>
+      <div><dt>連絡先</dt><dd><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block alt" id="contact">
+  <div class="wrap reveal">
+    <p class="eyebrow">CONTACT</p>
+    <h2 class="sec-h">お問い合わせ</h2>
+    <p class="body">研究へのご協力、取材、協業のご相談は、下記までお気軽にご連絡ください。語学アプリのベータ版を試していただける方も募集しています。</p>
+    <a class="btn" href="mailto:contact@kasanegi.com">contact@kasanegi.com <span class="arrow">→</span></a>
   </div>
 </section>
 
 </main>
 
-<footer class="footer">
+<footer>
   <div class="wrap">
-    <p>© 2026 Kasanegi</p>
+    <div class="grid">
+      <div>
+        <a class="mark logo-type" href="/" style="font-size:22px">KASANEGI</a>
+        <p class="meta">かさねぎ · 大阪</p>
+      </div>
+      <p class="meta"><a href="#projects">取り組み</a> · <a href="#news">お知らせ</a> · <a href="#company">概要</a> · <a href="/research/">研究</a> · <a href="/demo/">デモ</a> · <a href="/en/" hreflang="en" lang="en">English</a></p>
+    </div>
+    <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
   </div>
 </footer>
 
+<script>
+(function(){
+  var top=document.getElementById('top');
+  function onScroll(){ if(window.scrollY>window.innerHeight*0.7){top.classList.add('solid')}else{top.classList.remove('solid')} }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
