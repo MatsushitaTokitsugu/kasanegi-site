@@ -48,7 +48,6 @@
   <a class="brand" href="/"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
   <nav aria-label="メイン">
     <a href="#projects">取り組み</a>
-    <a class="hide-sm" href="#claude">Claude</a>
     <a class="hide-sm" href="#news">あゆみ</a>
     <a class="hide-sm" href="#company">概要</a>
     <a class="hide-sm" href="#contact">お問い合わせ</a>
@@ -83,7 +82,7 @@
         <p class="body">開業は 2026 年 6 月ですが、仕事はその前から動いています。動画の制作システムは 1 月に作り始め、5 月に YouTube パートナープログラムの承認を受けました。データ API は 4 月に公開を始め、5 月には開発者向けのマーケットにも出品しています。</p>
       </div>
       <div>
-        <p class="body">名前は、着物を一枚ずつ重ねて着る「重ね着」に由来します。地質学の知識に、ソフトウェアとデータと AI を重ねて、一つの価値に仕立てる。それが、かさねぎの仕事です。</p>
+        <p class="body">名前は、着物を一枚ずつ重ねて着る「重ね着」に由来します。地質学の知識に、ソフトウェアとデータと AI を重ねて、一つの価値に仕立てる。それが、かさねぎの仕事です。研究と開発は、Claude Code を軸に進めています。</p>
         <dl class="stats">
           <div><dt>4</dt><dd>事業(研究・アプリ・データ API・コンテンツ制作)</dd></div>
           <div><dt>1,700<small style="font-size:.5em">+</small></dt><dd>開業から 4 か月のコミット</dd></div>
@@ -111,7 +110,7 @@
         <dl class="stats">
           <div><dt>354<small style="font-size:.5em">件</small></dt><dd>世界の衝突構造の台帳(確認済み 226 か所を含む)</dd></div>
           <div><dt>48<small style="font-size:.5em">か所</small></dt><dd>1 m の地形から赤色立体地図を作った既知のクレーター</dd></div>
-          <div><dt>292</dt><dd>研究開始から 18 日間のコミット(すべて Claude Code とともに)</dd></div>
+          <div><dt>292</dt><dd>研究開始から 18 日間のコミット</dd></div>
         </dl>
         <div class="btns"><a class="btn" href="/research/">研究の詳細 <span class="arrow">→</span></a></div>
       </div>
@@ -177,10 +176,10 @@
         <h3>完全自動で収益を上げるコンテンツ制作システム</h3>
         <p class="body">研究と開発には、AI の利用料だけでも毎月 400 ドル以上がかかります。その AI の利用枠の一部を使い、原稿の作成から編集、投稿までを AI が完全に自動で行うコンテンツ制作システムを、Claude Code で作りました。いまは、このシステムが生む収益で毎月の AI の利用料とそのほかの開発費をまかないながら、その規模を広げています。</p>
         <p class="body">AI で作られた動画の多くが品質や正確さの課題を抱えるなかで、このシステムは、試合の事実を公式のデータから機械的に取り込み、海外の掲示板や配信のコメントから反応を集めて選び、訳します。AI には原文を書かせず、選んだ反応の番号と訳だけを返させる作りにして、捏造を構造から防いでいます。</p>
-        <p class="body">チャンネルは、ジャンルや言語の違うものがいくつも動いています。下はその中の、スポーツの 2 つです。</p>
+        <p class="body">このシステムで、ジャンルも言語も違う 7 つのチャンネルを動かしています。下は、そのうちスポーツの 2 つです。</p>
         <dl class="stats">
+          <div><dt>7</dt><dd>このシステムで動かしているチャンネル</dd></div>
           <div><dt>1<small style="font-size:.5em">か月</small></dt><dd>フットボール海外の反応局が、開設から累計 100 万回再生に届くまで</dd></div>
-          <div><dt>3,612<small style="font-size:.5em">件</small></dt><dd>1 試合で集め、選び、訳した海外の反応</dd></div>
           <div><dt>2<small style="font-size:.5em">時間35分</small></dt><dd>試合終了から動画の公開まで</dd></div>
         </dl>
         <div class="ch-links">
@@ -192,29 +191,7 @@
   </div>
 </section>
 
-<section class="block" id="claude">
-  <div class="wrap reveal">
-    <p class="eyebrow">WITH CLAUDE</p>
-    <h2 class="sec-h">Claude とともに</h2>
-    <p class="body lead-claude">かさねぎの事業は、どれも Claude を中心に組み立てています。</p>
-    <div class="pillars">
-      <div class="pillar">
-        <h3>開発の中心</h3>
-        <p>研究、アプリ、データ API、コンテンツ制作の設計・実装・検証を、Claude Code が中心になって進めています。研究のコミットは 292 件すべて、語学アプリは 273 件中 256 件、サッカーの制作システムは 529 件中 320 件、野球の制作システムは 435 件中 289 件が、Claude との共同作業です。</p>
-      </div>
-      <div class="pillar">
-        <h3>製品の中で</h3>
-        <p>データ API は、Claude のような AI エージェントが使うための製品です。MCP サーバで 10 本の API を道具として公開しています。コンテンツ制作では、Claude API を本番の原稿の著者に使い、prompt caching と Message Batches で費用を抑えてきました。工程ごとに Claude と他のモデルを切り替えられる作りです。</p>
-      </div>
-      <div class="pillar">
-        <h3>記録を忘れない</h3>
-        <p>Claude Code の上に、過去の会話と報告をすべて出所つきで引ける記憶の仕組みを作りました。発言のたびに関係する記録を差し込み、241 本の会話と 1,693 件の報告から、決めたことと試して捨てたことを取り違えないようにしています。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block alt" id="news">
+<section class="block" id="news">
   <div class="wrap reveal">
     <p class="eyebrow">NEWS &amp; HISTORY</p>
     <h2 class="sec-h">お知らせとあゆみ</h2>
@@ -237,7 +214,7 @@
   </div>
 </section>
 
-<section class="block" id="member">
+<section class="block alt" id="member">
   <div class="wrap reveal">
     <p class="eyebrow">MEMBER</p>
     <h2 class="sec-h">代表</h2>
@@ -252,7 +229,7 @@
   </div>
 </section>
 
-<section class="block alt" id="company">
+<section class="block" id="company">
   <div class="wrap reveal">
     <p class="eyebrow">COMPANY</p>
     <h2 class="sec-h">概要</h2>
@@ -269,7 +246,7 @@
   </div>
 </section>
 
-<section class="block" id="contact">
+<section class="block alt" id="contact">
   <div class="wrap reveal">
     <p class="eyebrow">CONTACT</p>
     <h2 class="sec-h">お問い合わせ</h2>
@@ -287,7 +264,7 @@
         <a class="mark logo-type" href="/" style="font-size:22px">KASANEGI</a>
         <p class="meta">かさねぎ · 大阪</p>
       </div>
-      <p class="meta"><a href="#projects">取り組み</a> · <a href="#claude">Claude</a> · <a href="#news">あゆみ</a> · <a href="#company">概要</a> · <a href="/research/">研究</a> · <a href="/reader/">語学</a> · <a href="/api/">データ API</a> · <a href="/demo/">デモ</a> · <a href="/en/" hreflang="en" lang="en">English</a></p>
+      <p class="meta"><a href="#projects">取り組み</a> · <a href="#news">あゆみ</a> · <a href="#company">概要</a> · <a href="/research/">研究</a> · <a href="/reader/">語学</a> · <a href="/api/">データ API</a> · <a href="/demo/">デモ</a> · <a href="/en/" hreflang="en" lang="en">English</a></p>
     </div>
     <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
   </div>
