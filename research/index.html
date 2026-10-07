@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>隕石衝突痕の研究 | かさねぎ Kasanegi</title>
+<meta name="description" content="日本で最初の隕石クレーターを探す研究です。世界の既知の衝突痕で確かめた処理を、日本全土の赤色立体地図と同じ形で国土全体に当てます。方法、データの出所、成果、進み方の記録を公開しています。">
+<link rel="canonical" href="https://kasanegi.com/research/">
+<link rel="alternate" hreflang="ja" href="https://kasanegi.com/research/">
+<link rel="alternate" hreflang="en" href="https://kasanegi.com/en/research/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="かさねぎ Kasanegi">
+<meta property="og:title" content="日本で最初の隕石クレーターを、AI で探す | かさねぎ">
+<meta property="og:description" content="世界の既知の衝突痕で確かめた処理を、日本全土の公開観測に当てて、日本で最初の隕石衝突痕を探す研究です。">
+<meta property="og:image" content="https://kasanegi.com/assets/og.png">
+<meta property="og:url" content="https://kasanegi.com/research/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/kasanegi-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  html:not(.js) .reveal{opacity:1;transform:none}
+  .together .lede{text-wrap:pretty;word-break:auto-phrase}
+  .phero h1{word-break:auto-phrase}
+  .nw{display:inline-block}
+  .sub-h{margin:84px 0 22px}
+  .sub-h + .plate{margin-top:0}
+  .split.top-start{align-items:start}
+  .split.method-note{margin-top:96px;align-items:start}
+  .visual h3{font-size:22px}
+  .visual .tag{font-size:12px;letter-spacing:.14em;color:var(--beni);margin-bottom:6px}
+  .visual .facts{margin-top:16px}
+  .visual .facts > div,.horizon .facts > div{grid-template-columns:4.6em 1fr;gap:12px;padding:12px 0}
+  .visual .facts dt,.horizon .facts dt{font-size:12.5px;padding-top:2px}
+  .visual .facts dd,.horizon .facts dd{font-size:14px;line-height:1.85;color:var(--ink2)}
+
+  /* 段の工程図 */
+  .steps{list-style:none;margin-top:56px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ai)}
+  .step{position:relative;padding:30px 22px 6px 0}
+  .step + .step{padding-left:22px;border-left:1px solid var(--line)}
+  .step::before{content:"";position:absolute;top:-8px;left:-7px;width:14px;height:14px;border-radius:50%;background:var(--paper2);border:2px solid var(--ai)}
+  .step:first-child::before{left:0}
+  .step .k{display:block;font-family:var(--latin);font-size:40px;line-height:1;color:var(--beni)}
+  .step h3{font-size:19px;line-height:1.6;margin:14px 0 4px}
+  .step dt{margin-top:16px;font-size:12px;letter-spacing:.14em;color:var(--mute)}
+  .step dd{margin-top:4px;font-size:14px;line-height:1.85;color:var(--ink2)}
+  .step dd.res{color:var(--ink)}
+  @media(max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(3){padding-left:0;border-left:0}.step:nth-child(n+3){margin-top:30px;border-top:1px solid var(--line)}.step:nth-child(3)::before{left:0}}
+  @media(max-width:600px){.steps{grid-template-columns:1fr}.step,.step + .step{padding:30px 0 6px;border-left:0}.step + .step{margin-top:24px;border-top:1px solid var(--line)}.step::before,.step:nth-child(3)::before{left:0}}
+
+  /* 模式図 */
+  .rrim{margin:0}
+  .rrim svg{width:100%;height:auto;display:block;overflow:visible}
+  .rrim text{font-family:var(--sans);font-size:12px;fill:var(--ink2)}
+  .rrim .th{font-family:var(--serif);font-size:13.5px;font-weight:600;fill:var(--ink)}
+  .rrim .sm{font-size:10.5px;fill:var(--mute)}
+
+  /* 表 */
+  .tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;line-height:1.75}
+  .tbl col.c1{width:34%}.tbl col.c2{width:28%}.tbl col.c3{width:16%}.tbl col.c4{width:22%}
+  .tbl th,.tbl td{text-align:left;vertical-align:top;padding:13px 18px 13px 0;border-bottom:1px solid var(--line)}
+  .tbl thead th{font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--mute);border-bottom:1px solid var(--ink)}
+  .tbl tbody th{font-weight:500;color:var(--ink)}
+  .tbl td{color:var(--ink2)}
+  @media(max-width:720px){.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl th,.tbl td{display:block;width:auto}.tbl tr{padding:14px 0;border-bottom:1px solid var(--line)}.tbl tbody th,.tbl td{border:0;padding:2px 0;width:auto}.tbl td::before{content:attr(data-l);display:inline-block;min-width:4.4em;margin-right:8px;font-size:11.5px;letter-spacing:.1em;color:var(--mute)}}
+
+  /* 直径に合わせた並べ図 */
+  .dgrid{margin-top:32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 22px}
+  .dgrid figure{margin:0}
+  .dgrid img{width:100%;height:auto;aspect-ratio:1/1;background:var(--paper);border:1px solid var(--line);border-radius:3px}
+  .dgrid figcaption{margin-top:10px;line-height:1.6}
+  .dgrid figcaption b{display:block;font-family:var(--serif);font-size:16px;font-weight:600;letter-spacing:.04em}
+  .dgrid figcaption span{display:block;font-size:12.5px;color:var(--mute)}
+  .dgrid .dlegend{align-self:center;font-size:12.5px;line-height:1.85;color:var(--mute);padding-left:16px;border-left:2px solid var(--beni)}
+  @media(max-width:760px){.dgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.dgrid .dlegend{grid-column:1/-1}}
+
+  /* 進み方の記録 */
+  .tl{margin-top:36px}
+  .tl p b{font-weight:700;color:var(--ink)}
+  .tl p span{display:block;margin-top:2px;font-size:14.5px;color:var(--ink2)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  "name": "日本の隕石衝突痕の探索",
+  "alternateName": "Searching for impact structures in Japan",
+  "url": "https://kasanegi.com/research/",
+  "description": "世界の既知の衝突痕で確かめた赤色立体地図などの処理を、日本全土の公開観測に当てて、日本で最初の隕石衝突痕を探す研究です。",
+  "foundingDate": "2026-09-20",
+  "email": "contact@kasanegi.com",
+  "parentOrganization": {"@type": "Organization", "name": "Kasanegi", "alternateName": "かさねぎ", "url": "https://kasanegi.com/"},
+  "knowsAbout": ["隕石衝突痕", "赤色立体地図", "航空レーザ測量", "重力異常", "空中磁気"]
+}
+</script>
+</head>
+<body>
+
+<header class="top always" id="top">
+  <a class="brand" href="/" aria-label="かさねぎ トップへ"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
+  <nav aria-label="メイン">
+    <a href="/research/" aria-current="page">研究</a>
+    <a href="/reader/">語学</a>
+    <a class="hide-sm" href="/#contact">お問い合わせ</a>
+    <a class="lang" href="/en/research/" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="phero">
+  <div class="wrap">
+    <p class="kicker">RESEARCH</p>
+    <h1>日本初の隕石クレーターを<span class="nw">探す研究</span></h1>
+    <p>日本には、確認された隕石衝突痕がまだありません。2025 年から 2026 年にかけて、日本全土の赤色立体地図を誰でも見られるようになりました。この研究では、世界の既知の衝突痕で確かめた処理を日本全土に当てて、最初の一つを探します。方法と経過は、このページで公開しています。</p>
+  </div>
+</section>
+
+<div class="kasane" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="block" id="question">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">QUESTION</p>
+      <h2 class="sec-h">研究の問い</h2>
+    </div>
+    <div class="split top-start reveal">
+      <div>
+        <p class="body">隕石の衝突でできた構造は、世界で 200 以上が確認されています。日本で衝突痕の可能性が高い(probable)とされているのは、長野県の御池山だけです(Sakamoto et al. 2010)。日本は山が険しく、雨や森林によって地形が変わりやすい国土です。このため、衝突痕が見落とされてきた可能性があります。</p>
+        <p class="body">御池山の構造は、山頂を含む南東斜面にある直径約 900 m の半円形の地形で、その成因は長く議論されてきました。2005 年には、石英の衝撃変成組織が報告されました。2010 年には、約 2 mGal の負の重力異常も報告されています。御池山の研究も、半円形の地形が出発点になっています。</p>
+        <p class="body">近年、航空レーザ測量による 1 m の標高データが全国で整備されてきました。地形を読み取りやすく表す赤色立体地図も、日本全土で見られるようになりました。日本全土を人の目で調べることは現実的ではありません。そこでこの研究では、世界の既知の衝突痕で確かめた処理と、機械学習による判別を組み合わせて、国土全体を調べます。</p>
+      </div>
+      <div class="visual">
+        <p class="tag">日本で唯一の probable</p>
+        <h3>御池山(長野県飯田市)</h3>
+        <dl class="facts">
+          <div><dt>場所</dt><dd>赤石山脈の西麓。御池山(標高 1,905 m)の山頂を含む南東斜面</dd></div>
+          <div><dt>形</dt><dd>直径約 900 m の半円形(円の約 4 割が残存)</dd></div>
+          <div><dt>証拠</dt><dd>石英の衝撃変成組織(PDFs)、約 2 mGal の負の重力異常(114 測点)</dd></div>
+          <div><dt>評価</dt><dd>probable(衝突痕の可能性が高い)</dd></div>
+          <div><dt>文献</dt><dd>Sakamoto et al. 2005(LPSC XXXVI)、Sakamoto et al. 2010(Meteoritics &amp; Planetary Science 45)、坂本・志知 2010(日本惑星科学会誌 19)</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">近年の公開データの整備</h3>
+      <ul class="reach">
+        <li><b>2002</b><span>千葉達朗らが赤色立体地図を考案しました(アジア航測)。斜面の傾斜と、地上開度・地下開度から求める尾根谷度を、一枚の画像に表します。</span></li>
+        <li><b>2023</b><span>国土地理院が、航空レーザ測量による 1 m の標高データ(DEM1A)の提供を始めました。同じ年に、赤色立体地図の特許の期間が満了しました。</span></li>
+        <li><b>2025</b><span>6 月に、全国の赤色立体地図をブラウザで見られるようになりました(全国 Q 地図)。10 月には、DEM1A の提供範囲が全国の 3 次メッシュの約 61% になりました。</span></li>
+        <li><b>2026</b><span>2 月に、林野庁が森林の航空レーザ測量の標高データと微地形表現図の公開を始めました。DEM1A の提供範囲も、2 月と 7 月に広がりました。</span></li>
+      </ul>
+      <p class="note">出典: 千葉ほか 2007(地図 45(1))、千葉 2026(東京地学協会 特別講演会の案内)、国土地理院の発表(2025 年 3 月・10 月)と DEM1A の更新履歴、全国 Q 地図の案内、林野庁の資料(2026 年 3 月)。</p>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">研究の広がり</h3>
+      <p class="body">赤色立体地図の考案者は、この表現が人だけでなく AI にとっても地形の特徴を捉えやすいかもしれない、と述べています(千葉 2026)。この研究の方法は、次の分野にも使えます。</p>
+      <ul class="points">
+        <li><b>海外</b><span>高精細な標高データが公開されている国や地域で、同じ処理と判別を使えます。</span></li>
+        <li><b>月面</b><span>赤色立体地図は、月の裏側のクレーターについても作られています(千葉 2026。かぐやのレーザ高度計のデータによる)。</span></li>
+        <li><b>考古学</b><span>赤色立体地図は、森林に隠れた古墳の発見に使われています。島根県奥出雲町では、前方後円墳 77 基が新たに見つかったと報じられました(山陰中央新報、2023 年)。</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="method">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">METHOD</p>
+      <h2 class="sec-h">研究の方法</h2>
+      <p class="body">研究は四つの段階で進めます。まず、日本で使える観測とその質を調べます。次に、その質に合わせて、世界の既知の衝突痕に同じ処理を施します。三つ目の段階では、既知の衝突痕を取りこぼさない判別の仕組みを作ります。最後に、その仕組みを日本全土に当てます。使うデータと処理は、すべて公開されているものです。</p>
+    </div>
+
+    <ol class="steps reveal">
+      <li class="step">
+        <span class="k">I</span>
+        <h3>日本の観測の質を、場所ごとに把握する</h3>
+        <dl>
+          <dt>データ</dt>
+          <dd>国土地理院の数値標高モデル(DEM1A〜DEM10B)、提供範囲と作業年度の索引、公共測量の記録、地上重力データ、全国航空磁気異常</dd>
+          <dt>内容</dt>
+          <dd>日本全土に施せる観測と処理を一覧にします。それぞれの作り方、細かさ、精度は、配布元の説明の原文で確かめます。標高データについては、場所ごとに、どの年度のどの測量に由来するかまで調べます。</dd>
+          <dt>これまで</dt>
+          <dd class="res">観測 90 系列と処理 44 群の一覧を作りました。御池山の 1 m の標高データは、令和 4 年度に長野県が砂防計画のために行った航空レーザ測量に由来することを確かめました。</dd>
+        </dl>
+      </li>
+      <li class="step">
+        <span class="k">II</span>
+        <h3>世界の既知の衝突痕に、同じ処理を施す</h3>
+        <dl>
+          <dt>データ</dt>
+          <dd>世界の衝突構造の台帳 354 件、米国・カナダ・エストニア・ドイツの公開 1 m 級標高データ</dd>
+          <dt>内容</dt>
+          <dd>全国 Q 地図と同じ式と定数で、赤色立体地図を作ります。海外の標高データは、日本と同じタイルの格子に変換してから処理します。格子の 1 画素は北緯 35 度で約 0.98 m、開度の探索半径は 50 画素です。構造の直径に合わせて並べます。そのうえで、中心からの距離ごとに計測します。</dd>
+          <dt>これまで</dt>
+          <dd class="res">4 か国の 48 構造で標高データを整え、赤色立体地図を作りました。このうち 43 構造は、全国 Q 地図と同じ式と定数で処理しました。39 構造は、直径に合わせて並べて計測しました。</dd>
+        </dl>
+      </li>
+      <li class="step">
+        <span class="k">III</span>
+        <h3>既知の衝突痕を取りこぼさない判別</h3>
+        <dl>
+          <dt>データ</dt>
+          <dd>段階 II の処理結果、重力・磁気・地質のデータ</dd>
+          <dt>内容</dt>
+          <dd>学習から意図的に外した既知の衝突痕を、位置や種類を教えずに衝突痕と判別できるかで評価します。合格の条件は、既知の衝突痕を一つも取りこぼさないことです。赤色立体地図に加えて、重力・磁気・地質のデータも組み合わせます。</dd>
+          <dt>目標</dt>
+          <dd class="res">御池山のように侵食が進んだ山地の構造も、事前の情報なしに検出することです。この段階では、誤検出の少なさは問いません。</dd>
+        </dl>
+      </li>
+      <li class="step">
+        <span class="k">IV</span>
+        <h3>日本全土への適用</h3>
+        <dl>
+          <dt>データ</dt>
+          <dd>日本全土を覆う 100 万枚を超える標高タイル(全国 Q 地図)、全国の重力・磁気・地質のデータ</dd>
+          <dt>内容</dt>
+          <dd>同じ処理と判別を、日本全土に一度に当てます。1 m の標高データの範囲が広がれば、調べられる範囲も広がります。</dd>
+          <dt>目標</dt>
+          <dd class="res">検出された候補の中から、現地の地質調査で確かめる地点を選ぶことです。衝突の証拠には、衝撃を受けた石英などがあります。</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <div class="split method-note reveal">
+      <div>
+        <h3>「同じ処理」の意味</h3>
+        <p class="body" style="margin-top:18px">赤色立体地図は、二つの画像を乗算合成したものです(千葉ほか 2007)。一つは、斜面の傾斜を赤の彩度で表した画像です。もう一つは、尾根谷度を明るさで表した画像です。尾根谷度は地上開度と地下開度の差の半分で、尾根で大きく、谷で小さくなります。</p>
+        <p class="body">この研究では、全国 Q 地図の演算を、式と定数まで特定しました。自家製の処理も、それに合わせました。海外の構造の標高データは、日本と同じタイルの格子に変換してから処理します。比べるときは、式と定数に加えて、入力の標高データの版、格子、探索半径、元の観測の質もそろえます。</p>
+        <p class="note">出典: 千葉達朗・鈴木雄介・平松孝晋 2007「地形表現手法の諸問題と赤色立体地図」地図 45(1): 27–36。</p>
+      </div>
+      <figure class="visual rrim">
+        <svg viewBox="0 0 360 444" role="img" aria-labelledby="rrim-t">
+          <title id="rrim-t">赤色立体地図の作り方の模式図。地形の断面で開度を測り、尾根谷度を明るさに、傾斜を赤の彩度に当てて乗算合成します。</title>
+          <defs>
+            <linearGradient id="gL" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:var(--ink)"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+            <linearGradient id="gS" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="1" style="stop-color:var(--beni)"/></linearGradient>
+            <linearGradient id="gSv" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" style="stop-color:var(--beni)"/></linearGradient>
+          </defs>
+          <text class="th" x="2" y="16">1. 地形の断面で開度を測る</text>
+          <path d="M0,140 C30,136 52,84 90,78 C126,72 140,120 172,130 C204,140 222,98 256,82 C286,68 318,96 360,110 L360,170 L0,170 Z" style="fill:var(--paper2)"/>
+          <path d="M0,140 C30,136 52,84 90,78 C126,72 140,120 172,130 C204,140 222,98 256,82 C286,68 318,96 360,110" fill="none" style="stroke:var(--ink)" stroke-width="1.5"/>
+          <line x1="172" y1="130" x2="172" y2="40" style="stroke:var(--mute)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="172" y1="130" x2="82" y2="73" style="stroke:var(--beni)" stroke-width="1.2"/>
+          <line x1="172" y1="130" x2="264" y2="77" style="stroke:var(--beni)" stroke-width="1.2"/>
+          <path d="M172,96 A34,34 0 0 0 143.3,111.8" fill="none" style="stroke:var(--beni)" stroke-width="1.6"/>
+          <path d="M172,96 A34,34 0 0 1 201.5,113.1" fill="none" style="stroke:var(--beni)" stroke-width="1.6"/>
+          <circle cx="172" cy="130" r="3.5" style="fill:var(--ink)"/>
+          <text x="178" y="50">天頂</text>
+          <text x="178" y="88">地上開度</text>
+          <text x="172" y="158" text-anchor="middle">着目点</text>
+          <text x="2" y="192">地上開度: 天頂から周りの地形の稜線までの角度(8 方向の平均)</text>
+          <text x="2" y="210">地下開度: 地形を上下に反転して、同じように測った角度</text>
+          <text class="th" x="2" y="246">2. 二つの量を色に当てる</text>
+          <rect x="0" y="258" width="220" height="18" fill="url(#gL)"/>
+          <text x="232" y="272">尾根谷度 → 明るさ</text>
+          <text class="sm" x="2" y="290">谷</text>
+          <text class="sm" x="220" y="290" text-anchor="end">尾根</text>
+          <rect x="0" y="300" width="220" height="18" fill="url(#gS)"/>
+          <text x="232" y="314">傾斜 → 赤の彩度</text>
+          <text class="sm" x="2" y="332">緩い</text>
+          <text class="sm" x="220" y="332" text-anchor="end">急</text>
+          <text class="th" x="2" y="362">3. 乗算合成</text>
+          <g style="isolation:isolate">
+            <rect x="0" y="374" width="220" height="56" fill="url(#gL)"/>
+            <rect x="0" y="374" width="220" height="56" fill="url(#gSv)" style="mix-blend-mode:multiply"/>
+          </g>
+          <text x="232" y="388">横: 尾根谷度</text>
+          <text x="232" y="404">縦: 傾斜</text>
+          <text x="232" y="420">急なほど赤く</text>
+          <text x="232" y="436">尾根ほど明るい</text>
+        </svg>
+        <figcaption class="cap">赤色立体地図の作り方の模式図です。千葉ほか(2007)の定義をもとに作成しました。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="data">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">DATA</p>
+      <h2 class="sec-h">データの出所</h2>
+      <p class="body">処理と判別には、公的機関が公開している観測データと、公開されている衝突構造の目録だけを使います。各データの作り方と細かさは、配布元の説明の原文で確認しています。</p>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">日本の観測データ</h3>
+      <table class="tbl">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead><tr><th scope="col">データ</th><th scope="col">提供</th><th scope="col">細かさ</th><th scope="col">範囲</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">数値標高モデル DEM1A(航空レーザ測量)</th><td data-l="提供">国土地理院</td><td data-l="細かさ">1 m</td><td data-l="範囲">全国の 3 次メッシュの約 61%(2025 年 10 月)、以後も拡大</td></tr>
+          <tr><th scope="row">数値標高モデル DEM5A・DEM5B・DEM5C</th><td data-l="提供">国土地理院</td><td data-l="細かさ">5 m</td><td data-l="範囲">地域ごと</td></tr>
+          <tr><th scope="row">数値標高モデル DEM10B(1/25,000 地形図の等高線から作成)</th><td data-l="提供">国土地理院</td><td data-l="細かさ">10 m</td><td data-l="範囲">日本全域</td></tr>
+          <tr><th scope="row">赤色立体地図・標高タイル</th><td data-l="提供">全国 Q 地図</td><td data-l="細かさ">場所ごとに最も細かいもの(0.5〜10 m)</td><td data-l="範囲">日本全土</td></tr>
+          <tr><th scope="row">森林の航空レーザ測量の標高データ・CS 立体図</th><td data-l="提供">林野庁・都道府県</td><td data-l="細かさ">0.5 m 級</td><td data-l="範囲">計測済みの地域(2026 年 2 月から公開)</td></tr>
+          <tr><th scope="row">提供範囲と作業年度の索引、公共測量の記録</th><td data-l="提供">国土地理院</td><td data-l="細かさ">測量ごと</td><td data-l="範囲">全国</td></tr>
+          <tr><th scope="row">JGSN2016 地上重力データ</th><td data-l="提供">国土地理院</td><td data-l="細かさ">測点 約 1.4 万</td><td data-l="範囲">全国</td></tr>
+          <tr><th scope="row">日本重力データベース(公開の測点データ)</th><td data-l="提供">産業技術総合研究所 地質調査総合センター</td><td data-l="細かさ">測点 約 17 万</td><td data-l="範囲">全国</td></tr>
+          <tr><th scope="row">全国航空磁気異常</th><td data-l="提供">国土地理院</td><td data-l="細かさ">緯度・経度 3 分の格子(1984〜1998 年の観測)</td><td data-l="範囲">全国</td></tr>
+          <tr><th scope="row">20 万分の 1 日本シームレス地質図 V2</th><td data-l="提供">産業技術総合研究所 地質調査総合センター</td><td data-l="細かさ">縮尺 20 万分の 1</td><td data-l="範囲">全国</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">海外の既知の衝突痕のデータ</h3>
+      <table class="tbl">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead><tr><th scope="col">データ</th><th scope="col">提供</th><th scope="col">細かさ</th><th scope="col">範囲</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">3DEP(The National Map)</th><td data-l="提供">米国地質調査所(USGS)</td><td data-l="細かさ">1 m</td><td data-l="範囲">米国</td></tr>
+          <tr><th scope="row">HRDEM(高解像度数値標高モデル)</th><td data-l="提供">カナダ天然資源省</td><td data-l="細かさ">1 m</td><td data-l="範囲">カナダ</td></tr>
+          <tr><th scope="row">数値地形モデル</th><td data-l="提供">エストニア土地庁(Maa-amet)</td><td data-l="細かさ">1 m</td><td data-l="範囲">エストニア</td></tr>
+          <tr><th scope="row">DGM1</th><td data-l="提供">バイエルン州測量局(LDBV)</td><td data-l="細かさ">1 m</td><td data-l="範囲">ドイツ バイエルン州</td></tr>
+          <tr><th scope="row">DGM1</th><td data-l="提供">バーデン=ヴュルテンベルク州 地理情報・土地開発局(LGL)</td><td data-l="細かさ">1 m</td><td data-l="範囲">ドイツ バーデン=ヴュルテンベルク州</td></tr>
+          <tr><th scope="row">衝突構造の目録</th><td data-l="提供">Earth Impact Database(PASSC)、Impact Earth</td><td data-l="細かさ">構造ごと</td><td data-l="範囲">世界(台帳 354 件に統合)</td></tr>
+        </tbody>
+      </table>
+      <p class="note">細かさは、配布されている格子の間隔か、測点の数です。範囲は 2026 年 10 月に確認したものです。</p>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="results">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">RESULTS</p>
+      <h2 class="sec-h">これまでの成果</h2>
+      <p class="body">世界の既知の衝突痕を、日本の赤色立体地図と同じ処理で並べました。このページの図は、すべて公開の標高データから作成したものです。</p>
+    </div>
+
+    <div class="figs3 reveal">
+      <div><p class="n">354<small>件</small></p><p>世界の衝突構造の台帳です。比較のための対照と否定例も含みます。論文 2,011 本(DOI)を構造ごとに結び付けました。</p></div>
+      <div><p class="n">48<small>構造</small></p><p>4 か国の公開 1 m 級標高データで、赤色立体地図を作成した既知の衝突痕です。このうち 43 構造は、全国 Q 地図と同じ式と定数で処理しました。</p></div>
+      <div><p class="n">36<small>/ 36 タイル</small></p><p>御池山の 36 タイルすべてで、全国 Q 地図の演算との差が RGB 各 1 段階以内でした。</p></div>
+    </div>
+
+    <h3 class="sub-h reveal">既知の 28 構造の並べ図</h3>
+    <figure class="plate reveal">
+      <a href="/assets/known-structures.png"><img src="/assets/known-structures.png" width="1500" height="1367" loading="lazy" decoding="async" alt="既知の衝突構造 28 件を、同じ赤色立体地図の処理で並べた図"></a>
+      <figcaption>既知の衝突構造 28 件を、全国 Q 地図と同じ式と定数の赤色立体地図で並べた図です。各図は構造の中心の周りを示し、北が上です。米国地質調査所(3DEP)、カナダ天然資源省(HRDEM)、エストニア土地庁、バイエルン州測量局、バーデン=ヴュルテンベルク州 地理情報・土地開発局が公開している 1 m 級の標高データから作成しました。</figcaption>
+    </figure>
+
+    <h3 class="sub-h reveal">直径に合わせた並べ図</h3>
+    <p class="body reveal">構造の直径に合わせて表示すると、直径 40 m の孔から 4 km 級の構造までを、同じ尺度で比べられます。直径に合わせて並べた 39 構造のうち、7 構造を示します。</p>
+    <div class="dgrid reveal">
+      <figure><img src="/assets/research/d-tsoorikmae.png" width="250" height="250" loading="lazy" decoding="async" alt="Tsõõrikmäe の赤色立体地図"><figcaption><b>Tsõõrikmäe</b><span>エストニア・直径 40 m</span></figcaption></figure>
+      <figure><img src="/assets/research/d-ilumetsa.png" width="250" height="250" loading="lazy" decoding="async" alt="Ilumetsa の赤色立体地図"><figcaption><b>Ilumetsa</b><span>エストニア・直径 76 m</span></figcaption></figure>
+      <figure><img src="/assets/research/d-kaali.png" width="250" height="250" loading="lazy" decoding="async" alt="Kaali の赤色立体地図"><figcaption><b>Kaali</b><span>エストニア・直径 110 m</span></figcaption></figure>
+      <figure><img src="/assets/research/d-odessa.png" width="250" height="250" loading="lazy" decoding="async" alt="Odessa の赤色立体地図"><figcaption><b>Odessa</b><span>米国・直径 170 m</span></figcaption></figure>
+      <figure><img src="/assets/research/d-barringer.png" width="250" height="250" loading="lazy" decoding="async" alt="Barringer の赤色立体地図"><figcaption><b>Barringer</b><span>米国・直径 1.2 km</span></figcaption></figure>
+      <figure><img src="/assets/research/d-brent.png" width="250" height="250" loading="lazy" decoding="async" alt="Brent の赤色立体地図"><figcaption><b>Brent</b><span>カナダ・直径 3.8 km</span></figcaption></figure>
+      <figure><img src="/assets/research/d-jeptha-knob.png" width="250" height="250" loading="lazy" decoding="async" alt="Jeptha Knob の赤色立体地図"><figcaption><b>Jeptha Knob</b><span>米国・直径 4.3 km</span></figcaption></figure>
+      <p class="dlegend">各図の一辺は構造の直径の 2 倍で、北が上です。直径は台帳の値です。エストニア土地庁、米国地質調査所(3DEP)、カナダ天然資源省(HRDEM)の公開 1 m 級標高データから作成しました。</p>
+    </div>
+
+    <div class="horizon reveal">
+      <figure class="shot">
+        <img src="/assets/oikeyama.png" width="768" height="768" loading="lazy" decoding="async" alt="長野県・御池山付近の赤色立体地図">
+        <figcaption>御池山(長野県飯田市)付近の約 1.8 km 四方、北が上。国土地理院の基盤地図情報 数値標高モデル(DEM1A)の標高タイルを加工して作成しました。</figcaption>
+      </figure>
+      <div>
+        <h3>御池山での検証</h3>
+        <p class="body">日本側の処理が全国の赤色立体地図と同じであることを、御池山で確かめました。</p>
+        <dl class="facts" style="margin-top:22px">
+          <div><dt>入力</dt><dd>国土地理院 DEM1A の標高タイル(ズーム 17)の中央 36 タイル、約 1.8 km 四方</dd></div>
+          <div><dt>比較</dt><dd>自家製の処理による画像と、全国 Q 地図の色の演算を同じ標高に施した画像</dd></div>
+          <div><dt>結果</dt><dd>36 タイルすべてで、各画素の RGB の差は最大 1 段階(256 段階中)でした。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">日本の公開観測の点検</h3>
+      <p class="body">日本側の基準とする観測の質を、一次資料で確かめています。</p>
+      <ul class="points">
+        <li><b>空中磁気</b><span>全国の陸域の空中磁気は、1981〜1983 年の調査で、主測線の間隔 3〜4 km、交差測線の間隔 20 km、海抜約 1,372 m の一定の高度で測られました。1985 年の原報告で確かめました。</span></li>
+        <li><b>重力</b><span>国土地理院の地上重力 14,029 点と、産業技術総合研究所の公開測点 173,365 点を使いました。陸域に 0.02 度間隔で置いた 95,484 の評価点ごとに、周りの測点を数えました。その結果から、全国の測点密度の地図を作りました。</span></li>
+        <li><b>1 m の標高</b><span>国土地理院の索引をもとに、御池山の 1 m の標高データの原典を、公共測量の記録の原本まで確かめました。令和 4 年度に長野県が砂防計画のために行った、854 km² の航空レーザ測量です。</span></li>
+        <li><b>原文の照合</b><span>国土地理院の基盤地図情報 FAQ、全国航空磁気異常の説明、JGSN2016 地上重力データ説明書、産業技術総合研究所の日本重力データベースの説明を、原文で読みました。数字は、これらの原文と照合しています。</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="record">
+  <div class="wrap reveal">
+    <p class="eyebrow">RECORD</p>
+    <h2 class="sec-h">進み方の記録</h2>
+    <p class="body">研究の経過は、版管理システム(git)に日付とともに記録しています。主な出来事は次のとおりです。</p>
+    <ul class="news tl">
+      <li><time datetime="2026-09-20">2026.09.20</time><span class="tag">開始</span><p><b>研究の開始</b><span>研究の拠点を作りました。先に行われていた試行の記録を集めました。それらは一次資料で検収しました。</span></p></li>
+      <li><time datetime="2026-09-21">2026.09.21</time><span class="tag">調査</span><p><b>日本の既知の衝突痕の確認</b><span>日本の衝突痕は確認済みが 0 件、probable が 1 件(御池山)であることを、一次資料で確かめました。赤色立体地図の作り方は、考案者の原著(千葉ほか 2007)で確認しました。国土地理院の標高データの作り方と整備範囲も、原文で確認しました。</span></p></li>
+      <li><time datetime="2026-09-23">2026.09.23</time><span class="tag">処理</span><p><b>日本と海外を同じ処理で並べる</b><span>世界の衝突構造の台帳を 354 件にまとめました。エストニアの 1 m の標高データで、Kaali など 3 構造を処理しました。御池山の 1 m の標高データにも、同じ処理を施しました。これにより、日本と海外の既知の構造を初めて同じ処理で並べました。</span></p></li>
+      <li><time datetime="2026-09-24">2026.09.24</time><span class="tag">データ</span><p><b>各国の標高データの取得</b><span>各国の配布元から 1 m 級の標高データを取得する道具を作りました。46 地域の取得を終えました。</span></p></li>
+      <li><time datetime="2026-09-25">2026.09.25</time><span class="tag">文献</span><p><b>論文の台帳</b><span>354 構造に、論文 2,011 本(DOI)を結び付けました。研究の記録と論文を検索できる索引も作りました。</span></p></li>
+      <li><time datetime="2026-10-06">2026.10.06</time><span class="tag">検証</span><p><b>全国の赤色立体地図との一致</b><span>全国 Q 地図の演算を、式と定数まで特定しました。自家製の処理もそれに合わせました。御池山の 36 タイルで、RGB の差は各 1 段階以内でした。</span></p></li>
+      <li><time datetime="2026-10-06">2026.10.06</time><span class="tag">処理</span><p><b>既知 28 構造の並べ図</b><span>全国 Q 地図と同じ処理を、海外の既知の構造に施しました。その結果を並べた最初の図を作りました。</span></p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">処理</span><p><b>直径に合わせた並べ図</b><span>39 構造を、それぞれの直径に合わせて並べました。直径 40 m の孔から 4 km 級の構造までを、同じ尺度で比べられるようになりました。</span></p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">調査</span><p><b>日本の観測の一覧</b><span>日本全土に施せる観測 90 系列と処理 44 群を、一覧にまとめました。国土地理院と産業技術総合研究所の原文と照合しました。</span></p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">調査</span><p><b>観測の質の確認</b><span>全国の重力測点の密度を、95,484 の評価点で調べました。空中磁気の測線の間隔を、原報告で確かめました。御池山の 1 m の標高データの原典を、公共測量の記録で確かめました。</span></p></li>
+    </ul>
+    <p class="note">2026 年 10 月 7 日までのコミット数は 289 です。</p>
+  </div>
+</section>
+
+<section class="block alt" id="claude">
+  <div class="wrap reveal">
+    <p class="eyebrow">CLAUDE</p>
+    <h2 class="sec-h">Claude の役割</h2>
+    <p class="body">この研究は、Anthropic の Claude(Claude Code)を監督役として進めています。研究の問いと最終的な判断は、人が担います。Claude は主に次の作業を担当しています。</p>
+    <ul class="points">
+      <li><b>研究の設計</b><span>研究の問いを、いくつかの段階に分けます。各段階で何をどのように比べるかを設計します。</span></li>
+      <li><b>照合</b><span>数字はすべて、論文、測量の記録、配布元の説明の原文と照合します。照合した数字は、出所とともに記録します。</span></li>
+      <li><b>意味の確定</b><span>「1 m の標高」が何から作られ、どこまでが実測かを原文で確かめます。全国 Q 地図と国土地理院 DEM1A の標高の違いを、画素ごとに確かめました(御池山で平均 0.46 m)。その結果から、日本側の入力を全国 Q 地図の標高に決めました。</span></li>
+      <li><b>処理の検証</b><span>全国の赤色立体地図の演算と自家製の処理を、同じ標高データで比べました。その結果から、二つの処理の一致を判定しました。</span></li>
+      <li><b>依頼と検収</b><span>長時間の調査や実装の依頼文を書きます。返ってきた成果は、一次資料で検収します。採否は記録に残します。</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="collaboration">
+  <div class="wrap together reveal">
+    <p class="eyebrow">COLLABORATION</p>
+    <h2 class="sec-h">共同研究のお願い</h2>
+    <p class="lede">この手法を一緒に試していただける研究者を歓迎します。地形・重力・磁気のデータの読み方、既知の衝突痕の現地での知見、候補地の確かめ方など、どの段階からでもご相談ください。</p>
+    <div class="who3">
+      <div><b>地質学</b><span>衝撃変成の証拠や、既知の衝突構造の現地の知見をお持ちの方</span></div>
+      <div><b>考古学</b><span>赤色立体地図で古墳や遺構を判読した経験をお持ちの方</span></div>
+      <div><b>地球物理学・惑星科学</b><span>重力・磁気・レーザ高度計のデータ処理や、月や惑星の地形を研究されている方</span></div>
+    </div>
+    <a class="btn" href="mailto:contact@kasanegi.com">contact@kasanegi.com <span class="arrow">→</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <a class="mark logo-type" href="/" style="font-size:22px">KASANEGI</a>
+        <p class="meta">かさねぎ · 大阪</p>
+      </div>
+      <p class="meta"><a href="/#projects">取り組み</a> · <a href="/research/">研究</a> · <a href="/reader/">語学</a> · <a href="/demo/">デモ</a> · <a href="/#contact">お問い合わせ</a> · <a href="/en/research/" hreflang="en" lang="en">English</a></p>
+    </div>
+    <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

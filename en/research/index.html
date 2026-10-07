@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Impact structure research | Kasanegi</title>
+<meta name="description" content="Research to find Japan's first confirmed meteorite impact crater. We apply processing verified on known impact structures worldwide to the whole of Japan, in the same form as Japan's nationwide red relief image map. Methods, data sources, results and a dated record are published here.">
+<link rel="canonical" href="https://kasanegi.com/en/research/">
+<link rel="alternate" hreflang="ja" href="https://kasanegi.com/research/">
+<link rel="alternate" hreflang="en" href="https://kasanegi.com/en/research/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Kasanegi">
+<meta property="og:title" content="Searching for Japan's first impact crater with AI | Kasanegi">
+<meta property="og:description" content="We apply processing verified on known impact structures worldwide to Japan's public observations, to find the first meteorite impact structure in Japan.">
+<meta property="og:image" content="https://kasanegi.com/assets/og.png">
+<meta property="og:url" content="https://kasanegi.com/en/research/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/kasanegi-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  body{letter-spacing:.005em}
+  .sec-h,.phero h1,h3,.figs3 .n,.dgrid figcaption b{font-family:"Source Serif 4",var(--serif);letter-spacing:.01em}
+  .body,.lede{line-height:1.85}
+  .news p{line-height:1.7}
+  html:not(.js) .reveal{opacity:1;transform:none}
+  .together .lede{text-wrap:pretty}
+  .sub-h{margin:84px 0 22px}
+  .sub-h + .plate{margin-top:0}
+  .split.top-start{align-items:start}
+  .split.method-note{margin-top:96px;align-items:start}
+  .visual h3{font-size:22px}
+  .visual .tag{font-size:12px;letter-spacing:.14em;color:var(--beni);margin-bottom:6px}
+  .visual .facts{margin-top:16px}
+  .visual .facts > div,.horizon .facts > div{grid-template-columns:6.4em 1fr;gap:12px;padding:12px 0}
+  .visual .facts dt,.horizon .facts dt{font-size:12.5px;letter-spacing:.06em;padding-top:2px}
+  .visual .facts dd,.horizon .facts dd{font-size:14px;line-height:1.75;color:var(--ink2)}
+  .points li{grid-template-columns:150px 1fr}
+  .points b{font-family:"Source Serif 4",var(--serif);font-size:20px;line-height:1.4}
+  .reach span{line-height:1.8}
+  @media(max-width:480px){.points li{grid-template-columns:1fr}}
+
+  /* stages */
+  .steps{list-style:none;margin-top:56px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ai)}
+  .step{position:relative;padding:30px 22px 6px 0}
+  .step + .step{padding-left:22px;border-left:1px solid var(--line)}
+  .step::before{content:"";position:absolute;top:-8px;left:-7px;width:14px;height:14px;border-radius:50%;background:var(--paper2);border:2px solid var(--ai)}
+  .step:first-child::before{left:0}
+  .step .k{display:block;font-family:var(--latin);font-size:40px;line-height:1;color:var(--beni)}
+  .step h3{font-size:19px;line-height:1.45;margin:14px 0 4px}
+  .step dt{margin-top:16px;font-size:12px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+  .step dd{margin-top:4px;font-size:14px;line-height:1.75;color:var(--ink2)}
+  .step dd.res{color:var(--ink)}
+  @media(max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(3){padding-left:0;border-left:0}.step:nth-child(n+3){margin-top:30px;border-top:1px solid var(--line)}.step:nth-child(3)::before{left:0}}
+  @media(max-width:600px){.steps{grid-template-columns:1fr}.step,.step + .step{padding:30px 0 6px;border-left:0}.step + .step{margin-top:24px;border-top:1px solid var(--line)}.step::before,.step:nth-child(3)::before{left:0}}
+
+  /* diagram */
+  .rrim{margin:0}
+  .rrim svg{width:100%;height:auto;display:block;overflow:visible}
+  .rrim text{font-family:var(--sans);font-size:12px;fill:var(--ink2)}
+  .rrim .th{font-family:"Source Serif 4",var(--serif);font-size:14px;font-weight:600;fill:var(--ink)}
+  .rrim .sm{font-size:10.5px;fill:var(--mute)}
+
+  /* tables */
+  .tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;line-height:1.65}
+  .tbl col.c1{width:34%}.tbl col.c2{width:28%}.tbl col.c3{width:16%}.tbl col.c4{width:22%}
+  .tbl th,.tbl td{text-align:left;vertical-align:top;padding:13px 18px 13px 0;border-bottom:1px solid var(--line)}
+  .tbl thead th{font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--mute);border-bottom:1px solid var(--ink);text-transform:uppercase}
+  .tbl tbody th{font-weight:500;color:var(--ink)}
+  .tbl td{color:var(--ink2)}
+  @media(max-width:720px){.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl th,.tbl td{display:block;width:auto}.tbl tr{padding:14px 0;border-bottom:1px solid var(--line)}.tbl tbody th,.tbl td{border:0;padding:2px 0;width:auto}.tbl td::before{content:attr(data-l);display:inline-block;min-width:6.4em;margin-right:8px;font-size:11.5px;letter-spacing:.08em;color:var(--mute)}}
+
+  /* scaled to diameter */
+  .dgrid{margin-top:32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 22px}
+  .dgrid figure{margin:0}
+  .dgrid img{width:100%;height:auto;aspect-ratio:1/1;background:var(--paper);border:1px solid var(--line);border-radius:3px}
+  .dgrid figcaption{margin-top:10px;line-height:1.5}
+  .dgrid figcaption b{display:block;font-size:16px;font-weight:600}
+  .dgrid figcaption span{display:block;font-size:12.5px;color:var(--mute)}
+  .dgrid .dlegend{align-self:center;font-size:12.5px;line-height:1.8;color:var(--mute);padding-left:16px;border-left:2px solid var(--beni)}
+  @media(max-width:760px){.dgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.dgrid .dlegend{grid-column:1/-1}}
+
+  /* record */
+  .tl{margin-top:36px}
+  .tl p b{font-weight:700;color:var(--ink)}
+  .tl p span{display:block;margin-top:2px;font-size:14.5px;color:var(--ink2)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  "name": "Searching for impact structures in Japan",
+  "alternateName": "日本の隕石衝突痕の探索",
+  "url": "https://kasanegi.com/en/research/",
+  "description": "Research that applies red relief image map processing and other methods, verified on known impact structures worldwide, to Japan's public observations in order to find the first meteorite impact structure in Japan.",
+  "foundingDate": "2026-09-20",
+  "email": "contact@kasanegi.com",
+  "parentOrganization": {"@type": "Organization", "name": "Kasanegi", "alternateName": "かさねぎ", "url": "https://kasanegi.com/en/"},
+  "knowsAbout": ["Impact structures", "Red relief image map", "Airborne laser scanning", "Gravity anomaly", "Aeromagnetic survey"]
+}
+</script>
+</head>
+<body>
+
+<header class="top always" id="top">
+  <a class="brand" href="/en/" aria-label="Kasanegi home"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
+  <nav aria-label="Main">
+    <a href="/en/research/" aria-current="page">Research</a>
+    <a href="/en/reader/">Reader</a>
+    <a class="hide-sm" href="/en/#contact">Contact</a>
+    <a class="lang" href="/research/" hreflang="ja" lang="ja">JA</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="phero">
+  <div class="wrap">
+    <p class="kicker">RESEARCH</p>
+    <h1>Searching for Japan's first impact crater with AI</h1>
+    <p>No meteorite impact structure has yet been confirmed in Japan. Between 2025 and 2026, a red relief image map covering all of Japan became available for anyone to view. In this research, we apply processing that we have verified on known impact structures around the world to the whole country, to look for the first one. Our methods and progress are published on this page.</p>
+  </div>
+</section>
+
+<div class="kasane" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="block" id="question">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">QUESTION</p>
+      <h2 class="sec-h">Research question</h2>
+    </div>
+    <div class="split top-start reveal">
+      <div>
+        <p class="body">More than 200 structures formed by meteorite impacts have been confirmed worldwide. In Japan, only Mt. Oikeyama in Nagano Prefecture is regarded as a probable impact structure (Sakamoto et al. 2010). Japan's mountains are steep, and rain and forest change its landforms quickly. Impact structures may therefore have been overlooked.</p>
+        <p class="body">The Oikeyama structure is a semicircular landform about 900 m across on the south-eastern slope that includes the summit, and its origin has long been debated. Shock-metamorphic features in quartz were reported in 2005. A negative gravity anomaly of about 2 mGal was reported in 2010. The study of Oikeyama also began with its landform.</p>
+        <p class="body">In recent years, 1 m elevation data from airborne laser scanning have been prepared across Japan. Red relief image maps, which make landforms easy to read, can now be viewed for the whole country. Surveying all of Japan by eye is not realistic. This research therefore combines processing verified on known impact structures with machine-learning classification to examine the whole country.</p>
+      </div>
+      <div class="visual">
+        <p class="tag">The only probable structure in Japan</p>
+        <h3>Mt. Oikeyama (Iida, Nagano)</h3>
+        <dl class="facts">
+          <div><dt>Location</dt><dd>Western foot of the Akaishi Mountains; south-eastern slope including the summit of Mt. Oikeyama (1,905 m)</dd></div>
+          <div><dt>Form</dt><dd>Semicircular, about 900 m across (about 40% of the circle remains)</dd></div>
+          <div><dt>Evidence</dt><dd>Shock features in quartz (PDFs); a negative gravity anomaly of about 2 mGal (114 stations)</dd></div>
+          <div><dt>Status</dt><dd>Probable impact structure</dd></div>
+          <div><dt>Literature</dt><dd>Sakamoto et al. 2005 (LPSC XXXVI); Sakamoto et al. 2010 (Meteoritics &amp; Planetary Science 45); Sakamoto &amp; Shichi 2010 (Planetary People 19, in Japanese)</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">Recent open data in Japan</h3>
+      <ul class="reach">
+        <li><b>2002</b><span>Tatsuro Chiba and colleagues devised the red relief image map (Asia Air Survey). It shows slope together with a ridge-valley index, derived from above-ground and below-ground openness, in a single image.</span></li>
+        <li><b>2023</b><span>The Geospatial Information Authority of Japan (GSI) began providing 1 m elevation data from airborne laser scanning (DEM1A). The patent on the red relief image map expired in the same year.</span></li>
+        <li><b>2025</b><span>In June, a red relief image map of all of Japan became viewable in the browser (Q-chizu). In October, DEM1A coverage reached about 61% of Japan's tertiary mesh cells.</span></li>
+        <li><b>2026</b><span>In February, the Forestry Agency began publishing forest elevation data and micro-topography maps from airborne laser scanning. DEM1A coverage also expanded in February and July.</span></li>
+      </ul>
+      <p class="note">Sources: Chiba et al. 2007 (Chizu 45(1)); Chiba 2026 (Tokyo Geographical Society lecture announcement); GSI announcements (March and October 2025) and DEM1A update history; Q-chizu; Forestry Agency material (March 2026).</p>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">Wider applications</h3>
+      <p class="body">The inventor of the red relief image map has noted that it may make landform features easier to recognise for AI as well as for people (Chiba 2026). The methods of this research can also be used in the following fields.</p>
+      <ul class="points">
+        <li><b>Overseas</b><span>The same processing and classification can be used in countries and regions where high-resolution elevation data are public.</span></li>
+        <li><b>The Moon</b><span>Red relief image maps have also been made of craters on the far side of the Moon (Chiba 2026, from Kaguya laser altimeter data).</span></li>
+        <li><b>Archaeology</b><span>Red relief image maps are used to find burial mounds hidden under forest. In Okuizumo, Shimane, 77 previously unknown keyhole-shaped mounds were reported (San'in Chuo Shimpo, 2023).</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="method">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">METHOD</p>
+      <h2 class="sec-h">Research method</h2>
+      <p class="body">The research proceeds in four stages. First, we examine which observations can be used in Japan and how good they are. Second, we apply the same processing to known impact structures around the world, matched to that quality. Third, we build a classifier that does not miss known impact structures. Finally, we apply it to the whole of Japan. All data and processing used are public.</p>
+    </div>
+
+    <ol class="steps reveal">
+      <li class="step">
+        <span class="k">I</span>
+        <h3>Establish the quality of Japan's observations, place by place</h3>
+        <dl>
+          <dt>Data</dt>
+          <dd>GSI digital elevation models (DEM1A to DEM10B), the index of coverage and survey years, public survey records, ground gravity data, aeromagnetic anomalies of Japan</dd>
+          <dt>Work</dt>
+          <dd>We list the observations and processes that can be applied to the whole of Japan. For each, we confirm how it is made, its resolution and its accuracy in the distributor's own documentation. For elevation data, we trace which survey in which year each place comes from.</dd>
+          <dt>So far</dt>
+          <dd class="res">We compiled a list of 90 observation series and 44 process groups. We confirmed that Oikeyama's 1 m elevation comes from an airborne laser survey carried out by Nagano Prefecture in fiscal 2022 for erosion-control planning.</dd>
+        </dl>
+      </li>
+      <li class="step">
+        <span class="k">II</span>
+        <h3>Apply the same processing to known structures worldwide</h3>
+        <dl>
+          <dt>Data</dt>
+          <dd>An inventory of 354 impact structures; open 1 m-class elevation data from the US, Canada, Estonia and Germany</dd>
+          <dt>Work</dt>
+          <dd>We make red relief image maps with the same formulas and constants as Q-chizu. Elevation data from abroad are converted to the same tile grid as Japan before processing. One pixel is about 0.98 m at 35°N, and the openness search radius is 50 pixels. Structures are lined up by diameter. They are then measured by distance from the centre.</dd>
+          <dt>So far</dt>
+          <dd class="res">We prepared elevation data and made red relief image maps for 48 structures in four countries. Of these, 43 were processed with the same formulas and constants as Q-chizu. 39 were lined up by diameter and measured.</dd>
+        </dl>
+      </li>
+      <li class="step">
+        <span class="k">III</span>
+        <h3>A classifier that does not miss known structures</h3>
+        <dl>
+          <dt>Data</dt>
+          <dd>Outputs of stage II; gravity, magnetic and geological data</dd>
+          <dt>Work</dt>
+          <dd>We test whether known impact structures deliberately left out of training are classified as impact structures without being told their location or type. The pass condition is that no known impact structure is missed. Gravity, magnetic and geological data are combined with the red relief image maps.</dd>
+          <dt>Goal</dt>
+          <dd class="res">To detect even an eroded mountain structure like Oikeyama without prior information. The false-positive rate is not assessed at this stage.</dd>
+        </dl>
+      </li>
+      <li class="step">
+        <span class="k">IV</span>
+        <h3>Apply to the whole of Japan</h3>
+        <dl>
+          <dt>Data</dt>
+          <dd>More than a million elevation tiles covering Japan (Q-chizu); nationwide gravity, magnetic and geological data</dd>
+          <dt>Work</dt>
+          <dd>We apply the same processing and classifier to the whole of Japan at once. As the area covered by 1 m elevation data grows, so does the area we can examine.</dd>
+          <dt>Goal</dt>
+          <dd class="res">To choose, from the detected candidates, sites to confirm by geological fieldwork. Evidence of impact includes shocked quartz.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <div class="split method-note reveal">
+      <div>
+        <h3>What "the same processing" means</h3>
+        <p class="body" style="margin-top:18px">A red relief image map is made by multiplying two images (Chiba et al. 2007). One shows slope as the saturation of red. The other shows the ridge-valley index as brightness. The ridge-valley index is half the difference between above-ground and below-ground openness. It is high on ridges and low in valleys.</p>
+        <p class="body">We identified the formulas and constants of Q-chizu's computation. Our own processing was matched to them. Elevation data for structures abroad are converted to the same tile grid as Japan before processing. When comparing, we also align the version of the input elevation data, the grid, the search radius and the quality of the original observations, in addition to the formulas and constants.</p>
+        <p class="note">Source: Chiba, T., Suzuki, Y. and Hiramatsu, T. 2007. Chizu (Map) 45(1): 27–36 (in Japanese).</p>
+      </div>
+      <figure class="visual rrim">
+        <svg viewBox="0 0 360 476" role="img" aria-labelledby="rrim-t">
+          <title id="rrim-t">How a red relief image map is made. Openness is measured on a terrain profile; the ridge-valley index is mapped to brightness, slope to red saturation, and the two are multiplied.</title>
+          <defs>
+            <linearGradient id="gL" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:var(--ink)"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+            <linearGradient id="gS" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="1" style="stop-color:var(--beni)"/></linearGradient>
+            <linearGradient id="gSv" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" style="stop-color:var(--beni)"/></linearGradient>
+          </defs>
+          <text class="th" x="2" y="16">1. Measure openness on a terrain profile</text>
+          <path d="M0,140 C30,136 52,84 90,78 C126,72 140,120 172,130 C204,140 222,98 256,82 C286,68 318,96 360,110 L360,170 L0,170 Z" style="fill:var(--paper2)"/>
+          <path d="M0,140 C30,136 52,84 90,78 C126,72 140,120 172,130 C204,140 222,98 256,82 C286,68 318,96 360,110" fill="none" style="stroke:var(--ink)" stroke-width="1.5"/>
+          <line x1="172" y1="130" x2="172" y2="40" style="stroke:var(--mute)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="172" y1="130" x2="82" y2="73" style="stroke:var(--beni)" stroke-width="1.2"/>
+          <line x1="172" y1="130" x2="264" y2="77" style="stroke:var(--beni)" stroke-width="1.2"/>
+          <path d="M172,96 A34,34 0 0 0 143.3,111.8" fill="none" style="stroke:var(--beni)" stroke-width="1.6"/>
+          <path d="M172,96 A34,34 0 0 1 201.5,113.1" fill="none" style="stroke:var(--beni)" stroke-width="1.6"/>
+          <circle cx="172" cy="130" r="3.5" style="fill:var(--ink)"/>
+          <text x="178" y="50">Zenith</text>
+          <text x="178" y="88">Openness</text>
+          <text x="172" y="158" text-anchor="middle">Point</text>
+          <text x="2" y="188">Above-ground openness: angle from the zenith</text>
+          <text x="2" y="204">to the skyline, averaged over 8 directions</text>
+          <text x="2" y="220">Below-ground openness: the same, on inverted terrain</text>
+          <text class="th" x="2" y="254">2. Map two quantities to colour</text>
+          <text x="2" y="276">Ridge-valley index → brightness</text>
+          <rect x="0" y="284" width="200" height="16" fill="url(#gL)"/>
+          <text class="sm" x="2" y="314">valley</text>
+          <text class="sm" x="200" y="314" text-anchor="end">ridge</text>
+          <text x="2" y="338">Slope → red saturation</text>
+          <rect x="0" y="346" width="200" height="16" fill="url(#gS)"/>
+          <text class="sm" x="2" y="376">gentle</text>
+          <text class="sm" x="200" y="376" text-anchor="end">steep</text>
+          <text class="th" x="2" y="404">3. Multiply</text>
+          <g style="isolation:isolate">
+            <rect x="0" y="414" width="200" height="52" fill="url(#gL)"/>
+            <rect x="0" y="414" width="200" height="52" fill="url(#gSv)" style="mix-blend-mode:multiply"/>
+          </g>
+          <text x="212" y="424">Across: ridge-valley</text>
+          <text x="212" y="440">Down: slope</text>
+          <text x="212" y="456">Steeper is redder,</text>
+          <text x="212" y="470">ridges are brighter</text>
+        </svg>
+        <figcaption class="cap">How a red relief image map is made, drawn from the definition in Chiba et al. (2007).</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="data">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">DATA</p>
+      <h2 class="sec-h">Data sources</h2>
+      <p class="body">Processing and classification use only observation data published by public bodies and published catalogues of impact structures. How each dataset is made, and its resolution, are confirmed against the distributor's own documentation.</p>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">Observation data for Japan</h3>
+      <table class="tbl">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead><tr><th scope="col">Dataset</th><th scope="col">Provider</th><th scope="col">Resolution</th><th scope="col">Coverage</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Digital elevation model DEM1A (airborne laser scanning)</th><td data-l="Provider">GSI</td><td data-l="Resolution">1 m</td><td data-l="Coverage">About 61% of tertiary mesh cells (October 2025), expanding</td></tr>
+          <tr><th scope="row">Digital elevation models DEM5A, DEM5B, DEM5C</th><td data-l="Provider">GSI</td><td data-l="Resolution">5 m</td><td data-l="Coverage">Regional</td></tr>
+          <tr><th scope="row">Digital elevation model DEM10B (from 1:25,000 map contours)</th><td data-l="Provider">GSI</td><td data-l="Resolution">10 m</td><td data-l="Coverage">All of Japan</td></tr>
+          <tr><th scope="row">Red relief image map and elevation tiles</th><td data-l="Provider">Q-chizu</td><td data-l="Resolution">Finest available at each place (0.5–10 m)</td><td data-l="Coverage">All of Japan</td></tr>
+          <tr><th scope="row">Forest airborne-laser elevation data and CS maps</th><td data-l="Provider">Forestry Agency and prefectures</td><td data-l="Resolution">0.5 m class</td><td data-l="Coverage">Surveyed areas (published from February 2026)</td></tr>
+          <tr><th scope="row">Index of coverage and survey years; public survey records</th><td data-l="Provider">GSI</td><td data-l="Resolution">Per survey</td><td data-l="Coverage">Nationwide</td></tr>
+          <tr><th scope="row">JGSN2016 ground gravity data</th><td data-l="Provider">GSI</td><td data-l="Resolution">About 14,000 stations</td><td data-l="Coverage">Nationwide</td></tr>
+          <tr><th scope="row">Gravity Database of Japan (public station data)</th><td data-l="Provider">Geological Survey of Japan, AIST</td><td data-l="Resolution">About 170,000 stations</td><td data-l="Coverage">Nationwide</td></tr>
+          <tr><th scope="row">Aeromagnetic anomalies of Japan</th><td data-l="Provider">GSI</td><td data-l="Resolution">3′ × 3′ grid (surveys 1984–1998)</td><td data-l="Coverage">Nationwide</td></tr>
+          <tr><th scope="row">Seamless Digital Geological Map of Japan 1:200,000 (V2)</th><td data-l="Provider">Geological Survey of Japan, AIST</td><td data-l="Resolution">1:200,000</td><td data-l="Coverage">Nationwide</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">Data for known impact structures abroad</h3>
+      <table class="tbl">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead><tr><th scope="col">Dataset</th><th scope="col">Provider</th><th scope="col">Resolution</th><th scope="col">Coverage</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">3DEP (The National Map)</th><td data-l="Provider">U.S. Geological Survey</td><td data-l="Resolution">1 m</td><td data-l="Coverage">United States</td></tr>
+          <tr><th scope="row">HRDEM (High Resolution Digital Elevation Model)</th><td data-l="Provider">Natural Resources Canada</td><td data-l="Resolution">1 m</td><td data-l="Coverage">Canada</td></tr>
+          <tr><th scope="row">Digital terrain model</th><td data-l="Provider">Estonian Land Board (Maa-amet)</td><td data-l="Resolution">1 m</td><td data-l="Coverage">Estonia</td></tr>
+          <tr><th scope="row">DGM1</th><td data-l="Provider">LDBV Bavaria</td><td data-l="Resolution">1 m</td><td data-l="Coverage">Bavaria, Germany</td></tr>
+          <tr><th scope="row">DGM1</th><td data-l="Provider">LGL Baden-Württemberg</td><td data-l="Resolution">1 m</td><td data-l="Coverage">Baden-Württemberg, Germany</td></tr>
+          <tr><th scope="row">Impact structure catalogues</th><td data-l="Provider">Earth Impact Database (PASSC); Impact Earth</td><td data-l="Resolution">Per structure</td><td data-l="Coverage">Worldwide (merged into a 354-entry inventory)</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Resolution is the grid spacing of the distributed data or the number of stations. Coverage was checked in October 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="results">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">RESULTS</p>
+      <h2 class="sec-h">Results so far</h2>
+      <p class="body">We lined up known impact structures around the world using the same processing as Japan's red relief image map. All figures on this page were made from open elevation data.</p>
+    </div>
+
+    <div class="figs3 reveal">
+      <div><p class="n">354<small>entries</small></p><p>An inventory of impact structures worldwide, including control and rejected sites for comparison. We linked 2,011 papers (by DOI) to the structures.</p></div>
+      <div><p class="n">48<small>structures</small></p><p>Known impact structures for which we made red relief image maps from open 1 m-class elevation data in four countries. Of these, 43 were processed with the same formulas and constants as Q-chizu.</p></div>
+      <div><p class="n">36<small>/ 36 tiles</small></p><p>At Oikeyama, the difference from Q-chizu's computation was within one RGB level in all 36 tiles.</p></div>
+    </div>
+
+    <h3 class="sub-h reveal">28 known structures side by side</h3>
+    <figure class="plate reveal">
+      <a href="/assets/known-structures.png"><img src="/assets/known-structures.png" width="1500" height="1367" loading="lazy" decoding="async" alt="28 known impact structures shown side by side with the same red relief image map processing"></a>
+      <figcaption>28 known impact structures shown as red relief image maps made with the same formulas and constants as Q-chizu. Each panel shows the area around the centre of the structure, with north up. Made from open 1 m-class elevation data published by the U.S. Geological Survey (3DEP), Natural Resources Canada (HRDEM), the Estonian Land Board, LDBV Bavaria and LGL Baden-Württemberg.</figcaption>
+    </figure>
+
+    <h3 class="sub-h reveal">Scaled to diameter</h3>
+    <p class="body reveal">When each structure is shown at a scale set by its diameter, structures from a 40 m pit to about 4 km across can be compared on the same scale. Seven of the 39 structures lined up this way are shown here.</p>
+    <div class="dgrid reveal">
+      <figure><img src="/assets/research/d-tsoorikmae.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Tsõõrikmäe"><figcaption><b>Tsõõrikmäe</b><span>Estonia · 40 m across</span></figcaption></figure>
+      <figure><img src="/assets/research/d-ilumetsa.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Ilumetsa"><figcaption><b>Ilumetsa</b><span>Estonia · 76 m across</span></figcaption></figure>
+      <figure><img src="/assets/research/d-kaali.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Kaali"><figcaption><b>Kaali</b><span>Estonia · 110 m across</span></figcaption></figure>
+      <figure><img src="/assets/research/d-odessa.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Odessa"><figcaption><b>Odessa</b><span>United States · 170 m across</span></figcaption></figure>
+      <figure><img src="/assets/research/d-barringer.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Barringer"><figcaption><b>Barringer</b><span>United States · 1.2 km across</span></figcaption></figure>
+      <figure><img src="/assets/research/d-brent.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Brent"><figcaption><b>Brent</b><span>Canada · 3.8 km across</span></figcaption></figure>
+      <figure><img src="/assets/research/d-jeptha-knob.png" width="250" height="250" loading="lazy" decoding="async" alt="Red relief image map of Jeptha Knob"><figcaption><b>Jeptha Knob</b><span>United States · 4.3 km across</span></figcaption></figure>
+      <p class="dlegend">Each panel is twice the structure's diameter across, with north up. Diameters are from the inventory. Made from open 1 m-class elevation data from the Estonian Land Board, the U.S. Geological Survey (3DEP) and Natural Resources Canada (HRDEM).</p>
+    </div>
+
+    <div class="horizon reveal">
+      <figure class="shot">
+        <img src="/assets/oikeyama.png" width="768" height="768" loading="lazy" decoding="async" alt="Red relief image map around Mt. Oikeyama, Nagano">
+        <figcaption>About 1.8 km square around Mt. Oikeyama (Iida, Nagano), north up. Made by processing GSI Fundamental Geospatial Data digital elevation model (DEM1A) tiles.</figcaption>
+      </figure>
+      <div>
+        <h3>Verification at Oikeyama</h3>
+        <p class="body">We confirmed at Oikeyama that our processing for Japan matches the nationwide red relief image map.</p>
+        <dl class="facts" style="margin-top:22px">
+          <div><dt>Input</dt><dd>The central 36 GSI DEM1A elevation tiles (zoom 17), about 1.8 km square</dd></div>
+          <div><dt>Comparison</dt><dd>An image from our processing and an image from Q-chizu's colour computation applied to the same elevation</dd></div>
+          <div><dt>Result</dt><dd>In all 36 tiles, the RGB difference at every pixel was at most one level (out of 256).</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3 class="sub-h">Checking Japan's public observations</h3>
+      <p class="body">We confirm, from primary sources, the quality of the observations that serve as Japan's reference.</p>
+      <ul class="points">
+        <li><b>Magnetics</b><span>Aeromagnetic data over Japan's land area were acquired in surveys in 1981–1983, with main lines 3–4 km apart, tie lines 20 km apart and a constant altitude of about 1,372 m above sea level. We confirmed this in the original 1985 report.</span></li>
+        <li><b>Gravity</b><span>We used 14,029 GSI ground gravity stations and 173,365 public stations from AIST. We counted the stations around each of 95,484 evaluation points spaced 0.02° apart over land. From the counts, we mapped station density across Japan.</span></li>
+        <li><b>1 m elevation</b><span>Starting from the GSI index, we traced the source of Oikeyama's 1 m elevation data to the original public survey record. It is an 854 km² airborne laser survey carried out by Nagano Prefecture in fiscal 2022 for erosion-control planning.</span></li>
+        <li><b>Source texts</b><span>We read the GSI Fundamental Geospatial Data FAQ, the description of the aeromagnetic anomalies of Japan, the JGSN2016 ground gravity data manual and AIST's documentation of the Gravity Database of Japan in the original. The figures were checked against these documents.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="record">
+  <div class="wrap reveal">
+    <p class="eyebrow">RECORD</p>
+    <h2 class="sec-h">Record of progress</h2>
+    <p class="body">The progress of the research is recorded with dates in a version-control system (git). The main events are listed below.</p>
+    <ul class="news tl">
+      <li><time datetime="2026-09-20">2026.09.20</time><span class="tag">Start</span><p><b>Research begins</b><span>We set up the research base. We gathered the records of earlier trials. They were checked against primary sources.</span></p></li>
+      <li><time datetime="2026-09-21">2026.09.21</time><span class="tag">Survey</span><p><b>Known impact structures in Japan</b><span>Using primary sources, we confirmed that Japan has no confirmed impact structure and one probable one (Oikeyama). We checked how red relief image maps are made in the inventor's original paper (Chiba et al. 2007). We also checked how GSI elevation data are made, and their coverage, in the original documents.</span></p></li>
+      <li><time datetime="2026-09-23">2026.09.23</time><span class="tag">Process</span><p><b>Japan and abroad side by side</b><span>We compiled an inventory of 354 impact structures. We processed three structures, including Kaali, from Estonian 1 m elevation data. We applied the same processing to Oikeyama's 1 m elevation data. Known structures in Japan and abroad were lined up with the same processing for the first time.</span></p></li>
+      <li><time datetime="2026-09-24">2026.09.24</time><span class="tag">Data</span><p><b>Elevation data from each country</b><span>We built a tool to download 1 m-class elevation data from each country's distributor. Downloads for 46 areas were completed.</span></p></li>
+      <li><time datetime="2026-09-25">2026.09.25</time><span class="tag">Papers</span><p><b>Paper inventory</b><span>We linked 2,011 papers (by DOI) to 354 structures. We also built an index for searching research records and papers.</span></p></li>
+      <li><time datetime="2026-10-06">2026.10.06</time><span class="tag">Check</span><p><b>Match with the nationwide map</b><span>We identified the formulas and constants of Q-chizu's computation. With our processing matched to them, the RGB difference at Oikeyama was within one level in all 36 tiles.</span></p></li>
+      <li><time datetime="2026-10-06">2026.10.06</time><span class="tag">Process</span><p><b>28 known structures</b><span>We applied the same processing as Q-chizu to known structures abroad. The results were shown side by side for the first time.</span></p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">Process</span><p><b>Scaled to diameter</b><span>We lined up 39 structures at scales set by their diameters. Structures from a 40 m pit to about 4 km across can now be compared on the same scale.</span></p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">Survey</span><p><b>List of Japan's observations</b><span>We listed 90 observation series and 44 process groups that can be applied to the whole of Japan. The list was checked against the original GSI and AIST documents.</span></p></li>
+      <li><time datetime="2026-10-07">2026.10.07</time><span class="tag">Survey</span><p><b>Quality of observations</b><span>We examined the density of gravity stations across Japan at 95,484 evaluation points. We confirmed the aeromagnetic line spacing in the original report. We traced the source of Oikeyama's 1 m elevation data to the public survey record.</span></p></li>
+    </ul>
+    <p class="note">As of 7 October 2026, the research record has 289 commits.</p>
+  </div>
+</section>
+
+<section class="block alt" id="claude">
+  <div class="wrap reveal">
+    <p class="eyebrow">CLAUDE</p>
+    <h2 class="sec-h">Claude's role</h2>
+    <p class="body">This research is run with Anthropic's Claude (Claude Code) as its supervisor. People set the research questions and make the final decisions. Claude mainly handles the following work.</p>
+    <ul class="points">
+      <li><b>Research design</b><span>Claude divides the research questions into stages. It designs what is compared at each stage, and how.</span></li>
+      <li><b>Checking</b><span>Every figure is checked against the original text of papers, survey records and distributors' documentation. Checked figures are recorded with their sources.</span></li>
+      <li><b>Meaning of data</b><span>Claude confirms in the original documents what "1 m elevation" is made from and how much of it is measured. It compared the elevation of Q-chizu and GSI DEM1A pixel by pixel (a mean difference of 0.46 m at Oikeyama). From the result, it decided to use Q-chizu's elevation as the input for Japan.</span></li>
+      <li><b>Processing check</b><span>Claude compared the nationwide map's computation and our own processing on the same elevation data. From the result, it judged that the two match.</span></li>
+      <li><b>Briefs and review</b><span>Claude writes briefs for long investigations and implementation work. Results that come back are reviewed against primary sources. Each decision to accept or reject them is recorded.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="collaboration">
+  <div class="wrap together reveal">
+    <p class="eyebrow">COLLABORATION</p>
+    <h2 class="sec-h">Collaboration</h2>
+    <p class="lede">We welcome researchers who would like to try this method with us. Whether your interest is in reading terrain, gravity or magnetic data, field knowledge of known impact structures, or ways to check candidate sites, please contact us at any stage.</p>
+    <div class="who3">
+      <div><b>Geology</b><span>Researchers with field knowledge of shock-metamorphic evidence or of known impact structures</span></div>
+      <div><b>Archaeology</b><span>Researchers who have interpreted burial mounds or archaeological features on red relief image maps</span></div>
+      <div><b>Geophysics and planetary science</b><span>Researchers working with gravity, magnetic or laser-altimeter data, or on lunar and planetary landforms</span></div>
+    </div>
+    <a class="btn" href="mailto:contact@kasanegi.com">contact@kasanegi.com <span class="arrow">→</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <a class="mark logo-type" href="/en/" style="font-size:22px">KASANEGI</a>
+        <p class="meta">Osaka, Japan</p>
+      </div>
+      <p class="meta"><a href="/en/#projects">Projects</a> · <a href="/en/research/">Research</a> · <a href="/en/reader/">Reader</a> · <a href="/demo/">Demo</a> · <a href="/en/#contact">Contact</a> · <a href="/research/" hreflang="ja" lang="ja">日本語</a></p>
+    </div>
+    <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
