@@ -1,6 +1,6 @@
 # kasanegi-site
 
-kasanegi.com の 1 ページのサイト。`index.html` 1 枚(インライン CSS・外部依存なし)と、GitHub Pages 用の `CNAME`(`kasanegi.com`)・`.nojekyll`。
+kasanegi.com の 1 ページのサイト。`index.html`(インライン CSS・外部依存なし)と `assets/`(図・OG 画像)・`favicon.svg`・`robots.txt`・`sitemap.xml`、GitHub Pages 用の `CNAME`(`kasanegi.com`)・`.nojekyll`。MDAF の節は `index.html` の中で HTML コメントにしてあり、表示しない。`demo/` は別の作業。
 
 ## 公開の前に: kasanegi.com はいま MDAF のサイトとして稼働している(2026-10-07 確認)
 

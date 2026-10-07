@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 480 412" width="480" height="412" role="img" aria-labelledby="t d">
+<title id="t">Two language editions of one page, overlaid, with a lens</title>
+<desc id="d">A Japanese (JA) page lies on top of the English (EN) edition of the same page. Inside a round lens the English page underneath shows through: the drawing continues across the lens edge and only the text in the speech balloon changes.</desc>
+<defs>
+<clipPath id="lens-clip"><circle cx="262" cy="104" r="60"/></clipPath>
+<g id="art" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="116" y="46" width="216" height="108"/>
+<rect x="116" y="162" width="104" height="128"/>
+<rect x="228" y="162" width="104" height="128"/>
+<rect x="116" y="298" width="216" height="54"/>
+<circle cx="150" cy="76" r="12"/>
+<polyline points="116,146 148,124 172,136 204,112 230,134 262,122 296,140 332,118"/>
+<path d="M267.7 105.6A36 24 0 1 0 253.4 101.7L246 120Z" fill="#fff"/>
+<circle cx="150" cy="238" r="18"/>
+<path d="M122 290Q150 254 178 290"/>
+<path d="M180.7 210.1A22 20 0 1 0 173.1 204.9L166 218Z" fill="#fff"/>
+<path d="M296 226h28M293.9 234l24.2 14M288 239.9l14 24.2M280 242v28M272 239.9l-14 24.2M266.1 234l-24.2 14M264 226h-28M266.1 218l-24.2-14M272 212.1l-14-24.2M280 210v-28M288 212.1l14-24.2M293.9 218l24.2-14"/>
+<path d="M132 314h168M150 322h168M128 330h134M170 338h146"/>
+</g>
+</defs>
+<rect width="480" height="412" fill="#f5f6f8"/>
+<rect x="120" y="48" width="240" height="330" rx="2" fill="#eef2fa" stroke="#1f4ea0" stroke-opacity=".55" stroke-width="1.5"/>
+<rect x="104" y="34" width="240" height="330" rx="2" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+<use href="#art" xlink:href="#art"/>
+<g stroke="#1a1a1a" stroke-width="3" stroke-linecap="round">
+<path d="M288 70v24M279 68v28M270 68v24M261 70v16"/>
+<path d="M198 182v22M190 181v19M182 184v12"/>
+</g>
+<circle cx="264" cy="107" r="61" fill="none" stroke="#1a1a1a" stroke-opacity=".12" stroke-width="7"/>
+<g clip-path="url(#lens-clip)">
+<rect x="104" y="34" width="240" height="330" fill="#eef2fa"/>
+<use href="#art" xlink:href="#art"/>
+<path d="M254 72h40M250 81h48M258 90h30" stroke="#1f4ea0" stroke-width="3" stroke-linecap="round"/>
+</g>
+<circle cx="262" cy="104" r="60" fill="none" stroke="#1f4ea0" stroke-width="5"/>
+<path d="M220.4 80A48 48 0 0 1 241.7 60.5" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-opacity=".9"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" letter-spacing=".5" text-anchor="middle" fill="#fff">
+<rect x="104" y="6" width="38" height="20" rx="10" fill="#1a1a1a"/>
+<text x="123" y="20">JA</text>
+<rect x="322" y="386" width="38" height="20" rx="10" fill="#1f4ea0"/>
+<text x="341" y="400">EN</text>
+</g>
+</svg>
