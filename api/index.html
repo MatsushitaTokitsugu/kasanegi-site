@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>データ API JP Local Pack | かさねぎ Kasanegi</title>
+<meta name="description" content="日本の公的データを、AI エージェントがそのまま使える API に。給与・社会保険・源泉所得税・消費税・祝日・法人番号・インボイス・Peppol の 10 本を、登録なしで無料で公開しています。MCP 対応。">
+<link rel="canonical" href="https://kasanegi.com/api/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="かさねぎ Kasanegi">
+<meta property="og:title" content="データ API JP Local Pack | かさねぎ">
+<meta property="og:description" content="給与・社会保険・源泉所得税・消費税・祝日・法人番号・インボイス・Peppol。日本のバックオフィスの公的データを、AI エージェントがそのまま呼べる 10 本の API に。">
+<meta property="og:image" content="https://kasanegi.com/assets/og.png">
+<meta property="og:url" content="https://kasanegi.com/api/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/kasanegi-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  html:not(.js) .reveal{opacity:1;transform:none}
+  .together .lede{text-wrap:pretty;word-break:auto-phrase}
+  .phero h1{word-break:auto-phrase}
+  .nw{display:inline-block}
+  .sub-h{margin:84px 0 22px}
+  .sub-h + .plate{margin-top:0}
+  .split.top-start{align-items:start}
+  .split.method-note{margin-top:96px;align-items:start}
+  .visual h3{font-size:22px}
+  .visual .tag{font-size:12px;letter-spacing:.14em;color:var(--beni);margin-bottom:6px}
+  .visual .facts{margin-top:16px}
+  .visual .facts > div,.horizon .facts > div{grid-template-columns:4.6em 1fr;gap:12px;padding:12px 0}
+  .visual .facts dt,.horizon .facts dt{font-size:12.5px;padding-top:2px}
+  .visual .facts dd,.horizon .facts dd{font-size:14px;line-height:1.85;color:var(--ink2)}
+
+  /* 段の工程図 */
+  .steps{list-style:none;margin-top:56px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ai)}
+  .step{position:relative;padding:30px 22px 6px 0}
+  .step + .step{padding-left:22px;border-left:1px solid var(--line)}
+  .step::before{content:"";position:absolute;top:-8px;left:-7px;width:14px;height:14px;border-radius:50%;background:var(--paper2);border:2px solid var(--ai)}
+  .step:first-child::before{left:0}
+  .step .k{display:block;font-family:var(--latin);font-size:40px;line-height:1;color:var(--beni)}
+  .step h3{font-size:19px;line-height:1.6;margin:14px 0 4px}
+  .step dt{margin-top:16px;font-size:12px;letter-spacing:.14em;color:var(--mute)}
+  .step dd{margin-top:4px;font-size:14px;line-height:1.85;color:var(--ink2)}
+  .step dd.res{color:var(--ink)}
+  @media(max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(3){padding-left:0;border-left:0}.step:nth-child(n+3){margin-top:30px;border-top:1px solid var(--line)}.step:nth-child(3)::before{left:0}}
+  @media(max-width:600px){.steps{grid-template-columns:1fr}.step,.step + .step{padding:30px 0 6px;border-left:0}.step + .step{margin-top:24px;border-top:1px solid var(--line)}.step::before,.step:nth-child(3)::before{left:0}}
+
+  /* 模式図 */
+  .rrim{margin:0}
+  .rrim svg{width:100%;height:auto;display:block;overflow:visible}
+  .rrim text{font-family:var(--sans);font-size:12px;fill:var(--ink2)}
+  .rrim .th{font-family:var(--serif);font-size:13.5px;font-weight:600;fill:var(--ink)}
+  .rrim .sm{font-size:10.5px;fill:var(--mute)}
+
+  /* 表 */
+  .tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;line-height:1.75}
+  .tbl col.c1{width:34%}.tbl col.c2{width:28%}.tbl col.c3{width:16%}.tbl col.c4{width:22%}
+  .tbl th,.tbl td{text-align:left;vertical-align:top;padding:13px 18px 13px 0;border-bottom:1px solid var(--line)}
+  .tbl thead th{font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--mute);border-bottom:1px solid var(--ink)}
+  .tbl tbody th{font-weight:500;color:var(--ink)}
+  .tbl td{color:var(--ink2)}
+  @media(max-width:720px){.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl th,.tbl td{display:block;width:auto}.tbl tr{padding:14px 0;border-bottom:1px solid var(--line)}.tbl tbody th,.tbl td{border:0;padding:2px 0;width:auto}.tbl td::before{content:attr(data-l);display:inline-block;min-width:4.4em;margin-right:8px;font-size:11.5px;letter-spacing:.1em;color:var(--mute)}}
+
+  /* 直径に合わせた並べ図 */
+  .dgrid{margin-top:32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 22px}
+  .dgrid figure{margin:0}
+  .dgrid img{width:100%;height:auto;aspect-ratio:1/1;background:var(--paper);border:1px solid var(--line);border-radius:3px}
+  .dgrid figcaption{margin-top:10px;line-height:1.6}
+  .dgrid figcaption b{display:block;font-family:var(--serif);font-size:16px;font-weight:600;letter-spacing:.04em}
+  .dgrid figcaption span{display:block;font-size:12.5px;color:var(--mute)}
+  .dgrid .dlegend{align-self:center;font-size:12.5px;line-height:1.85;color:var(--mute);padding-left:16px;border-left:2px solid var(--beni)}
+  @media(max-width:760px){.dgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.dgrid .dlegend{grid-column:1/-1}}
+
+  /* 進み方の記録 */
+  .tl{margin-top:36px}
+  .tl p b{font-weight:700;color:var(--ink)}
+  .tl p span{display:block;margin-top:2px;font-size:14.5px;color:var(--ink2)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "JP Local Pack",
+  "description": "Japanese public data as APIs for AI agents: payroll deductions, social insurance grades, withholding income tax (NTA monthly table, all 1,856 cells), consumption tax, national holidays, corporate numbers, qualified invoice issuer registry, and Peppol invoice validation.",
+  "url": "https://kasanegi.com/api/",
+  "documentation": "https://api.kasanegi.com/openapi.json",
+  "termsOfService": "https://kasanegi.com/api/",
+  "provider": {"@type": "Organization", "name": "Kasanegi", "alternateName": "かさねぎ", "url": "https://kasanegi.com/"},
+  "isAccessibleForFree": true
+}
+</script>
+</head>
+<body>
+
+<header class="top always" id="top">
+  <a class="brand" href="/" aria-label="かさねぎ トップへ"><img src="/assets/kasanegi-mark.svg" alt="" width="26" height="26"><span class="logo-type">KASANEGI</span></a>
+  <nav aria-label="メイン">
+    <a href="/research/">研究</a>
+    <a href="/reader/">語学</a>
+    <a href="/api/" aria-current="page">データ API</a>
+    <a class="hide-sm" href="/#contact">お問い合わせ</a>
+    <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="phero">
+  <div class="wrap">
+    <p class="kicker">DATA API</p>
+    <h1>日本の公的データを、<span class="nw">AI がそのまま使える形に</span></h1>
+    <p>国税庁、協会けんぽ、厚生労働省、内閣府、経済産業省の gBizINFO が公開している表や登録簿を、AI エージェントやソフトウェアが一度の呼び出しで使える API に作り替えています。開業前の 2026 年 4 月から、給与・法人・補助金の 3 製品を提供してきました。いま、その中心の JP Local Pack の 10 本を、登録なしで無料で公開しています。</p>
+    <div class="btns"><a class="btn light" href="#try">いま試す <span class="arrow">→</span></a><a class="btn ghost on-dark" href="#agents">AI エージェントから使う</a></div>
+  </div>
+</section>
+
+<div class="kasane" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="block" id="local-pack">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">JP LOCAL PACK</p>
+      <h2 class="sec-h">日本のバックオフィスを、10 本の API に</h2>
+      <p class="body">毎月の給与計算、取引先の確認、請求書の検証。日本の会社で毎月繰り返される計算と確認を、AI がそのまま呼べる形にまとめました。</p>
+    </div>
+    <div class="reveal">
+      <table class="tbl api-tbl">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+        <thead><tr><th scope="col">API</th><th scope="col">返すもの</th><th scope="col">出典</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">給与のまとめ<br><code class="ep">/combined/payroll-summary</code></th><td data-l="返すもの">月給から、各保険料・源泉所得税・控除の合計・手取りと、その月の祝日</td><td data-l="出典">協会けんぽ・厚生労働省・国税庁・内閣府</td></tr>
+          <tr><th scope="row">給与の控除<br><code class="ep">/payroll/calc-by-salary</code></th><td data-l="返すもの">健康保険・介護保険・子ども・子育て支援金・厚生年金・雇用保険・源泉所得税・手取り</td><td data-l="出典">協会けんぽ・日本年金機構・厚生労働省・国税庁</td></tr>
+          <tr><th scope="row">標準報酬月額<br><code class="ep">/social-insurance/standard-remuneration</code></th><td data-l="返すもの">健康保険 50 等級・厚生年金 32 等級の等級と保険料</td><td data-l="出典">協会けんぽ・日本年金機構</td></tr>
+          <tr><th scope="row">消費税率<br><code class="ep">/tax/consumption/rate</code></th><td data-l="返すもの">日付ごとの標準税率と軽減税率、インボイス制度の開始の判定</td><td data-l="出典">国税庁</td></tr>
+          <tr><th scope="row">国民の祝日<br><code class="ep">/holiday/jp</code></th><td data-l="返すもの">2024〜2027 年の国民の祝日・振替休日・国民の休日(英語名つき)</td><td data-l="出典">内閣府</td></tr>
+          <tr><th scope="row">法人の候補検索<br><code class="ep">/houjin-lookup/by-name</code></th><td data-l="返すもの">社名から、法人番号の候補と見分けの根拠</td><td data-l="出典">gBizINFO(経済産業省)</td></tr>
+          <tr><th scope="row">法人の照会<br><code class="ep">/houjin-number/lookup</code></th><td data-l="返すもの">法人番号から、会社の概要</td><td data-l="出典">gBizINFO(経済産業省)</td></tr>
+          <tr><th scope="row">インボイスの事業者検索<br><code class="ep">/invoice/issuer-by-name</code></th><td data-l="返すもの">社名から、適格請求書発行事業者の登録の有無</td><td data-l="出典">gBizINFO・国税庁の公表データ</td></tr>
+          <tr><th scope="row">インボイスの登録照会<br><code class="ep">/invoice/issuer-registration-lookup</code></th><td data-l="返すもの">登録番号(T 番号)から、登録の状態と登録日</td><td data-l="出典">国税庁 適格請求書発行事業者公表サイトの公表データ</td></tr>
+          <tr><th scope="row">Peppol の検証<br><code class="ep">/invoice/peppol-validate</code></th><td data-l="返すもの">請求書データを、Peppol BIS Billing JP の主要な 15 規則で検証</td><td data-l="出典">Peppol BIS Billing JP</td></tr>
+        </tbody>
+      </table>
+      <p class="note">道のはじめに <code>https://api.kasanegi.com/preview/v1/local</code> を付けて呼びます(上の表は道の後半)。</p>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="accuracy">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">ACCURACY</p>
+      <h2 class="sec-h">公式の表と、1 円単位で合わせる</h2>
+      <p class="body">給与の計算は、近い値で済ませません。公式の表と規則を、そのまま持っています。</p>
+    </div>
+    <ul class="points reveal">
+      <li><b>源泉所得税</b><span>国税庁「給与所得の源泉徴収税額表(令和 8 年分)」月額表・甲欄の 1,856 マス(231 の区分 × 扶養 0〜7 人と、最下行)をそのまま持ち、全マスが公式と一致することを試験で確かめています。社会保険料を引いた後の額が 74 万円以上なら、表の注記どおり 9 つの区分の式で求めます。国税庁「月額表の使い方」の設例とも一致します。</span></li>
+      <li><b>健康保険と介護保険</b><span>協会けんぽの令和 8 年度の料率を 47 都道府県すべて持ち、東京都の保険料額表 50 行と、等級・範囲・保険料を照合しています。円未満は額表の注記どおり 50 銭以下切り捨て・50 銭超切り上げ。40〜64 歳は、健康保険と介護保険を足してから丸めます。</span></li>
+      <li><b>支援金・年金・雇用保険</b><span>2026 年 4 月分からの子ども・子育て支援金(0.23%)、厚生年金(18.3%)、雇用保険(一般の事業・労働者負担 5/1,000。標準報酬ではなく賃金にかけ、規則どおりに端数を処理)。</span></li>
+      <li><b>消費税</b><span>1989 年の 3% から、2019 年 10 月の標準 10%・軽減 8% まで、施行日ごとの履歴を持ちます。インボイス制度の開始日(2023 年 10 月 1 日)も判定し、日付は日本時間で決めます。</span></li>
+      <li><b>インボイスの登録簿</b><span>国税庁の公表データの全件と差分から、5,009,701 件を引ける形に整えています。応答には、データがいつ時点のものかを必ず付けます。</span></li>
+      <li><b>国民の祝日</b><span>内閣府の公表データから、2024〜2027 年の 75 日(国民の祝日・振替休日・国民の休日)。</span></li>
+    </ul>
+    <dl class="stats reveal">
+      <div><dt>50,390<small style="font-size:.5em">円</small></dt><dd>月給 30 万円・東京都・30 歳の控除の合計(手取り 249,610 円)</dd></div>
+      <div><dt>113,596<small style="font-size:.5em">円</small></dt><dd>月給 105 万円・東京都・45 歳の源泉所得税(74 万円超の式)</dd></div>
+      <div><dt>1,856<small style="font-size:.5em">マス</small></dt><dd>国税庁の月額表と照合して、すべて一致したマス</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block" id="try">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">TRY</p>
+      <h2 class="sec-h">登録なしで、いま呼べます</h2>
+      <p class="body">キーも登録も要りません。ブラウザやコマンドから、そのまま呼べます。</p>
+    </div>
+    <div class="try-grid reveal">
+      <pre class="codeblock"><code>curl "https://api.kasanegi.com/preview/v1/local/payroll/calc-by-salary?monthly_salary=300000&amp;pref_code=13&amp;age=30"</code></pre>
+      <div class="api-card">
+        <p class="api-req"><span>200</span> 月給 30 万円・東京都(pref_code=13)・30 歳</p>
+        <dl class="api-res">
+          <div><dt>health_insurance_employee</dt><dd>14,775</dd></div>
+          <div><dt>child_care_support_employee</dt><dd>345</dd></div>
+          <div><dt>pension_employee</dt><dd>27,450</dd></div>
+          <div><dt>employment_insurance_employee</dt><dd>1,500</dd></div>
+          <div><dt>income_tax_withholding</dt><dd>6,320</dd></div>
+          <div class="sum"><dt>total_deduction</dt><dd>50,390</dd></div>
+          <div class="sum"><dt>net_salary</dt><dd>249,610</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body reveal" style="margin-top:28px">同じ相手からの呼び出しは、60 秒に 30 回までです。業務で多く使う場合は、開発者向けのマーケット RapidAPI でキーを発行できます。</p>
+    <div class="btns reveal"><a class="btn" href="https://api.kasanegi.com/preview/v1/local/payroll/calc-by-salary?monthly_salary=300000&amp;pref_code=13&amp;age=30" rel="noopener">ブラウザで開く <span class="arrow">→</span></a><a class="btn ghost" href="https://rapidapi.com/kasanegi123/api/jp-local-pack-japan-payroll-invoice-tax-apis" rel="noopener">RapidAPI</a></div>
+  </div>
+</section>
+
+<section class="block alt" id="agents">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">FOR AI AGENTS</p>
+      <h2 class="sec-h">AI エージェントから</h2>
+      <p class="body">AI エージェントは、MCP サーバから 10 本を道具として見つけ、使い方と呼び出し先を受け取れます。API の定義(OpenAPI 3.1)と、AI 向けの案内(llms.txt)も公開しています。製品の一覧・API の定義・道具の一覧は、すべて一つの台帳から作っているので、どこから見ても食い違いません。</p>
+    </div>
+    <dl class="facts reveal">
+      <div><dt>MCP サーバ</dt><dd><code>https://mcp.kasanegi.com/mcp</code>(Streamable HTTP・MCP 2025-06-18)</dd></div>
+      <div><dt>API の定義</dt><dd><a href="https://api.kasanegi.com/openapi.json" rel="noopener"><code>https://api.kasanegi.com/openapi.json</code></a>(OpenAPI 3.1)</dd></div>
+      <div><dt>AI 向けの案内</dt><dd><a href="https://api.kasanegi.com/llms.txt" rel="noopener"><code>https://api.kasanegi.com/llms.txt</code></a></dd></div>
+      <div><dt>製品の一覧</dt><dd><a href="https://api.kasanegi.com/products" rel="noopener"><code>https://api.kasanegi.com/products</code></a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block" id="sources">
+  <div class="wrap reveal">
+    <p class="eyebrow">SOURCES</p>
+    <h2 class="sec-h">データの出所</h2>
+    <table class="tbl src-tbl">
+      <colgroup><col class="c1"><col class="c2"></colgroup>
+      <thead><tr><th scope="col">データ</th><th scope="col">提供</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><a href="https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/01.htm" rel="noopener">給与所得の源泉徴収税額表(令和 8 年分)</a></th><td data-l="提供">国税庁</td></tr>
+        <tr><th scope="row"><a href="https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html" rel="noopener">都道府県単位保険料率・保険料額表(令和 8 年度)</a></th><td data-l="提供">全国健康保険協会(協会けんぽ)</td></tr>
+        <tr><th scope="row">厚生年金保険の保険料率</th><td data-l="提供">日本年金機構</td></tr>
+        <tr><th scope="row">雇用保険料率(令和 8 年度)</th><td data-l="提供">厚生労働省</td></tr>
+        <tr><th scope="row">消費税の税率</th><td data-l="提供">国税庁</td></tr>
+        <tr><th scope="row"><a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html" rel="noopener">国民の祝日</a></th><td data-l="提供">内閣府</td></tr>
+        <tr><th scope="row">法人の基本情報(gBizINFO)</th><td data-l="提供">経済産業省</td></tr>
+        <tr><th scope="row">適格請求書発行事業者の公表データ</th><td data-l="提供">国税庁</td></tr>
+        <tr><th scope="row">Peppol BIS Billing JP</th><td data-l="提供">OpenPeppol・デジタル庁</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block alt" id="history">
+  <div class="wrap reveal">
+    <p class="eyebrow">HISTORY</p>
+    <h2 class="sec-h">あゆみ</h2>
+    <ul class="news">
+      <li class="new"><time datetime="2026-10-08">2026.10.08</time><span class="tag">公開</span><p>JP Local Pack の 10 本を、登録なしで無料で公開しました</p></li>
+      <li><time datetime="2026-05-08">2026.05.08</time><span class="tag">掲載</span><p>給与・法人・補助金の 3 製品が、AI エージェント向け API の開発者コミュニティの一覧に掲載されました</p></li>
+      <li><time datetime="2026-05-07">2026.05.07</time><span class="tag">公開</span><p>kasanegi.com を開設し、データ API を公開しました。開発者向けのマーケット RapidAPI にも出品しました</p></li>
+      <li><time datetime="2026-04-16">2026.04.16</time><span class="tag">公開</span><p>日本の公的データを、AI がそのまま使える API にして公開しました</p></li>
+    </ul>
+    <p class="body" style="margin-top:36px">データ API の導入や、業務への組み込みのご相談は <a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a> へ。</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <a class="mark logo-type" href="/" style="font-size:22px">KASANEGI</a>
+        <p class="meta">かさねぎ · 大阪</p>
+      </div>
+      <p class="meta"><a href="/#projects">取り組み</a> · <a href="/research/">研究</a> · <a href="/reader/">語学</a> · <a href="/api/">データ API</a> · <a href="/demo/">デモ</a> · <a href="/#contact">お問い合わせ</a> · <a href="/en/" hreflang="en" lang="en">English</a></p>
+    </div>
+    <div class="small"><span>© 2026 Kasanegi</span><a href="mailto:contact@kasanegi.com">contact@kasanegi.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
